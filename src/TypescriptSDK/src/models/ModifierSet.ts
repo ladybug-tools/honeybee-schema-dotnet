@@ -1,4 +1,4 @@
-﻿import { IsString, IsOptional, Matches, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, Equals, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { deepTransform } from '../deepTransform';
 import { ApertureModifierSet } from "./ApertureModifierSet";
@@ -23,7 +23,7 @@ export class ModifierSet extends IDdRadianceBaseModel {
     @Type(() => String)
     @IsString()
     @IsOptional()
-    @Matches(/^ModifierSet$/)
+    @Equals("ModifierSet")
     @Expose({ name: "type" })
     /** type */
     type: string = "ModifierSet";

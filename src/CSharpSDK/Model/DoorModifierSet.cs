@@ -25,7 +25,7 @@ namespace HoneybeeSchema
     [Summary(@"Set containing radiance modifiers needed for a model's Doors.")]
     [System.Serializable]
     [DataContract(Name = "DoorModifierSet")] // Enables DataMember rules. For internal Serialization XML/JSON
-    public partial class DoorModifierSet : OpenAPIGenBaseModel, System.IEquatable<DoorModifierSet>
+    public partial class DoorModifierSet : BaseModifierSet, System.IEquatable<DoorModifierSet>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="DoorModifierSet" /> class.
@@ -48,10 +48,8 @@ namespace HoneybeeSchema
         public DoorModifierSet
         (
             AnyOf<Plastic, Glass, BSDF, Glow, Light, Trans, Metal, Void, Mirror> exteriorModifier = default, AnyOf<Plastic, Glass, BSDF, Glow, Light, Trans, Metal, Void, Mirror> interiorModifier = default, AnyOf<Plastic, Glass, BSDF, Glow, Light, Trans, Metal, Void, Mirror> interiorGlassModifier = default, AnyOf<Plastic, Glass, BSDF, Glow, Light, Trans, Metal, Void, Mirror> exteriorGlassModifier = default, AnyOf<Plastic, Glass, BSDF, Glow, Light, Trans, Metal, Void, Mirror> overheadModifier = default
-        ) : base()
+        ) : base(exteriorModifier: exteriorModifier, interiorModifier: interiorModifier)
         {
-            this.ExteriorModifier = exteriorModifier;
-            this.InteriorModifier = interiorModifier;
             this.InteriorGlassModifier = interiorGlassModifier;
             this.ExteriorGlassModifier = exteriorGlassModifier;
             this.OverheadModifier = overheadModifier;
@@ -66,26 +64,6 @@ namespace HoneybeeSchema
 
 	
 	
-        /// <summary>
-        /// A radiance modifier object for faces with an Outdoors boundary condition.
-        /// </summary>
-        [Summary(@"A radiance modifier object for faces with an Outdoors boundary condition.")]
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
-        [DataMember(Name = "exterior_modifier")] // For internal Serialization XML/JSON
-        [JsonProperty("exterior_modifier", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [System.Text.Json.Serialization.JsonPropertyName("exterior_modifier")] // For System.Text.Json
-        public AnyOf<Plastic, Glass, BSDF, Glow, Light, Trans, Metal, Void, Mirror> ExteriorModifier { get; set; }
-
-        /// <summary>
-        /// A radiance modifier object for faces with a boundary condition other than Outdoors.
-        /// </summary>
-        [Summary(@"A radiance modifier object for faces with a boundary condition other than Outdoors.")]
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
-        [DataMember(Name = "interior_modifier")] // For internal Serialization XML/JSON
-        [JsonProperty("interior_modifier", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [System.Text.Json.Serialization.JsonPropertyName("interior_modifier")] // For System.Text.Json
-        public AnyOf<Plastic, Glass, BSDF, Glow, Light, Trans, Metal, Void, Mirror> InteriorModifier { get; set; }
-
         /// <summary>
         /// A modifier object for glass with a Surface boundary condition.
         /// </summary>
@@ -176,8 +154,8 @@ namespace HoneybeeSchema
         /// <summary>
         /// Creates a new instance with the same properties.
         /// </summary>
-        /// <returns>OpenAPIGenBaseModel</returns>
-        public override OpenAPIGenBaseModel DuplicateOpenAPIGenBaseModel()
+        /// <returns>BaseModifierSet</returns>
+        public override BaseModifierSet DuplicateBaseModifierSet()
         {
             return DuplicateDoorModifierSet();
         }
@@ -205,8 +183,6 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
             return base.Equals(input) && 
-                    Extension.Equals(this.ExteriorModifier, input.ExteriorModifier) && 
-                    Extension.Equals(this.InteriorModifier, input.InteriorModifier) && 
                     Extension.Equals(this.InteriorGlassModifier, input.InteriorGlassModifier) && 
                     Extension.Equals(this.ExteriorGlassModifier, input.ExteriorGlassModifier) && 
                     Extension.Equals(this.OverheadModifier, input.OverheadModifier);
@@ -222,10 +198,6 @@ namespace HoneybeeSchema
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = base.GetHashCode();
-                if (this.ExteriorModifier != null)
-                    hashCode = hashCode * 59 + this.ExteriorModifier.GetHashCode();
-                if (this.InteriorModifier != null)
-                    hashCode = hashCode * 59 + this.InteriorModifier.GetHashCode();
                 if (this.InteriorGlassModifier != null)
                     hashCode = hashCode * 59 + this.InteriorGlassModifier.GetHashCode();
                 if (this.ExteriorGlassModifier != null)

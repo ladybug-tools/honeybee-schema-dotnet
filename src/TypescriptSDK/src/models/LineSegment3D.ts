@@ -1,4 +1,4 @@
-﻿import { IsArray, IsNumber, IsDefined, IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsArray, IsNumber, IsDefined, IsString, IsOptional, Equals, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { deepTransform } from '../deepTransform';
 
@@ -23,7 +23,7 @@ export class LineSegment3D {
     @Type(() => String)
     @IsString()
     @IsOptional()
-    @Matches(/^LineSegment3D$/)
+    @Equals("LineSegment3D")
     @Expose({ name: "type" })
     /** type */
     type: string = "LineSegment3D";

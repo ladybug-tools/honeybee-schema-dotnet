@@ -22,7 +22,7 @@ namespace HoneybeeSchema
     [Summary(@"")]
     [System.Serializable]
     [DataContract(Name = "ChangedInstruction")] // Enables DataMember rules. For internal Serialization XML/JSON
-    public partial class ChangedInstruction : OpenAPIGenBaseModel, System.IEquatable<ChangedInstruction>
+    public partial class ChangedInstruction : DiffObjectBase, System.IEquatable<ChangedInstruction>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ChangedInstruction" /> class.
@@ -46,11 +46,8 @@ namespace HoneybeeSchema
         public ChangedInstruction
         (
             GeometryObjectTypes elementType, string elementId, string elementName = default, bool updateGeometry = true, bool updateEnergy = true, bool updateRadiance = true
-        ) : base()
+        ) : base(elementType: elementType, elementId: elementId, elementName: elementName)
         {
-            this.ElementType = elementType;
-            this.ElementId = elementId ?? throw new System.ArgumentNullException("elementId is a required property for ChangedInstruction and cannot be null");
-            this.ElementName = elementName;
             this.UpdateGeometry = updateGeometry;
             this.UpdateEnergy = updateEnergy;
             this.UpdateRadiance = updateRadiance;
@@ -65,41 +62,6 @@ namespace HoneybeeSchema
 
 	
 	
-        /// <summary>
-        /// Text for the type of object that has been changed.
-        /// </summary>
-        [Summary(@"Text for the type of object that has been changed.")]
-        [Required] // For validation after deserialization
-        // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
-        [DataMember(Name = "element_type", IsRequired = true)] // For internal Serialization XML/JSON
-        [JsonProperty("element_type", Required = Required.Always)] // For Newtonsoft.Json
-        // [System.Text.Json.Serialization.JsonPropertyName("element_type")] // For System.Text.Json
-        public GeometryObjectTypes ElementType { get; set; }
-
-        /// <summary>
-        /// Text string for the unique object ID that has changed.
-        /// </summary>
-        [Summary(@"Text string for the unique object ID that has changed.")]
-        [Required] // For validation after deserialization
-        // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
-        [RegularExpression(@"^[^,;!\n\t]+$")]
-        [MinLength(1)]
-        [MaxLength(100)]
-        [DataMember(Name = "element_id", IsRequired = true)] // For internal Serialization XML/JSON
-        [JsonProperty("element_id", Required = Required.Always)] // For Newtonsoft.Json
-        // [System.Text.Json.Serialization.JsonPropertyName("element_id")] // For System.Text.Json
-        public string ElementId { get; set; }
-
-        /// <summary>
-        /// Text string for the display name of the object that has changed.
-        /// </summary>
-        [Summary(@"Text string for the display name of the object that has changed.")]
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
-        [DataMember(Name = "element_name")] // For internal Serialization XML/JSON
-        [JsonProperty("element_name", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [System.Text.Json.Serialization.JsonPropertyName("element_name")] // For System.Text.Json
-        public string ElementName { get; set; }
-
         /// <summary>
         /// A boolean to note whether the geometry of the object in the new/updated model should replace the base/existing geometry (True) or the existing geometry should be kept (False).
         /// </summary>
@@ -191,8 +153,8 @@ namespace HoneybeeSchema
         /// <summary>
         /// Creates a new instance with the same properties.
         /// </summary>
-        /// <returns>OpenAPIGenBaseModel</returns>
-        public override OpenAPIGenBaseModel DuplicateOpenAPIGenBaseModel()
+        /// <returns>DiffObjectBase</returns>
+        public override DiffObjectBase DuplicateDiffObjectBase()
         {
             return DuplicateChangedInstruction();
         }
@@ -220,9 +182,6 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
             return base.Equals(input) && 
-                    Extension.Equals(this.ElementType, input.ElementType) && 
-                    Extension.Equals(this.ElementId, input.ElementId) && 
-                    Extension.Equals(this.ElementName, input.ElementName) && 
                     Extension.Equals(this.UpdateGeometry, input.UpdateGeometry) && 
                     Extension.Equals(this.UpdateEnergy, input.UpdateEnergy) && 
                     Extension.Equals(this.UpdateRadiance, input.UpdateRadiance);
@@ -238,12 +197,6 @@ namespace HoneybeeSchema
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = base.GetHashCode();
-                if (this.ElementType != null)
-                    hashCode = hashCode * 59 + this.ElementType.GetHashCode();
-                if (this.ElementId != null)
-                    hashCode = hashCode * 59 + this.ElementId.GetHashCode();
-                if (this.ElementName != null)
-                    hashCode = hashCode * 59 + this.ElementName.GetHashCode();
                 if (this.UpdateGeometry != null)
                     hashCode = hashCode * 59 + this.UpdateGeometry.GetHashCode();
                 if (this.UpdateEnergy != null)

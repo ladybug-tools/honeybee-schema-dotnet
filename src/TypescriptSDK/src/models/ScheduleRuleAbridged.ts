@@ -1,4 +1,4 @@
-﻿import { IsString, IsDefined, MinLength, MaxLength, IsOptional, Matches, IsBoolean, IsArray, IsInt, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsDefined, MinLength, MaxLength, IsOptional, Equals, IsBoolean, IsArray, IsInt, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { deepTransform } from '../deepTransform';
 import { DatedBaseModel } from "./DatedBaseModel";
@@ -17,7 +17,7 @@ export class ScheduleRuleAbridged extends DatedBaseModel {
     @Type(() => String)
     @IsString()
     @IsOptional()
-    @Matches(/^ScheduleRuleAbridged$/)
+    @Equals("ScheduleRuleAbridged")
     @Expose({ name: "type" })
     /** type */
     type: string = "ScheduleRuleAbridged";

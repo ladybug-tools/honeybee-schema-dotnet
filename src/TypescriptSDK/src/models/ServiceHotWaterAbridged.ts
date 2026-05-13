@@ -1,9 +1,8 @@
-﻿import { IsNumber, IsDefined, Min, IsString, MinLength, MaxLength, IsOptional, Matches, Max, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsNumber, IsDefined, Min, IsString, IsOptional, Equals, MinLength, MaxLength, Max, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { deepTransform } from '../deepTransform';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
-/** Base class for all objects requiring an EnergyPlus identifier and user_data. */
 export class ServiceHotWaterAbridged extends IDdEnergyBaseModel {
     @Type(() => Number)
     @IsNumber()
@@ -15,20 +14,20 @@ export class ServiceHotWaterAbridged extends IDdEnergyBaseModel {
 	
     @Type(() => String)
     @IsString()
-    @IsDefined()
-    @MinLength(1)
-    @MaxLength(100)
-    @Expose({ name: "schedule" })
-    /** Identifier of the schedule for the hot water use over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the flow_per_area to yield a complete water usage profile. */
-    schedule!: string;
+    @IsOptional()
+    @Equals("ServiceHotWaterAbridged")
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "ServiceHotWaterAbridged";
 	
     @Type(() => String)
     @IsString()
     @IsOptional()
-    @Matches(/^ServiceHotWaterAbridged$/)
-    @Expose({ name: "type" })
-    /** type */
-    type: string = "ServiceHotWaterAbridged";
+    @MinLength(1)
+    @MaxLength(100)
+    @Expose({ name: "schedule" })
+    /** Identifier of the schedule for the hot water use over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the flow_per_area to yield a complete water usage profile. If None, an Always On schedule will be used. */
+    schedule?: string;
 	
     @Type(() => Number)
     @IsNumber()
@@ -70,8 +69,8 @@ export class ServiceHotWaterAbridged extends IDdEnergyBaseModel {
         if (_data) {
             const obj = deepTransform(ServiceHotWaterAbridged, _data);
             this.flowPerArea = obj.flowPerArea;
-            this.schedule = obj.schedule;
             this.type = obj.type ?? "ServiceHotWaterAbridged";
+            this.schedule = obj.schedule;
             this.targetTemperature = obj.targetTemperature ?? 60;
             this.sensibleFraction = obj.sensibleFraction ?? 0.2;
             this.latentFraction = obj.latentFraction ?? 0.05;
@@ -100,8 +99,8 @@ export class ServiceHotWaterAbridged extends IDdEnergyBaseModel {
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["flow_per_area"] = this.flowPerArea;
-        data["schedule"] = this.schedule;
         data["type"] = this.type ?? "ServiceHotWaterAbridged";
+        data["schedule"] = this.schedule;
         data["target_temperature"] = this.targetTemperature ?? 60;
         data["sensible_fraction"] = this.sensibleFraction ?? 0.2;
         data["latent_fraction"] = this.latentFraction ?? 0.05;

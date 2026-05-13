@@ -128,6 +128,7 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"A value greater than 1 for the index of refraction. Typical values are 1.52 for float glass and 1.4 for ETFE.")]
         // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [Range(1, double.MaxValue)]
         [DataMember(Name = "refraction_index")] // For internal Serialization XML/JSON
         [JsonProperty("refraction_index", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("refraction_index")] // For System.Text.Json

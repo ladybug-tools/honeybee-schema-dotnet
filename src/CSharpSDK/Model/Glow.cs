@@ -25,7 +25,7 @@ namespace HoneybeeSchema
     [Summary(@"Radiance Glow material.")]
     [System.Serializable]
     [DataContract(Name = "Glow")] // Enables DataMember rules. For internal Serialization XML/JSON
-    public partial class Glow : ModifierBase, System.IEquatable<Glow>
+    public partial class Glow : Light, System.IEquatable<Glow>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Glow" /> class.
@@ -51,13 +51,8 @@ namespace HoneybeeSchema
         public Glow
         (
             string identifier, string displayName = default, AnyOf<Plastic, Glass, BSDF, Glow, Light, Trans, Metal, Void, Mirror> modifier = default, List<AnyOf<Plastic, Glass, BSDF, Glow, Light, Trans, Metal, Void, Mirror>> dependencies = default, double rEmittance = 0D, double gEmittance = 0D, double bEmittance = 0D, double maxRadius = 0D
-        ) : base(identifier: identifier, displayName: displayName)
+        ) : base(identifier: identifier, displayName: displayName, modifier: modifier, dependencies: dependencies, rEmittance: rEmittance, gEmittance: gEmittance, bEmittance: bEmittance)
         {
-            this.Modifier = modifier ?? new Void();
-            this.Dependencies = dependencies;
-            this.REmittance = rEmittance;
-            this.GEmittance = gEmittance;
-            this.BEmittance = bEmittance;
             this.MaxRadius = maxRadius;
 
             // Set readonly properties with defaultValue
@@ -70,59 +65,6 @@ namespace HoneybeeSchema
 
 	
 	
-        /// <summary>
-        /// Material modifier.
-        /// </summary>
-        [Summary(@"Material modifier.")]
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
-        [DataMember(Name = "modifier")] // For internal Serialization XML/JSON
-        [JsonProperty("modifier", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [System.Text.Json.Serialization.JsonPropertyName("modifier")] // For System.Text.Json
-        public AnyOf<Plastic, Glass, BSDF, Glow, Light, Trans, Metal, Void, Mirror> Modifier { get; set; } = new Void();
-
-        /// <summary>
-        /// List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers.
-        /// </summary>
-        [Summary(@"List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers.")]
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
-        [DataMember(Name = "dependencies")] // For internal Serialization XML/JSON
-        [JsonProperty("dependencies", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [System.Text.Json.Serialization.JsonPropertyName("dependencies")] // For System.Text.Json
-        public List<AnyOf<Plastic, Glass, BSDF, Glow, Light, Trans, Metal, Void, Mirror>> Dependencies { get; set; }
-
-        /// <summary>
-        /// A value between 0 and 1 for the red channel of the modifier.
-        /// </summary>
-        [Summary(@"A value between 0 and 1 for the red channel of the modifier.")]
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
-        [Range(0, 1)]
-        [DataMember(Name = "r_emittance")] // For internal Serialization XML/JSON
-        [JsonProperty("r_emittance", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [System.Text.Json.Serialization.JsonPropertyName("r_emittance")] // For System.Text.Json
-        public double REmittance { get; set; } = 0D;
-
-        /// <summary>
-        /// A value between 0 and 1 for the green channel of the modifier.
-        /// </summary>
-        [Summary(@"A value between 0 and 1 for the green channel of the modifier.")]
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
-        [Range(0, 1)]
-        [DataMember(Name = "g_emittance")] // For internal Serialization XML/JSON
-        [JsonProperty("g_emittance", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [System.Text.Json.Serialization.JsonPropertyName("g_emittance")] // For System.Text.Json
-        public double GEmittance { get; set; } = 0D;
-
-        /// <summary>
-        /// A value between 0 and 1 for the blue channel of the modifier.
-        /// </summary>
-        [Summary(@"A value between 0 and 1 for the blue channel of the modifier.")]
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
-        [Range(0, 1)]
-        [DataMember(Name = "b_emittance")] // For internal Serialization XML/JSON
-        [JsonProperty("b_emittance", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [System.Text.Json.Serialization.JsonPropertyName("b_emittance")] // For System.Text.Json
-        public double BEmittance { get; set; } = 0D;
-
         /// <summary>
         /// Maximum radius for shadow testing. Objects with zero radius are permissable and may participate in interreflection calculation (though they are not representative of real light sources). Negative values will never contribute to scene illumination.
         /// </summary>
@@ -196,8 +138,8 @@ namespace HoneybeeSchema
         /// <summary>
         /// Creates a new instance with the same properties.
         /// </summary>
-        /// <returns>ModifierBase</returns>
-        public override ModifierBase DuplicateModifierBase()
+        /// <returns>Light</returns>
+        public override Light DuplicateLight()
         {
             return DuplicateGlow();
         }
@@ -225,11 +167,6 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
             return base.Equals(input) && 
-                    Extension.Equals(this.Modifier, input.Modifier) && 
-                    Extension.AllEquals(this.Dependencies, input.Dependencies) && 
-                    Extension.Equals(this.REmittance, input.REmittance) && 
-                    Extension.Equals(this.GEmittance, input.GEmittance) && 
-                    Extension.Equals(this.BEmittance, input.BEmittance) && 
                     Extension.Equals(this.MaxRadius, input.MaxRadius);
         }
 
@@ -243,16 +180,6 @@ namespace HoneybeeSchema
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = base.GetHashCode();
-                if (this.Modifier != null)
-                    hashCode = hashCode * 59 + this.Modifier.GetHashCode();
-                if (this.Dependencies != null)
-                    hashCode = hashCode * 59 + this.Dependencies.GetHashCode();
-                if (this.REmittance != null)
-                    hashCode = hashCode * 59 + this.REmittance.GetHashCode();
-                if (this.GEmittance != null)
-                    hashCode = hashCode * 59 + this.GEmittance.GetHashCode();
-                if (this.BEmittance != null)
-                    hashCode = hashCode * 59 + this.BEmittance.GetHashCode();
                 if (this.MaxRadius != null)
                     hashCode = hashCode * 59 + this.MaxRadius.GetHashCode();
                 return hashCode;

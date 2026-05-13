@@ -1,11 +1,10 @@
-﻿import { IsNumber, IsDefined, Min, IsOptional, Max, IsString, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsNumber, IsDefined, Min, IsOptional, Max, IsString, Equals, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { deepTransform } from '../deepTransform';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { ScheduleFixedInterval } from "./ScheduleFixedInterval";
 import { ScheduleRuleset } from "./ScheduleRuleset";
 
-/** Base class for all objects requiring an EnergyPlus identifier and user_data. */
 export class GasEquipment extends IDdEnergyBaseModel {
     @Type(() => Number)
     @IsNumber()
@@ -15,7 +14,7 @@ export class GasEquipment extends IDdEnergyBaseModel {
     /** Equipment level per floor area as [W/m2]. */
     wattsPerArea!: number;
 	
-    @IsDefined()
+    @IsOptional()
     @Expose({ name: "schedule" })
     @Transform(({ value }) => {
       const item = value;
@@ -23,8 +22,8 @@ export class GasEquipment extends IDdEnergyBaseModel {
       else if (item?.type === 'ScheduleFixedInterval') return ScheduleFixedInterval.fromJS(item);
       else return item;
     })
-    /** The schedule for the use of equipment over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the watts_per_area to yield a complete equipment profile. */
-    schedule!: (ScheduleRuleset | ScheduleFixedInterval);
+    /** The schedule for the use of equipment over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the watts_per_area to yield a complete equipment profile. If None, an Always On schedule will be used. */
+    schedule?: (ScheduleRuleset | ScheduleFixedInterval);
 	
     @Type(() => Number)
     @IsNumber()
@@ -56,7 +55,7 @@ export class GasEquipment extends IDdEnergyBaseModel {
     @Type(() => String)
     @IsString()
     @IsOptional()
-    @Matches(/^GasEquipment$/)
+    @Equals("GasEquipment")
     @Expose({ name: "type" })
     /** type */
     type: string = "GasEquipment";

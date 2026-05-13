@@ -3,7 +3,7 @@
   "servers": [],
   "info": {
     "description": "Documentation for Honeybee sync-instructions schema",
-    "version": "1.59.1",
+    "version": "2.0.5",
     "title": "Honeybee Sync Instructions Schema",
     "contact": {
       "name": "Ladybug Tools",
@@ -77,55 +77,19 @@
   "paths": {},
   "components": {
     "schemas": {
-      "GeometryObjectTypes": {
-        "title": "GeometryObjectTypes",
-        "description": "Types of Honeybee geometry objects.",
-        "enum": [
-          "Shade",
-          "Aperture",
-          "Door",
-          "Face",
-          "Room"
-        ],
-        "type": "string"
-      },
       "AddedInstruction": {
         "allOf": [
           {
-            "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
+            "$ref": "#/components/schemas/_DiffObjectBase"
           },
           {
             "type": "object",
-            "required": [
-              "element_type",
-              "element_id"
-            ],
+            "required": [],
             "properties": {
-              "element_type": {
-                "description": "Text for the type of object that has been changed.",
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/GeometryObjectTypes"
-                  }
-                ]
-              },
-              "element_id": {
-                "title": "Element Id",
-                "description": "Text string for the unique object ID that has changed.",
-                "maxLength": 100,
-                "minLength": 1,
-                "pattern": "^[^,;!\\n\\t]+$",
-                "type": "string"
-              },
-              "element_name": {
-                "title": "Element Name",
-                "description": "Text string for the display name of the object that has changed.",
-                "type": "string"
-              },
               "type": {
-                "title": "Type",
+                "const": "AddedInstruction",
                 "default": "AddedInstruction",
-                "pattern": "^AddedInstruction$",
+                "title": "Type",
                 "type": "string",
                 "readOnly": true
               }
@@ -137,43 +101,61 @@
           "propertyName": "type"
         }
       },
-      "DeletedInstruction": {
+      "ChangedInstruction": {
         "allOf": [
           {
-            "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
+            "$ref": "#/components/schemas/_DiffObjectBase"
           },
           {
             "type": "object",
-            "required": [
-              "element_type",
-              "element_id"
-            ],
+            "required": [],
             "properties": {
-              "element_type": {
-                "description": "Text for the type of object that has been changed.",
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/GeometryObjectTypes"
-                  }
-                ]
-              },
-              "element_id": {
-                "title": "Element Id",
-                "description": "Text string for the unique object ID that has changed.",
-                "maxLength": 100,
-                "minLength": 1,
-                "pattern": "^[^,;!\\n\\t]+$",
-                "type": "string"
-              },
-              "element_name": {
-                "title": "Element Name",
-                "description": "Text string for the display name of the object that has changed.",
-                "type": "string"
-              },
               "type": {
+                "const": "ChangedInstruction",
+                "default": "ChangedInstruction",
                 "title": "Type",
+                "type": "string",
+                "readOnly": true
+              },
+              "update_geometry": {
+                "default": true,
+                "description": "A boolean to note whether the geometry of the object in the new/updated model should replace the base/existing geometry (True) or the existing geometry should be kept (False).",
+                "title": "Update Geometry",
+                "type": "boolean"
+              },
+              "update_energy": {
+                "default": true,
+                "description": "A boolean to note whether the energy properties of the object in the new/updated model should replace the base/existing energy properties (True) or the base/existing energy properties should be kept (False).",
+                "title": "Update Energy",
+                "type": "boolean"
+              },
+              "update_radiance": {
+                "default": true,
+                "description": "A boolean to note whether the radiance properties of the object in the new/updated model should replace the base/existing radiance properties (True) or the base/existing radiance properties should be kept (False).",
+                "title": "Update Radiance",
+                "type": "boolean"
+              }
+            }
+          }
+        ],
+        "title": "ChangedInstruction",
+        "discriminator": {
+          "propertyName": "type"
+        }
+      },
+      "DeletedInstruction": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/_DiffObjectBase"
+          },
+          {
+            "type": "object",
+            "required": [],
+            "properties": {
+              "type": {
+                "const": "DeletedInstruction",
                 "default": "DeletedInstruction",
-                "pattern": "^DeletedInstruction$",
+                "title": "Type",
                 "type": "string",
                 "readOnly": true
               }
@@ -185,71 +167,17 @@
           "propertyName": "type"
         }
       },
-      "ChangedInstruction": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
-          },
-          {
-            "type": "object",
-            "required": [
-              "element_type",
-              "element_id"
-            ],
-            "properties": {
-              "element_type": {
-                "description": "Text for the type of object that has been changed.",
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/GeometryObjectTypes"
-                  }
-                ]
-              },
-              "element_id": {
-                "title": "Element Id",
-                "description": "Text string for the unique object ID that has changed.",
-                "maxLength": 100,
-                "minLength": 1,
-                "pattern": "^[^,;!\\n\\t]+$",
-                "type": "string"
-              },
-              "element_name": {
-                "title": "Element Name",
-                "description": "Text string for the display name of the object that has changed.",
-                "type": "string"
-              },
-              "update_geometry": {
-                "title": "Update Geometry",
-                "description": "A boolean to note whether the geometry of the object in the new/updated model should replace the base/existing geometry (True) or the existing geometry should be kept (False).",
-                "default": true,
-                "type": "boolean"
-              },
-              "update_energy": {
-                "title": "Update Energy",
-                "description": "A boolean to note whether the energy properties of the object in the new/updated model should replace the base/existing energy properties (True) or the base/existing energy properties should be kept (False).",
-                "default": true,
-                "type": "boolean"
-              },
-              "update_radiance": {
-                "title": "Update Radiance",
-                "description": "A boolean to note whether the radiance properties of the object in the new/updated model should replace the base/existing radiance properties (True) or the base/existing radiance properties should be kept (False).",
-                "default": true,
-                "type": "boolean"
-              },
-              "type": {
-                "title": "Type",
-                "default": "ChangedInstruction",
-                "pattern": "^ChangedInstruction$",
-                "type": "string",
-                "readOnly": true
-              }
-            }
-          }
+      "GeometryObjectTypes": {
+        "description": "Types of Honeybee geometry objects.",
+        "enum": [
+          "Shade",
+          "Aperture",
+          "Door",
+          "Face",
+          "Room"
         ],
-        "title": "ChangedInstruction",
-        "discriminator": {
-          "propertyName": "type"
-        }
+        "title": "GeometryObjectTypes",
+        "type": "string"
       },
       "SyncInstructions": {
         "allOf": [
@@ -260,35 +188,59 @@
             "type": "object",
             "properties": {
               "type": {
-                "title": "Type",
+                "const": "SyncInstructions",
                 "default": "SyncInstructions",
-                "pattern": "^SyncInstructions$",
+                "title": "Type",
                 "type": "string",
                 "readOnly": true
               },
               "changed_objects": {
-                "title": "Changed Objects",
+                "anyOf": [
+                  {
+                    "items": {
+                      "$ref": "#/components/schemas/ChangedInstruction"
+                    },
+                    "type": "array"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
                 "description": "A list of ChangedInstruction definitions for each top-level object with properties to transfer from the new/updated model to the base/existing model.",
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/ChangedInstruction"
-                }
+                "title": "Changed Objects"
               },
               "deleted_objects": {
-                "title": "Deleted Objects",
+                "anyOf": [
+                  {
+                    "items": {
+                      "$ref": "#/components/schemas/DeletedInstruction"
+                    },
+                    "type": "array"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
                 "description": "A list of DeletedInstruction definitions for each top-level object to be deleted from the base/existing model.",
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/DeletedInstruction"
-                }
+                "title": "Deleted Objects"
               },
               "added_objects": {
-                "title": "Added Objects",
+                "anyOf": [
+                  {
+                    "items": {
+                      "$ref": "#/components/schemas/AddedInstruction"
+                    },
+                    "type": "array"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
                 "description": "A list of AddedInstruction definitions for each top-level object to be added to the base/existing model from the new/updated model.",
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/AddedInstruction"
-                }
+                "title": "Added Objects"
               }
             }
           }
@@ -307,25 +259,29 @@
             "type": "object",
             "properties": {
               "element_type": {
-                "description": "Text for the type of object that has been changed.",
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/GeometryObjectTypes"
-                  }
-                ]
+                "$ref": "#/components/schemas/GeometryObjectTypes",
+                "description": "Text for the type of object that has been changed."
               },
               "element_id": {
-                "title": "Element Id",
                 "description": "Text string for the unique object ID that has changed.",
                 "maxLength": 100,
                 "minLength": 1,
                 "pattern": "^[^,;!\\n\\t]+$",
+                "title": "Element Id",
                 "type": "string"
               },
               "element_name": {
-                "title": "Element Name",
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
                 "description": "Text string for the display name of the object that has changed.",
-                "type": "string"
+                "title": "Element Name"
               },
               "type": {
                 "title": "Type",
@@ -347,17 +303,17 @@
         }
       },
       "_OpenAPIGenBaseModel": {
-        "title": "_OpenAPIGenBaseModel",
-        "type": "object",
         "properties": {
           "type": {
-            "title": "Type",
-            "description": "A base class to use when there is no baseclass available to fall on.",
             "default": "InvalidType",
+            "description": "A base class to use when there is no baseclass available to fall on.",
+            "title": "Type",
             "type": "string",
             "readOnly": true
           }
         },
+        "title": "_OpenAPIGenBaseModel",
+        "type": "object",
         "discriminator": {
           "propertyName": "type"
         }

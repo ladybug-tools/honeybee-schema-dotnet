@@ -139,7 +139,7 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Aspect ratio of a rectangular footprint, defined as the ratio of length of the short axis divided by the length of the long axis. This parameter is required to automatically calculate wind pressure coefficients for the AirflowNetwork simulation. If used for complex building geometries that cannot be described as a highrise or lowrise rectangular mass, the resulting air flow and pressure simulated on the building surfaces may be inaccurate.")]
         // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
-        [Range(double.MinValue, 1)]
+        [Range(0, 1)]
         [DataMember(Name = "aspect_ratio")] // For internal Serialization XML/JSON
         [JsonProperty("aspect_ratio", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("aspect_ratio")] // For System.Text.Json

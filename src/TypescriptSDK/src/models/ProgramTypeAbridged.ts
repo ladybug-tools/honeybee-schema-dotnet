@@ -1,4 +1,4 @@
-﻿import { IsString, IsOptional, Matches, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, Equals, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { deepTransform } from '../deepTransform';
 import { ElectricEquipmentAbridged } from "./ElectricEquipmentAbridged";
@@ -11,12 +11,11 @@ import { ServiceHotWaterAbridged } from "./ServiceHotWaterAbridged";
 import { SetpointAbridged } from "./SetpointAbridged";
 import { VentilationAbridged } from "./VentilationAbridged";
 
-/** Base class for all objects requiring an EnergyPlus identifier and user_data. */
 export class ProgramTypeAbridged extends IDdEnergyBaseModel {
     @Type(() => String)
     @IsString()
     @IsOptional()
-    @Matches(/^ProgramTypeAbridged$/)
+    @Equals("ProgramTypeAbridged")
     @Expose({ name: "type" })
     /** type */
     type: string = "ProgramTypeAbridged";

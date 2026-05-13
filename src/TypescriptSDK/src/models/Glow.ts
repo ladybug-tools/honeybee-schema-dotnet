@@ -1,4 +1,4 @@
-﻿import { IsOptional, IsArray, IsNumber, Min, Max, IsString, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsNumber, IsOptional, IsString, Equals, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { deepTransform } from '../deepTransform';
 import { BSDF } from "./BSDF";
@@ -6,76 +6,12 @@ import { Glass } from "./Glass";
 import { Light } from "./Light";
 import { Metal } from "./Metal";
 import { Mirror } from "./Mirror";
-import { ModifierBase } from "./ModifierBase";
 import { Plastic } from "./Plastic";
 import { Trans } from "./Trans";
 import { Void } from "./Void";
 
 /** Radiance Glow material. */
-export class Glow extends ModifierBase {
-    @IsOptional()
-    @Expose({ name: "modifier" })
-    @Transform(({ value }) => {
-      const item = value;
-      if (item?.type === 'Plastic') return Plastic.fromJS(item);
-      else if (item?.type === 'Glass') return Glass.fromJS(item);
-      else if (item?.type === 'BSDF') return BSDF.fromJS(item);
-      else if (item?.type === 'Glow') return Glow.fromJS(item);
-      else if (item?.type === 'Light') return Light.fromJS(item);
-      else if (item?.type === 'Trans') return Trans.fromJS(item);
-      else if (item?.type === 'Metal') return Metal.fromJS(item);
-      else if (item?.type === 'Void') return Void.fromJS(item);
-      else if (item?.type === 'Mirror') return Mirror.fromJS(item);
-      else return item;
-    })
-    /** Material modifier. */
-    modifier: (Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror) = new Void();
-	
-    @IsArray()
-    @IsOptional()
-    @Expose({ name: "dependencies" })
-    @Transform(({ value }) => value?.map((item: any) => {
-      if (item?.type === 'Plastic') return Plastic.fromJS(item);
-      else if (item?.type === 'Glass') return Glass.fromJS(item);
-      else if (item?.type === 'BSDF') return BSDF.fromJS(item);
-      else if (item?.type === 'Glow') return Glow.fromJS(item);
-      else if (item?.type === 'Light') return Light.fromJS(item);
-      else if (item?.type === 'Trans') return Trans.fromJS(item);
-      else if (item?.type === 'Metal') return Metal.fromJS(item);
-      else if (item?.type === 'Void') return Void.fromJS(item);
-      else if (item?.type === 'Mirror') return Mirror.fromJS(item);
-      else return item;
-    }))
-    /** List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers. */
-    dependencies?: (Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror)[];
-	
-    @Type(() => Number)
-    @IsNumber()
-    @IsOptional()
-    @Min(0)
-    @Max(1)
-    @Expose({ name: "r_emittance" })
-    /** A value between 0 and 1 for the red channel of the modifier. */
-    rEmittance: number = 0;
-	
-    @Type(() => Number)
-    @IsNumber()
-    @IsOptional()
-    @Min(0)
-    @Max(1)
-    @Expose({ name: "g_emittance" })
-    /** A value between 0 and 1 for the green channel of the modifier. */
-    gEmittance: number = 0;
-	
-    @Type(() => Number)
-    @IsNumber()
-    @IsOptional()
-    @Min(0)
-    @Max(1)
-    @Expose({ name: "b_emittance" })
-    /** A value between 0 and 1 for the blue channel of the modifier. */
-    bEmittance: number = 0;
-	
+export class Glow extends Light {
     @Type(() => Number)
     @IsNumber()
     @IsOptional()
@@ -86,7 +22,7 @@ export class Glow extends ModifierBase {
     @Type(() => String)
     @IsString()
     @IsOptional()
-    @Matches(/^Glow$/)
+    @Equals("Glow")
     @Expose({ name: "type" })
     /** type */
     type: string = "Glow";
@@ -94,10 +30,6 @@ export class Glow extends ModifierBase {
 
     constructor() {
         super();
-        this.modifier = new Void();
-        this.rEmittance = 0;
-        this.gEmittance = 0;
-        this.bEmittance = 0;
         this.maxRadius = 0;
         this.type = "Glow";
     }
@@ -107,13 +39,13 @@ export class Glow extends ModifierBase {
 
         if (_data) {
             const obj = deepTransform(Glow, _data);
+            this.maxRadius = obj.maxRadius ?? 0;
+            this.type = obj.type ?? "Glow";
             this.modifier = obj.modifier ?? new Void();
             this.dependencies = obj.dependencies;
             this.rEmittance = obj.rEmittance ?? 0;
             this.gEmittance = obj.gEmittance ?? 0;
             this.bEmittance = obj.bEmittance ?? 0;
-            this.maxRadius = obj.maxRadius ?? 0;
-            this.type = obj.type ?? "Glow";
             this.identifier = obj.identifier;
             this.displayName = obj.displayName;
         }
@@ -137,11 +69,6 @@ export class Glow extends ModifierBase {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["modifier"] = this.modifier ?? new Void();
-        data["dependencies"] = this.dependencies;
-        data["r_emittance"] = this.rEmittance ?? 0;
-        data["g_emittance"] = this.gEmittance ?? 0;
-        data["b_emittance"] = this.bEmittance ?? 0;
         data["max_radius"] = this.maxRadius ?? 0;
         data["type"] = this.type ?? "Glow";
         data = super.toJSON(data);

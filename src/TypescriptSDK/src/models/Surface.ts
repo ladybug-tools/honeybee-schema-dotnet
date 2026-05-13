@@ -1,9 +1,8 @@
-﻿import { IsArray, IsString, IsDefined, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsArray, IsString, IsDefined, IsOptional, Equals, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { deepTransform } from '../deepTransform';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
-/** Base class for all objects that are not extensible with additional keys.\n\nThis effectively includes all objects except for the Properties classes\nthat are assigned to geometry objects. */
 export class Surface extends _OpenAPIGenBaseModel {
     @IsArray()
     @Type(() => String)
@@ -16,7 +15,7 @@ export class Surface extends _OpenAPIGenBaseModel {
     @Type(() => String)
     @IsString()
     @IsOptional()
-    @Matches(/^Surface$/)
+    @Equals("Surface")
     @Expose({ name: "type" })
     /** type */
     type: string = "Surface";

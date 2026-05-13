@@ -451,9 +451,7 @@ namespace HoneybeeSchema
                 return;
             switch (modifier)
             {
-                case Plastic obj:
-                    modelRadianceCollection.Modifiers.Add(obj);
-                    break;
+               
                 case Glass obj:
                     modelRadianceCollection.Modifiers.Add(obj);
                     break;
@@ -473,6 +471,9 @@ namespace HoneybeeSchema
                     modelRadianceCollection.Modifiers.Add(obj);
                     break;
                 case BSDF obj:
+                    modelRadianceCollection.Modifiers.Add(obj);
+                    break;
+                case Plastic obj:
                     modelRadianceCollection.Modifiers.Add(obj);
                     break;
                 default:

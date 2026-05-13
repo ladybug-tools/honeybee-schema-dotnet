@@ -25,7 +25,7 @@ namespace HoneybeeSchema
     [Summary(@"Fan Coil Unit (FCU) with DOAS HVAC system.\n\nAll rooms/zones in the system are connected to a Dedicated Outdoor Air System\n(DOAS) that supplies a constant volume of ventilation air at the same temperature\nto all rooms/zones. The ventilation air temperature will vary from 21.1C (70F)\nto 15.5C (60F) depending on the outdoor air temperature (the DOAS supplies cooler air\nwhen outdoor conditions are warmer). The ventilation air temperature is maintained\nby a chilled water cooling coil and a heating coil. The heating coil is a hot\nwater coil except when electric baseboards or gas heaters are specified, in\nwhich case the heating coil is a single-speed direct expansion (DX) heat pump\nwith a backup electrical resistance coil.\n\nEach room/zone also receives its own Fan Coil Unit (FCU), which meets the heating\nand cooling loads of the space. The cooling coil in the FCU is always chilled\nwater cooling coil, which is connected to a chilled water loop operating\nat 6.7C (44F). The heating coil is a hot water coil except when when electric\nbaseboards or gas heaters are specified. Hot water temperature is 82C (180F) for\nboiler/district heating and 49C (120F) when ASHP is used.\n\nThe FCU with DOAS template is relatively close in performance to active chilled\nbeams (ACBs). When using this template to represent ACBs, care must be taken\nto ensure that the DOAS ventilation air requirement is sufficient to extract\nthe heating cooling from the ACB. If so, then this FCUwithDOAS template can be\nused but with the energy use of the FCU fans ignored.")]
     [System.Serializable]
     [DataContract(Name = "FCUwithDOASAbridged")] // Enables DataMember rules. For internal Serialization XML/JSON
-    public partial class FCUwithDOASAbridged : IDdEnergyBaseModel, System.IEquatable<FCUwithDOASAbridged>
+    public partial class FCUwithDOASAbridged : DOASBase, System.IEquatable<FCUwithDOASAbridged>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="FCUwithDOASAbridged" /> class.
@@ -52,13 +52,8 @@ namespace HoneybeeSchema
         public FCUwithDOASAbridged
         (
             string identifier, string displayName = default, object userData = default, Vintages vintage = Vintages.ASHRAE_2019, double sensibleHeatRecovery = 0D, double latentHeatRecovery = 0D, bool demandControlledVentilation = false, string doasAvailabilitySchedule = default, FCUwithDOASEquipmentType equipmentType = FCUwithDOASEquipmentType.DOAS_FCU_Chiller_Boiler
-        ) : base(identifier: identifier, displayName: displayName, userData: userData)
+        ) : base(identifier: identifier, displayName: displayName, userData: userData, vintage: vintage, sensibleHeatRecovery: sensibleHeatRecovery, latentHeatRecovery: latentHeatRecovery, demandControlledVentilation: demandControlledVentilation, doasAvailabilitySchedule: doasAvailabilitySchedule)
         {
-            this.Vintage = vintage;
-            this.SensibleHeatRecovery = sensibleHeatRecovery;
-            this.LatentHeatRecovery = latentHeatRecovery;
-            this.DemandControlledVentilation = demandControlledVentilation;
-            this.DoasAvailabilitySchedule = doasAvailabilitySchedule;
             this.EquipmentType = equipmentType;
 
             // Set readonly properties with defaultValue
@@ -71,60 +66,6 @@ namespace HoneybeeSchema
 
 	
 	
-        /// <summary>
-        /// Text for the vintage of the template system. This will be used to set efficiencies for various pieces of equipment within the system. Further information about these defaults can be found in the version of ASHRAE 90.1 corresponding to the selected vintage. Read-only versions of the standard can be found at: https://www.ashrae.org/technical-resources/standards-and-guidelines/read-only-versions-of-ashrae-standards
-        /// </summary>
-        [Summary(@"Text for the vintage of the template system. This will be used to set efficiencies for various pieces of equipment within the system. Further information about these defaults can be found in the version of ASHRAE 90.1 corresponding to the selected vintage. Read-only versions of the standard can be found at: https://www.ashrae.org/technical-resources/standards-and-guidelines/read-only-versions-of-ashrae-standards")]
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
-        [DataMember(Name = "vintage")] // For internal Serialization XML/JSON
-        [JsonProperty("vintage", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [System.Text.Json.Serialization.JsonPropertyName("vintage")] // For System.Text.Json
-        public Vintages Vintage { get; set; } = Vintages.ASHRAE_2019;
-
-        /// <summary>
-        /// A number between 0 and 1 for the effectiveness of sensible heat recovery within the system.
-        /// </summary>
-        [Summary(@"A number between 0 and 1 for the effectiveness of sensible heat recovery within the system.")]
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
-        [Range(0, 1)]
-        [DataMember(Name = "sensible_heat_recovery")] // For internal Serialization XML/JSON
-        [JsonProperty("sensible_heat_recovery", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [System.Text.Json.Serialization.JsonPropertyName("sensible_heat_recovery")] // For System.Text.Json
-        public double SensibleHeatRecovery { get; set; } = 0D;
-
-        /// <summary>
-        /// A number between 0 and 1 for the effectiveness of latent heat recovery within the system.
-        /// </summary>
-        [Summary(@"A number between 0 and 1 for the effectiveness of latent heat recovery within the system.")]
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
-        [Range(0, 1)]
-        [DataMember(Name = "latent_heat_recovery")] // For internal Serialization XML/JSON
-        [JsonProperty("latent_heat_recovery", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [System.Text.Json.Serialization.JsonPropertyName("latent_heat_recovery")] // For System.Text.Json
-        public double LatentHeatRecovery { get; set; } = 0D;
-
-        /// <summary>
-        /// Boolean to note whether demand controlled ventilation should be used on the system, which will vary the amount of ventilation air according to the occupancy schedule of the Rooms.
-        /// </summary>
-        [Summary(@"Boolean to note whether demand controlled ventilation should be used on the system, which will vary the amount of ventilation air according to the occupancy schedule of the Rooms.")]
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
-        [DataMember(Name = "demand_controlled_ventilation")] // For internal Serialization XML/JSON
-        [JsonProperty("demand_controlled_ventilation", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [System.Text.Json.Serialization.JsonPropertyName("demand_controlled_ventilation")] // For System.Text.Json
-        public bool DemandControlledVentilation { get; set; } = false;
-
-        /// <summary>
-        /// An optional On/Off discrete schedule to set when the dedicated outdoor air system (DOAS) shuts off. This will not only prevent any outdoor air from flowing thorough the system but will also shut off the fans, which can result in more energy savings when spaces served by the DOAS are completely unoccupied. If None, the DOAS will be always on.
-        /// </summary>
-        [Summary(@"An optional On/Off discrete schedule to set when the dedicated outdoor air system (DOAS) shuts off. This will not only prevent any outdoor air from flowing thorough the system but will also shut off the fans, which can result in more energy savings when spaces served by the DOAS are completely unoccupied. If None, the DOAS will be always on.")]
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
-        [MinLength(1)]
-        [MaxLength(100)]
-        [DataMember(Name = "doas_availability_schedule")] // For internal Serialization XML/JSON
-        [JsonProperty("doas_availability_schedule", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [System.Text.Json.Serialization.JsonPropertyName("doas_availability_schedule")] // For System.Text.Json
-        public string DoasAvailabilitySchedule { get; set; }
-
         /// <summary>
         /// Text for the specific type of system equipment from the FCUwithDOASEquipmentType enumeration.
         /// </summary>
@@ -199,8 +140,8 @@ namespace HoneybeeSchema
         /// <summary>
         /// Creates a new instance with the same properties.
         /// </summary>
-        /// <returns>IDdEnergyBaseModel</returns>
-        public override IDdEnergyBaseModel DuplicateIDdEnergyBaseModel()
+        /// <returns>DOASBase</returns>
+        public override DOASBase DuplicateDOASBase()
         {
             return DuplicateFCUwithDOASAbridged();
         }
@@ -228,11 +169,6 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
             return base.Equals(input) && 
-                    Extension.Equals(this.Vintage, input.Vintage) && 
-                    Extension.Equals(this.SensibleHeatRecovery, input.SensibleHeatRecovery) && 
-                    Extension.Equals(this.LatentHeatRecovery, input.LatentHeatRecovery) && 
-                    Extension.Equals(this.DemandControlledVentilation, input.DemandControlledVentilation) && 
-                    Extension.Equals(this.DoasAvailabilitySchedule, input.DoasAvailabilitySchedule) && 
                     Extension.Equals(this.EquipmentType, input.EquipmentType);
         }
 
@@ -246,16 +182,6 @@ namespace HoneybeeSchema
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = base.GetHashCode();
-                if (this.Vintage != null)
-                    hashCode = hashCode * 59 + this.Vintage.GetHashCode();
-                if (this.SensibleHeatRecovery != null)
-                    hashCode = hashCode * 59 + this.SensibleHeatRecovery.GetHashCode();
-                if (this.LatentHeatRecovery != null)
-                    hashCode = hashCode * 59 + this.LatentHeatRecovery.GetHashCode();
-                if (this.DemandControlledVentilation != null)
-                    hashCode = hashCode * 59 + this.DemandControlledVentilation.GetHashCode();
-                if (this.DoasAvailabilitySchedule != null)
-                    hashCode = hashCode * 59 + this.DoasAvailabilitySchedule.GetHashCode();
                 if (this.EquipmentType != null)
                     hashCode = hashCode * 59 + this.EquipmentType.GetHashCode();
                 return hashCode;

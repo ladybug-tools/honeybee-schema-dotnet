@@ -47,6 +47,16 @@ namespace HoneybeeSchema
         // [JsonPropertyName("Electric_TanklessHeater")]                   // STJ
         Electric_TanklessHeater = 5,
 
+        [EnumMember(Value = "District_WaterHeater")]
+        [JsonProperty("District_WaterHeater")]       // Newtonsoft
+        // [JsonPropertyName("District_WaterHeater")]                   // STJ
+        District_WaterHeater = 6,
+
+        [EnumMember(Value = "District_TanklessHeater")]
+        [JsonProperty("District_TanklessHeater")]       // Newtonsoft
+        // [JsonPropertyName("District_TanklessHeater")]                   // STJ
+        District_TanklessHeater = 7,
+
     }
  
 }

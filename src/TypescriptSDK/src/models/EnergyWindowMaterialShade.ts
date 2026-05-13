@@ -1,4 +1,4 @@
-﻿import { IsString, IsOptional, Matches, IsNumber, Min, Max, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, Equals, IsNumber, Min, Max, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { deepTransform } from '../deepTransform';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
@@ -8,7 +8,7 @@ export class EnergyWindowMaterialShade extends IDdEnergyBaseModel {
     @Type(() => String)
     @IsString()
     @IsOptional()
-    @Matches(/^EnergyWindowMaterialShade$/)
+    @Equals("EnergyWindowMaterialShade")
     @Expose({ name: "type" })
     /** type */
     type: string = "EnergyWindowMaterialShade";

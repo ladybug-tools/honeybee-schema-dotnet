@@ -90,6 +90,7 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"The surface-to-surface thickness of the glass in meters. Default:  0.003.")]
         // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [Range(0, double.MaxValue)]
         [DataMember(Name = "thickness")] // For internal Serialization XML/JSON
         [JsonProperty("thickness", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("thickness")] // For System.Text.Json
@@ -197,6 +198,7 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Thermal conductivity of the glass in W/(m-K). Default: 0.9, which is  typical for clear glass without a low-e coating.")]
         // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [Range(0, double.MaxValue)]
         [DataMember(Name = "conductivity")] // For internal Serialization XML/JSON
         [JsonProperty("conductivity", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("conductivity")] // For System.Text.Json

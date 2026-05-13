@@ -1,15 +1,14 @@
-﻿import { IsString, IsOptional, Matches, MinLength, MaxLength, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, Equals, MinLength, MaxLength, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { deepTransform } from '../deepTransform';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { VentilationOpening } from "./VentilationOpening";
 
-/** Base class for all objects that are not extensible with additional keys.\n\nThis effectively includes all objects except for the Properties classes\nthat are assigned to geometry objects. */
 export class DoorEnergyPropertiesAbridged extends _OpenAPIGenBaseModel {
     @Type(() => String)
     @IsString()
     @IsOptional()
-    @Matches(/^DoorEnergyPropertiesAbridged$/)
+    @Equals("DoorEnergyPropertiesAbridged")
     @Expose({ name: "type" })
     /** type */
     type: string = "DoorEnergyPropertiesAbridged";

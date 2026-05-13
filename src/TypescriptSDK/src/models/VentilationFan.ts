@@ -1,11 +1,10 @@
-﻿import { IsNumber, IsDefined, Min, Max, IsString, IsOptional, Matches, IsEnum, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsNumber, IsDefined, Min, Max, IsString, IsOptional, Equals, IsEnum, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { deepTransform } from '../deepTransform';
 import { EnergyBaseModel } from "./EnergyBaseModel";
 import { VentilationControlAbridged } from "./VentilationControlAbridged";
 import { VentilationType } from "./VentilationType";
 
-/** Base class for all objects requiring a valid EnergyPlus identifier. */
 export class VentilationFan extends EnergyBaseModel {
     @Type(() => Number)
     @IsNumber()
@@ -33,7 +32,7 @@ export class VentilationFan extends EnergyBaseModel {
     @Type(() => String)
     @IsString()
     @IsOptional()
-    @Matches(/^VentilationFan$/)
+    @Equals("VentilationFan")
     @Expose({ name: "type" })
     /** type */
     type: string = "VentilationFan";

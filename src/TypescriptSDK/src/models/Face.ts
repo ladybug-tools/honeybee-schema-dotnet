@@ -1,4 +1,4 @@
-﻿import { IsInstance, ValidateNested, IsDefined, IsEnum, IsString, IsOptional, Matches, IsArray, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsInstance, ValidateNested, IsDefined, IsEnum, IsString, IsOptional, Equals, IsArray, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { deepTransform } from '../deepTransform';
 import { Adiabatic } from "./Adiabatic";
@@ -14,7 +14,6 @@ import { Outdoors } from "./Outdoors";
 import { Shade } from "./Shade";
 import { Surface } from "./Surface";
 
-/** Base class for all objects requiring a identifiers acceptable for all engines. */
 export class Face extends IDdBaseModel {
     @Type(() => Face3D)
     @IsInstance(Face3D)
@@ -56,7 +55,7 @@ export class Face extends IDdBaseModel {
     @Type(() => String)
     @IsString()
     @IsOptional()
-    @Matches(/^Face$/)
+    @Equals("Face")
     @Expose({ name: "type" })
     /** type */
     type: string = "Face";

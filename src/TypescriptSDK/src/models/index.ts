@@ -238,6 +238,7 @@ export * from "./VentilationAbridged";
 export * from "./VentilationControlAbridged";
 export * from "./VentilationControlType";
 export * from "./VentilationFan";
+export * from "./VentilationMethod";
 export * from "./VentilationOpening";
 export * from "./VentilationSimulationControl";
 export * from "./VentilationType";

@@ -1,4 +1,4 @@
-﻿import { IsString, IsOptional, Matches, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, Equals, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { deepTransform } from '../deepTransform';
 import { AirBoundaryConstruction } from "./AirBoundaryConstruction";
@@ -16,7 +16,7 @@ export class ConstructionSet extends IDdEnergyBaseModel {
     @Type(() => String)
     @IsString()
     @IsOptional()
-    @Matches(/^ConstructionSet$/)
+    @Equals("ConstructionSet")
     @Expose({ name: "type" })
     /** type */
     type: string = "ConstructionSet";

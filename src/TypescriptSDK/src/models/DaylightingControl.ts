@@ -1,9 +1,8 @@
-﻿import { IsArray, IsNumber, IsDefined, IsString, IsOptional, Matches, Min, Max, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsArray, IsNumber, IsDefined, IsString, IsOptional, Equals, Min, Max, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { deepTransform } from '../deepTransform';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 
-/** Base class for all objects that are not extensible with additional keys.\n\nThis effectively includes all objects except for the Properties classes\nthat are assigned to geometry objects. */
 export class DaylightingControl extends _OpenAPIGenBaseModel {
     @IsArray()
     @Type(() => Number)
@@ -16,7 +15,7 @@ export class DaylightingControl extends _OpenAPIGenBaseModel {
     @Type(() => String)
     @IsString()
     @IsOptional()
-    @Matches(/^DaylightingControl$/)
+    @Equals("DaylightingControl")
     @Expose({ name: "type" })
     /** type */
     type: string = "DaylightingControl";

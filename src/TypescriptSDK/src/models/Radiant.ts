@@ -1,24 +1,17 @@
-﻿import { IsEnum, IsOptional, IsString, Matches, IsNumber, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, Equals, IsEnum, IsNumber, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { deepTransform } from '../deepTransform';
-import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
+import { _HeatCoolBase } from "./_HeatCoolBase";
 import { RadiantEquipmentType } from "./RadiantEquipmentType";
 import { RadiantFaceTypes } from "./RadiantFaceTypes";
 import { Vintages } from "./Vintages";
 
 /** Low temperature radiant HVAC system.\n\nThis HVAC template will change the floor and/or ceiling constructions\nof the Rooms that it is applied to, replacing them with a construction that\naligns with the radiant_type property (eg. CeilingMetalPanel).\n\nThe heating and cooling needs of the space are met with the radiant constructions,\nwhich use chilled water at 12.8C (55F) and a hot water temperature somewhere\nbetween 32.2C (90F) and 49C (120F) (warmer temperatures are used in colder\nclimate zones).\n\nNote that radiant systems are particularly limited in cooling capacity and\nusing them may result in many unmet hours. To reduce unmet hours, one can\nremove carpets, reduce internal loads, reduce solar and envelope gains during\npeak times, add thermal mass, and use an expanded comfort range. */
-export class Radiant extends IDdEnergyBaseModel {
-    @Type(() => String)
-    @IsEnum(Vintages)
-    @IsOptional()
-    @Expose({ name: "vintage" })
-    /** Text for the vintage of the template system. This will be used to set efficiencies for various pieces of equipment within the system. Further information about these defaults can be found in the version of ASHRAE 90.1 corresponding to the selected vintage. Read-only versions of the standard can be found at: https://www.ashrae.org/technical-resources/standards-and-guidelines/read-only-versions-of-ashrae-standards */
-    vintage: Vintages = Vintages.ASHRAE_2019;
-	
+export class Radiant extends _HeatCoolBase {
     @Type(() => String)
     @IsString()
     @IsOptional()
-    @Matches(/^Radiant$/)
+    @Equals("Radiant")
     @Expose({ name: "type" })
     /** type */
     type: string = "Radiant";
@@ -54,7 +47,6 @@ export class Radiant extends IDdEnergyBaseModel {
 
     constructor() {
         super();
-        this.vintage = Vintages.ASHRAE_2019;
         this.type = "Radiant";
         this.equipmentType = RadiantEquipmentType.Radiant_Chiller_Boiler;
         this.radiantFaceType = RadiantFaceTypes.Floor;
@@ -67,12 +59,12 @@ export class Radiant extends IDdEnergyBaseModel {
 
         if (_data) {
             const obj = deepTransform(Radiant, _data);
-            this.vintage = obj.vintage ?? Vintages.ASHRAE_2019;
             this.type = obj.type ?? "Radiant";
             this.equipmentType = obj.equipmentType ?? RadiantEquipmentType.Radiant_Chiller_Boiler;
             this.radiantFaceType = obj.radiantFaceType ?? RadiantFaceTypes.Floor;
             this.minimumOperationTime = obj.minimumOperationTime ?? 1;
             this.switchOverTime = obj.switchOverTime ?? 24;
+            this.vintage = obj.vintage ?? Vintages.ASHRAE_2019;
             this.userData = obj.userData;
             this.identifier = obj.identifier;
             this.displayName = obj.displayName;
@@ -97,7 +89,6 @@ export class Radiant extends IDdEnergyBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["vintage"] = this.vintage ?? Vintages.ASHRAE_2019;
         data["type"] = this.type ?? "Radiant";
         data["equipment_type"] = this.equipmentType ?? RadiantEquipmentType.Radiant_Chiller_Boiler;
         data["radiant_face_type"] = this.radiantFaceType ?? RadiantFaceTypes.Floor;

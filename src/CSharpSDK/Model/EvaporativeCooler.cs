@@ -25,7 +25,7 @@ namespace HoneybeeSchema
     [Summary(@"Direct evaporative cooling systems (with optional heating).\n\nEach room/zone will receive its own air loop sized to meet the sensible load,\nwhich contains an evaporative cooler that directly adds humidity to the room\nair to cool it. The loop contains an outdoor air mixer, which is used whenever\nthe outdoor air has a lower wet bulb temperature than the return air from\nthe room. In the event that the combination of outdoor and room return air\nair is too humid, a backup single-speed direct expansion (DX) cooling coil\nwill be used. Heating loads can be met with various options, including\nseveral types of baseboards, a furnace, or gas unit heaters.")]
     [System.Serializable]
     [DataContract(Name = "EvaporativeCooler")] // Enables DataMember rules. For internal Serialization XML/JSON
-    public partial class EvaporativeCooler : IDdEnergyBaseModel, System.IEquatable<EvaporativeCooler>
+    public partial class EvaporativeCooler : HeatCoolBase, System.IEquatable<EvaporativeCooler>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="EvaporativeCooler" /> class.
@@ -48,9 +48,8 @@ namespace HoneybeeSchema
         public EvaporativeCooler
         (
             string identifier, string displayName = default, object userData = default, Vintages vintage = Vintages.ASHRAE_2019, EvaporativeCoolerEquipmentType equipmentType = EvaporativeCoolerEquipmentType.EvapCoolers_ElectricBaseboard
-        ) : base(identifier: identifier, displayName: displayName, userData: userData)
+        ) : base(identifier: identifier, displayName: displayName, userData: userData, vintage: vintage)
         {
-            this.Vintage = vintage;
             this.EquipmentType = equipmentType;
 
             // Set readonly properties with defaultValue
@@ -63,16 +62,6 @@ namespace HoneybeeSchema
 
 	
 	
-        /// <summary>
-        /// Text for the vintage of the template system. This will be used to set efficiencies for various pieces of equipment within the system. Further information about these defaults can be found in the version of ASHRAE 90.1 corresponding to the selected vintage. Read-only versions of the standard can be found at: https://www.ashrae.org/technical-resources/standards-and-guidelines/read-only-versions-of-ashrae-standards
-        /// </summary>
-        [Summary(@"Text for the vintage of the template system. This will be used to set efficiencies for various pieces of equipment within the system. Further information about these defaults can be found in the version of ASHRAE 90.1 corresponding to the selected vintage. Read-only versions of the standard can be found at: https://www.ashrae.org/technical-resources/standards-and-guidelines/read-only-versions-of-ashrae-standards")]
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
-        [DataMember(Name = "vintage")] // For internal Serialization XML/JSON
-        [JsonProperty("vintage", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [System.Text.Json.Serialization.JsonPropertyName("vintage")] // For System.Text.Json
-        public Vintages Vintage { get; set; } = Vintages.ASHRAE_2019;
-
         /// <summary>
         /// Text for the specific type of system equipment from the EvaporativeCoolerEquipmentType enumeration.
         /// </summary>
@@ -143,8 +132,8 @@ namespace HoneybeeSchema
         /// <summary>
         /// Creates a new instance with the same properties.
         /// </summary>
-        /// <returns>IDdEnergyBaseModel</returns>
-        public override IDdEnergyBaseModel DuplicateIDdEnergyBaseModel()
+        /// <returns>HeatCoolBase</returns>
+        public override HeatCoolBase DuplicateHeatCoolBase()
         {
             return DuplicateEvaporativeCooler();
         }
@@ -172,7 +161,6 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
             return base.Equals(input) && 
-                    Extension.Equals(this.Vintage, input.Vintage) && 
                     Extension.Equals(this.EquipmentType, input.EquipmentType);
         }
 
@@ -186,8 +174,6 @@ namespace HoneybeeSchema
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = base.GetHashCode();
-                if (this.Vintage != null)
-                    hashCode = hashCode * 59 + this.Vintage.GetHashCode();
                 if (this.EquipmentType != null)
                     hashCode = hashCode * 59 + this.EquipmentType.GetHashCode();
                 return hashCode;

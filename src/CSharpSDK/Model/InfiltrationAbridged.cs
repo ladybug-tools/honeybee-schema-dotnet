@@ -19,10 +19,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace HoneybeeSchema
 {
-    /// <summary>
-    /// Base class for all objects requiring an EnergyPlus identifier and user_data.
-    /// </summary>
-    [Summary(@"Base class for all objects requiring an EnergyPlus identifier and user_data.")]
+    [Summary(@"")]
     [System.Serializable]
     [DataContract(Name = "InfiltrationAbridged")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class InfiltrationAbridged : IDdEnergyBaseModel, System.IEquatable<InfiltrationAbridged>
@@ -42,19 +39,19 @@ namespace HoneybeeSchema
         /// </summary>
         /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be < 100 characters, use only ASCII characters and exclude (, ; ! \n \t).</param>
         /// <param name="flowPerExteriorArea">Number for the infiltration per exterior surface area in m3/s-m2.</param>
-        /// <param name="schedule">Identifier of the schedule for the infiltration over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the flow_per_exterior_area to yield a complete infiltration profile.</param>
         /// <param name="displayName">Display name of the object with no character restrictions.</param>
         /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list).</param>
+        /// <param name="schedule">Identifier of the schedule for the infiltration over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the flow_per_exterior_area to yield a complete infiltration profile. If None, an Always On schedule will be used.</param>
         /// <param name="constantCoefficient">ConstantCoefficient</param>
         /// <param name="temperatureCoefficient">TemperatureCoefficient</param>
         /// <param name="velocityCoefficient">VelocityCoefficient</param>
         public InfiltrationAbridged
         (
-            string identifier, double flowPerExteriorArea, string schedule, string displayName = default, object userData = default, double constantCoefficient = 1D, double temperatureCoefficient = 0D, double velocityCoefficient = 0D
+            string identifier, double flowPerExteriorArea, string displayName = default, object userData = default, string schedule = default, double constantCoefficient = 1D, double temperatureCoefficient = 0D, double velocityCoefficient = 0D
         ) : base(identifier: identifier, displayName: displayName, userData: userData)
         {
             this.FlowPerExteriorArea = flowPerExteriorArea;
-            this.Schedule = schedule ?? throw new System.ArgumentNullException("schedule is a required property for InfiltrationAbridged and cannot be null");
+            this.Schedule = schedule;
             this.ConstantCoefficient = constantCoefficient;
             this.TemperatureCoefficient = temperatureCoefficient;
             this.VelocityCoefficient = velocityCoefficient;
@@ -82,15 +79,14 @@ namespace HoneybeeSchema
         public double FlowPerExteriorArea { get; set; }
 
         /// <summary>
-        /// Identifier of the schedule for the infiltration over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the flow_per_exterior_area to yield a complete infiltration profile.
+        /// Identifier of the schedule for the infiltration over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the flow_per_exterior_area to yield a complete infiltration profile. If None, an Always On schedule will be used.
         /// </summary>
-        [Summary(@"Identifier of the schedule for the infiltration over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the flow_per_exterior_area to yield a complete infiltration profile.")]
-        [Required] // For validation after deserialization
-        // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
+        [Summary(@"Identifier of the schedule for the infiltration over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the flow_per_exterior_area to yield a complete infiltration profile. If None, an Always On schedule will be used.")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [MinLength(1)]
         [MaxLength(100)]
-        [DataMember(Name = "schedule", IsRequired = true)] // For internal Serialization XML/JSON
-        [JsonProperty("schedule", Required = Required.Always)] // For Newtonsoft.Json
+        [DataMember(Name = "schedule")] // For internal Serialization XML/JSON
+        [JsonProperty("schedule", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("schedule")] // For System.Text.Json
         public string Schedule { get; set; }
 
@@ -151,10 +147,10 @@ namespace HoneybeeSchema
             sb.Append("InfiltrationAbridged:\n");
             sb.Append("  Identifier: ").Append(this.Identifier).Append("\n");
             sb.Append("  FlowPerExteriorArea: ").Append(this.FlowPerExteriorArea).Append("\n");
-            sb.Append("  Schedule: ").Append(this.Schedule).Append("\n");
             sb.Append("  Type: ").Append(this.Type).Append("\n");
             sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
             sb.Append("  UserData: ").Append(this.UserData).Append("\n");
+            sb.Append("  Schedule: ").Append(this.Schedule).Append("\n");
             sb.Append("  ConstantCoefficient: ").Append(this.ConstantCoefficient).Append("\n");
             sb.Append("  TemperatureCoefficient: ").Append(this.TemperatureCoefficient).Append("\n");
             sb.Append("  VelocityCoefficient: ").Append(this.VelocityCoefficient).Append("\n");

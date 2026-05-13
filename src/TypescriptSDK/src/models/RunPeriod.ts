@@ -1,4 +1,4 @@
-﻿import { IsString, IsOptional, Matches, IsArray, IsInt, IsEnum, IsInstance, ValidateNested, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, Equals, IsArray, IsInt, IsEnum, IsInstance, ValidateNested, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { deepTransform } from '../deepTransform';
 import { IsNestedIntegerArray } from "./../helpers/class-validator";
@@ -11,7 +11,7 @@ export class RunPeriod extends DatedBaseModel {
     @Type(() => String)
     @IsString()
     @IsOptional()
-    @Matches(/^RunPeriod$/)
+    @Equals("RunPeriod")
     @Expose({ name: "type" })
     /** type */
     type: string = "RunPeriod";

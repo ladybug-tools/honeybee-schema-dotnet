@@ -19,10 +19,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace HoneybeeSchema
 {
-    /// <summary>
-    /// Base class for all objects that are not extensible with additional keys.\n\nThis effectively includes all objects except for the Properties classes\nthat are assigned to geometry objects.
-    /// </summary>
-    [Summary(@"Base class for all objects that are not extensible with additional keys.\n\nThis effectively includes all objects except for the Properties classes\nthat are assigned to geometry objects.")]
+    [Summary(@"")]
     [System.Serializable]
     [DataContract(Name = "DaylightingControl")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class DaylightingControl : OpenAPIGenBaseModel, System.IEquatable<DaylightingControl>
@@ -84,6 +81,7 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"A number for the illuminance setpoint in lux beyond which electric lights are dimmed if there is sufficient daylight.")]
         // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [Range(0, double.MaxValue)]
         [DataMember(Name = "illuminance_setpoint")] // For internal Serialization XML/JSON
         [JsonProperty("illuminance_setpoint", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("illuminance_setpoint")] // For System.Text.Json

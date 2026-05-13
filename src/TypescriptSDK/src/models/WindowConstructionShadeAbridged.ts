@@ -1,4 +1,4 @@
-﻿import { IsInstance, ValidateNested, IsDefined, IsString, MinLength, MaxLength, IsOptional, Matches, IsEnum, IsNumber, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsInstance, ValidateNested, IsDefined, IsString, MinLength, MaxLength, IsOptional, Equals, IsEnum, IsNumber, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { deepTransform } from '../deepTransform';
 import { ControlType } from "./ControlType";
@@ -28,7 +28,7 @@ export class WindowConstructionShadeAbridged extends IDdEnergyBaseModel {
     @Type(() => String)
     @IsString()
     @IsOptional()
-    @Matches(/^WindowConstructionShadeAbridged$/)
+    @Equals("WindowConstructionShadeAbridged")
     @Expose({ name: "type" })
     /** type */
     type: string = "WindowConstructionShadeAbridged";

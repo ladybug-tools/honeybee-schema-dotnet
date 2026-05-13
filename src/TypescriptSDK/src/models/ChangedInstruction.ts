@@ -1,33 +1,16 @@
-﻿import { IsEnum, IsDefined, IsString, Matches, MinLength, MaxLength, IsOptional, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, Equals, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { deepTransform } from '../deepTransform';
-import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
-import { GeometryObjectTypes } from "./GeometryObjectTypes";
+import { _DiffObjectBase } from "./_DiffObjectBase";
 
-export class ChangedInstruction extends _OpenAPIGenBaseModel {
-    @Type(() => String)
-    @IsEnum(GeometryObjectTypes)
-    @IsDefined()
-    @Expose({ name: "element_type" })
-    /** Text for the type of object that has been changed. */
-    elementType!: GeometryObjectTypes;
-	
-    @Type(() => String)
-    @IsString()
-    @IsDefined()
-    @Matches(/^[^,;!\n\t]+$/)
-    @MinLength(1)
-    @MaxLength(100)
-    @Expose({ name: "element_id" })
-    /** Text string for the unique object ID that has changed. */
-    elementId!: string;
-	
+export class ChangedInstruction extends _DiffObjectBase {
     @Type(() => String)
     @IsString()
     @IsOptional()
-    @Expose({ name: "element_name" })
-    /** Text string for the display name of the object that has changed. */
-    elementName?: string;
+    @Equals("ChangedInstruction")
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "ChangedInstruction";
 	
     @Type(() => Boolean)
     @IsBoolean()
@@ -50,21 +33,13 @@ export class ChangedInstruction extends _OpenAPIGenBaseModel {
     /** A boolean to note whether the radiance properties of the object in the new/updated model should replace the base/existing radiance properties (True) or the base/existing radiance properties should be kept (False). */
     updateRadiance: boolean = true;
 	
-    @Type(() => String)
-    @IsString()
-    @IsOptional()
-    @Matches(/^ChangedInstruction$/)
-    @Expose({ name: "type" })
-    /** type */
-    type: string = "ChangedInstruction";
-	
 
     constructor() {
         super();
+        this.type = "ChangedInstruction";
         this.updateGeometry = true;
         this.updateEnergy = true;
         this.updateRadiance = true;
-        this.type = "ChangedInstruction";
     }
 
 
@@ -72,13 +47,13 @@ export class ChangedInstruction extends _OpenAPIGenBaseModel {
 
         if (_data) {
             const obj = deepTransform(ChangedInstruction, _data);
-            this.elementType = obj.elementType;
-            this.elementId = obj.elementId;
-            this.elementName = obj.elementName;
+            this.type = obj.type ?? "ChangedInstruction";
             this.updateGeometry = obj.updateGeometry ?? true;
             this.updateEnergy = obj.updateEnergy ?? true;
             this.updateRadiance = obj.updateRadiance ?? true;
-            this.type = obj.type ?? "ChangedInstruction";
+            this.elementType = obj.elementType;
+            this.elementId = obj.elementId;
+            this.elementName = obj.elementName;
         }
     }
 
@@ -100,13 +75,10 @@ export class ChangedInstruction extends _OpenAPIGenBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["element_type"] = this.elementType;
-        data["element_id"] = this.elementId;
-        data["element_name"] = this.elementName;
+        data["type"] = this.type ?? "ChangedInstruction";
         data["update_geometry"] = this.updateGeometry ?? true;
         data["update_energy"] = this.updateEnergy ?? true;
         data["update_radiance"] = this.updateRadiance ?? true;
-        data["type"] = this.type ?? "ChangedInstruction";
         data = super.toJSON(data);
         return instanceToPlain(data, { exposeUnsetFields: false });
     }

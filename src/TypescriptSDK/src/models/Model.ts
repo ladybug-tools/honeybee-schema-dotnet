@@ -1,4 +1,4 @@
-﻿import { IsInstance, ValidateNested, IsDefined, IsString, IsOptional, Matches, IsArray, IsEnum, IsNumber, Min, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsInstance, ValidateNested, IsDefined, IsString, IsOptional, Equals, Matches, IsArray, IsEnum, IsNumber, Min, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { deepTransform } from '../deepTransform';
 import { Aperture } from "./Aperture";
@@ -11,7 +11,6 @@ import { Shade } from "./Shade";
 import { ShadeMesh } from "./ShadeMesh";
 import { Units } from "./Units";
 
-/** Base class for all objects requiring a identifiers acceptable for all engines. */
 export class Model extends IDdBaseModel {
     @Type(() => ModelProperties)
     @IsInstance(ModelProperties)
@@ -24,7 +23,7 @@ export class Model extends IDdBaseModel {
     @Type(() => String)
     @IsString()
     @IsOptional()
-    @Matches(/^Model$/)
+    @Equals("Model")
     @Expose({ name: "type" })
     /** type */
     type: string = "Model";
@@ -32,10 +31,10 @@ export class Model extends IDdBaseModel {
     @Type(() => String)
     @IsString()
     @IsOptional()
-    @Matches(/([0-9]+)\.([0-9]+)\.([0-9]+)/)
+    @Matches(/^([0-9]+)\.([0-9]+)\.([0-9]+)$/)
     @Expose({ name: "version" })
     /** Text string for the current version of the schema. */
-    version: string = "1.59.1";
+    version: string = "2.0.5";
 	
     @IsArray()
     @Type(() => Room)
@@ -118,7 +117,7 @@ export class Model extends IDdBaseModel {
     constructor() {
         super();
         this.type = "Model";
-        this.version = "1.59.1";
+        this.version = "2.0.5";
         this.units = Units.Meters;
         this.tolerance = 0.01;
         this.angleTolerance = 1;
@@ -131,7 +130,7 @@ export class Model extends IDdBaseModel {
             const obj = deepTransform(Model, _data);
             this.properties = obj.properties;
             this.type = obj.type ?? "Model";
-            this.version = obj.version ?? "1.59.1";
+            this.version = obj.version ?? "2.0.5";
             this.rooms = obj.rooms;
             this.orphanedFaces = obj.orphanedFaces;
             this.orphanedShades = obj.orphanedShades;
@@ -167,7 +166,7 @@ export class Model extends IDdBaseModel {
         data = typeof data === 'object' ? data : {};
         data["properties"] = this.properties;
         data["type"] = this.type ?? "Model";
-        data["version"] = this.version ?? "1.59.1";
+        data["version"] = this.version ?? "2.0.5";
         data["rooms"] = this.rooms;
         data["orphaned_faces"] = this.orphanedFaces;
         data["orphaned_shades"] = this.orphanedShades;

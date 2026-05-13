@@ -1,4 +1,4 @@
-﻿import { IsDefined, IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsDefined, IsString, IsOptional, Equals, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { deepTransform } from '../deepTransform';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
@@ -13,7 +13,7 @@ export class DetailedHVAC extends IDdEnergyBaseModel {
     @Type(() => String)
     @IsString()
     @IsOptional()
-    @Matches(/^DetailedHVAC$/)
+    @Equals("DetailedHVAC")
     @Expose({ name: "type" })
     /** type */
     type: string = "DetailedHVAC";

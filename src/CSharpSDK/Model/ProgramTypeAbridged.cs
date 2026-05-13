@@ -19,10 +19,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace HoneybeeSchema
 {
-    /// <summary>
-    /// Base class for all objects requiring an EnergyPlus identifier and user_data.
-    /// </summary>
-    [Summary(@"Base class for all objects requiring an EnergyPlus identifier and user_data.")]
+    [Summary(@"")]
     [System.Serializable]
     [DataContract(Name = "ProgramTypeAbridged")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class ProgramTypeAbridged : IDdEnergyBaseModel, System.IEquatable<ProgramTypeAbridged>

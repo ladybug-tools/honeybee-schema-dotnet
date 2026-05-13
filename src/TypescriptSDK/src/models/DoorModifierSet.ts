@@ -1,7 +1,7 @@
-﻿import { IsOptional, IsString, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, Equals, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { deepTransform } from '../deepTransform';
-import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
+import { BaseModifierSet } from "./BaseModifierSet";
 import { BSDF } from "./BSDF";
 import { Glass } from "./Glass";
 import { Glow } from "./Glow";
@@ -13,42 +13,14 @@ import { Trans } from "./Trans";
 import { Void } from "./Void";
 
 /** Set containing radiance modifiers needed for a model's Doors. */
-export class DoorModifierSet extends _OpenAPIGenBaseModel {
+export class DoorModifierSet extends BaseModifierSet {
+    @Type(() => String)
+    @IsString()
     @IsOptional()
-    @Expose({ name: "exterior_modifier" })
-    @Transform(({ value }) => {
-      const item = value;
-      if (item?.type === 'Plastic') return Plastic.fromJS(item);
-      else if (item?.type === 'Glass') return Glass.fromJS(item);
-      else if (item?.type === 'BSDF') return BSDF.fromJS(item);
-      else if (item?.type === 'Glow') return Glow.fromJS(item);
-      else if (item?.type === 'Light') return Light.fromJS(item);
-      else if (item?.type === 'Trans') return Trans.fromJS(item);
-      else if (item?.type === 'Metal') return Metal.fromJS(item);
-      else if (item?.type === 'Void') return Void.fromJS(item);
-      else if (item?.type === 'Mirror') return Mirror.fromJS(item);
-      else return item;
-    })
-    /** A radiance modifier object for faces with an Outdoors boundary condition. */
-    exteriorModifier?: (Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror);
-	
-    @IsOptional()
-    @Expose({ name: "interior_modifier" })
-    @Transform(({ value }) => {
-      const item = value;
-      if (item?.type === 'Plastic') return Plastic.fromJS(item);
-      else if (item?.type === 'Glass') return Glass.fromJS(item);
-      else if (item?.type === 'BSDF') return BSDF.fromJS(item);
-      else if (item?.type === 'Glow') return Glow.fromJS(item);
-      else if (item?.type === 'Light') return Light.fromJS(item);
-      else if (item?.type === 'Trans') return Trans.fromJS(item);
-      else if (item?.type === 'Metal') return Metal.fromJS(item);
-      else if (item?.type === 'Void') return Void.fromJS(item);
-      else if (item?.type === 'Mirror') return Mirror.fromJS(item);
-      else return item;
-    })
-    /** A radiance modifier object for faces with a boundary condition other than Outdoors. */
-    interiorModifier?: (Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror);
+    @Equals("DoorModifierSet")
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "DoorModifierSet";
 	
     @IsOptional()
     @Expose({ name: "interior_glass_modifier" })
@@ -104,14 +76,6 @@ export class DoorModifierSet extends _OpenAPIGenBaseModel {
     /** A window modifier object for doors with an Outdoors boundary condition and a RoofCeiling or Floor face type for their parent face. */
     overheadModifier?: (Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror);
 	
-    @Type(() => String)
-    @IsString()
-    @IsOptional()
-    @Matches(/^DoorModifierSet$/)
-    @Expose({ name: "type" })
-    /** type */
-    type: string = "DoorModifierSet";
-	
 
     constructor() {
         super();
@@ -123,12 +87,12 @@ export class DoorModifierSet extends _OpenAPIGenBaseModel {
 
         if (_data) {
             const obj = deepTransform(DoorModifierSet, _data);
-            this.exteriorModifier = obj.exteriorModifier;
-            this.interiorModifier = obj.interiorModifier;
+            this.type = obj.type ?? "DoorModifierSet";
             this.interiorGlassModifier = obj.interiorGlassModifier;
             this.exteriorGlassModifier = obj.exteriorGlassModifier;
             this.overheadModifier = obj.overheadModifier;
-            this.type = obj.type ?? "DoorModifierSet";
+            this.exteriorModifier = obj.exteriorModifier;
+            this.interiorModifier = obj.interiorModifier;
         }
     }
 
@@ -150,12 +114,10 @@ export class DoorModifierSet extends _OpenAPIGenBaseModel {
 
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["exterior_modifier"] = this.exteriorModifier;
-        data["interior_modifier"] = this.interiorModifier;
+        data["type"] = this.type ?? "DoorModifierSet";
         data["interior_glass_modifier"] = this.interiorGlassModifier;
         data["exterior_glass_modifier"] = this.exteriorGlassModifier;
         data["overhead_modifier"] = this.overheadModifier;
-        data["type"] = this.type ?? "DoorModifierSet";
         data = super.toJSON(data);
         return instanceToPlain(data, { exposeUnsetFields: false });
     }

@@ -108,7 +108,7 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Thickness of the soil layer in meters.")]
         // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
-        [Range(double.MinValue, 3)]
+        [Range(0, 3)]
         [DataMember(Name = "thickness")] // For internal Serialization XML/JSON
         [JsonProperty("thickness", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("thickness")] // For System.Text.Json
@@ -119,6 +119,7 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Thermal conductivity of the dry soil in W/m-K.")]
         // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [Range(0, double.MaxValue)]
         [DataMember(Name = "conductivity")] // For internal Serialization XML/JSON
         [JsonProperty("conductivity", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("conductivity")] // For System.Text.Json
@@ -129,6 +130,7 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Density of the dry soil in kg/m3.")]
         // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [Range(0, double.MaxValue)]
         [DataMember(Name = "density")] // For internal Serialization XML/JSON
         [JsonProperty("density", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("density")] // For System.Text.Json
@@ -150,7 +152,7 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Fraction of incident long wavelength radiation that is absorbed by the soil. Default: 0.9.")]
         // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
-        [Range(double.MinValue, 0.99999)]
+        [Range(0, 0.99999)]
         [DataMember(Name = "soil_thermal_absorptance")] // For internal Serialization XML/JSON
         [JsonProperty("soil_thermal_absorptance", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("soil_thermal_absorptance")] // For System.Text.Json

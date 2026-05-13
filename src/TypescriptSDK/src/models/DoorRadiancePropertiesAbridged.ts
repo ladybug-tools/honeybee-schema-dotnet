@@ -1,4 +1,4 @@
-﻿import { IsString, IsOptional, Matches, IsArray, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, Equals, IsArray, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { deepTransform } from '../deepTransform';
 import { _PropertiesBaseAbridged } from "./_PropertiesBaseAbridged";
@@ -9,7 +9,7 @@ export class DoorRadiancePropertiesAbridged extends _PropertiesBaseAbridged {
     @Type(() => String)
     @IsString()
     @IsOptional()
-    @Matches(/^DoorRadiancePropertiesAbridged$/)
+    @Equals("DoorRadiancePropertiesAbridged")
     @Expose({ name: "type" })
     /** type */
     type: string = "DoorRadiancePropertiesAbridged";

@@ -19,10 +19,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace HoneybeeSchema
 {
-    /// <summary>
-    /// Base class for all objects requiring an EnergyPlus identifier and user_data.
-    /// </summary>
-    [Summary(@"Base class for all objects requiring an EnergyPlus identifier and user_data.")]
+    [Summary(@"")]
     [System.Serializable]
     [DataContract(Name = "InternalMassAbridged")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class InternalMassAbridged : IDdEnergyBaseModel, System.IEquatable<InternalMassAbridged>
@@ -82,6 +79,7 @@ namespace HoneybeeSchema
         [Summary(@"A number representing the surface area of the internal mass that is exposed to the Room air. This value should always be in square meters regardless of what units system the parent model is a part of.")]
         [Required] // For validation after deserialization
         // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
+        [Range(0, double.MaxValue)]
         [DataMember(Name = "area", IsRequired = true)] // For internal Serialization XML/JSON
         [JsonProperty("area", Required = Required.Always)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("area")] // For System.Text.Json

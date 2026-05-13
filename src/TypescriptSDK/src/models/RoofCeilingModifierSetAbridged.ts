@@ -1,4 +1,4 @@
-﻿import { IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, Equals, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { deepTransform } from '../deepTransform';
 import { BaseModifierSetAbridged } from "./BaseModifierSetAbridged";
@@ -8,7 +8,7 @@ export class RoofCeilingModifierSetAbridged extends BaseModifierSetAbridged {
     @Type(() => String)
     @IsString()
     @IsOptional()
-    @Matches(/^RoofCeilingModifierSetAbridged$/)
+    @Equals("RoofCeilingModifierSetAbridged")
     @Expose({ name: "type" })
     /** type */
     type: string = "RoofCeilingModifierSetAbridged";

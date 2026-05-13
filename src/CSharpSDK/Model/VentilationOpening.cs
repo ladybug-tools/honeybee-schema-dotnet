@@ -19,10 +19,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace HoneybeeSchema
 {
-    /// <summary>
-    /// Base class for all objects that are not extensible with additional keys.\n\nThis effectively includes all objects except for the Properties classes\nthat are assigned to geometry objects.
-    /// </summary>
-    [Summary(@"Base class for all objects that are not extensible with additional keys.\n\nThis effectively includes all objects except for the Properties classes\nthat are assigned to geometry objects.")]
+    [Summary(@"")]
     [System.Serializable]
     [DataContract(Name = "VentilationOpening")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class VentilationOpening : OpenAPIGenBaseModel, System.IEquatable<VentilationOpening>
@@ -140,6 +137,7 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"A number in kg/m3 indicating the minimum density difference above which two-way flow may occur due to stack effect, required to run an AirflowNetwork simulation. This value is required because the air density difference between two zones (which drives two-way air flow) will tend towards division by zero errors as the air density difference approaches zero. The default of 0.0001 is a typical default value used for AirflowNetwork openings.")]
         // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [Range(0, double.MaxValue)]
         [DataMember(Name = "two_way_threshold")] // For internal Serialization XML/JSON
         [JsonProperty("two_way_threshold", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("two_way_threshold")] // For System.Text.Json

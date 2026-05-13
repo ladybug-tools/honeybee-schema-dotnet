@@ -1,10 +1,9 @@
-﻿import { IsNumber, IsDefined, Min, IsString, MinLength, MaxLength, IsEnum, IsOptional, Matches, Max, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsNumber, IsDefined, Min, IsString, IsOptional, Equals, MinLength, MaxLength, IsEnum, Max, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { deepTransform } from '../deepTransform';
 import { FuelTypes } from "./FuelTypes";
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
-/** Base class for all objects requiring an EnergyPlus identifier and user_data. */
 export class ProcessAbridged extends IDdEnergyBaseModel {
     @Type(() => Number)
     @IsNumber()
@@ -16,27 +15,27 @@ export class ProcessAbridged extends IDdEnergyBaseModel {
 	
     @Type(() => String)
     @IsString()
-    @IsDefined()
-    @MinLength(1)
-    @MaxLength(100)
-    @Expose({ name: "schedule" })
-    /** Identifier of the schedule for the use of the process over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the watts to yield a complete equipment profile. */
-    schedule!: string;
-	
-    @Type(() => String)
-    @IsEnum(FuelTypes)
-    @IsDefined()
-    @Expose({ name: "fuel_type" })
-    /** Text to denote the type of fuel consumed by the process. Using the ""None"" type indicates that no end uses will be associated with the process, only the zone gains. */
-    fuelType!: FuelTypes;
+    @IsOptional()
+    @Equals("ProcessAbridged")
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "ProcessAbridged";
 	
     @Type(() => String)
     @IsString()
     @IsOptional()
-    @Matches(/^ProcessAbridged$/)
-    @Expose({ name: "type" })
-    /** type */
-    type: string = "ProcessAbridged";
+    @MinLength(1)
+    @MaxLength(100)
+    @Expose({ name: "schedule" })
+    /** Identifier of the schedule for the use of the process over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the watts to yield a complete equipment profile. If None, an Always On schedule will be used. */
+    schedule?: string;
+	
+    @Type(() => String)
+    @IsEnum(FuelTypes)
+    @IsOptional()
+    @Expose({ name: "fuel_type" })
+    /** Text to denote the type of fuel consumed by the process. Using the ""None"" type indicates that no end uses will be associated with the process, only the zone gains. */
+    fuelType: FuelTypes = FuelTypes.Electricity;
 	
     @Type(() => String)
     @IsString()
@@ -78,6 +77,7 @@ export class ProcessAbridged extends IDdEnergyBaseModel {
     constructor() {
         super();
         this.type = "ProcessAbridged";
+        this.fuelType = FuelTypes.Electricity;
         this.endUseCategory = "Process";
         this.radiantFraction = 0;
         this.latentFraction = 0;
@@ -90,9 +90,9 @@ export class ProcessAbridged extends IDdEnergyBaseModel {
         if (_data) {
             const obj = deepTransform(ProcessAbridged, _data);
             this.watts = obj.watts;
-            this.schedule = obj.schedule;
-            this.fuelType = obj.fuelType;
             this.type = obj.type ?? "ProcessAbridged";
+            this.schedule = obj.schedule;
+            this.fuelType = obj.fuelType ?? FuelTypes.Electricity;
             this.endUseCategory = obj.endUseCategory ?? "Process";
             this.radiantFraction = obj.radiantFraction ?? 0;
             this.latentFraction = obj.latentFraction ?? 0;
@@ -122,9 +122,9 @@ export class ProcessAbridged extends IDdEnergyBaseModel {
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["watts"] = this.watts;
-        data["schedule"] = this.schedule;
-        data["fuel_type"] = this.fuelType;
         data["type"] = this.type ?? "ProcessAbridged";
+        data["schedule"] = this.schedule;
+        data["fuel_type"] = this.fuelType ?? FuelTypes.Electricity;
         data["end_use_category"] = this.endUseCategory ?? "Process";
         data["radiant_fraction"] = this.radiantFraction ?? 0;
         data["latent_fraction"] = this.latentFraction ?? 0;

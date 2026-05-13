@@ -19,13 +19,10 @@ using System.ComponentModel.DataAnnotations;
 
 namespace HoneybeeSchema
 {
-    /// <summary>
-    /// Base class for all objects requiring an EnergyPlus identifier and user_data.
-    /// </summary>
-    [Summary(@"Base class for all objects requiring an EnergyPlus identifier and user_data.")]
+    [Summary(@"")]
     [System.Serializable]
     [DataContract(Name = "ProgramType")] // Enables DataMember rules. For internal Serialization XML/JSON
-    public partial class ProgramType : IDdEnergyBaseModel, System.IEquatable<ProgramType>
+    public partial class ProgramType : ProgramTypeAbridged, System.IEquatable<ProgramType>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ProgramType" /> class.
@@ -53,17 +50,9 @@ namespace HoneybeeSchema
         /// <param name="setpoint">Setpoint object to describe the temperature and humidity setpoints of the program.  If None, the ProgramType cannot be assigned to a Room that is conditioned.</param>
         public ProgramType
         (
-            string identifier, string displayName = default, object userData = default, People people = default, Lighting lighting = default, ElectricEquipment electricEquipment = default, GasEquipment gasEquipment = default, ServiceHotWater serviceHotWater = default, Infiltration infiltration = default, Ventilation ventilation = default, Setpoint setpoint = default
-        ) : base(identifier: identifier, displayName: displayName, userData: userData)
+            string identifier, string displayName = default, object userData = default, PeopleAbridged people = default, LightingAbridged lighting = default, ElectricEquipmentAbridged electricEquipment = default, GasEquipmentAbridged gasEquipment = default, ServiceHotWaterAbridged serviceHotWater = default, InfiltrationAbridged infiltration = default, VentilationAbridged ventilation = default, SetpointAbridged setpoint = default
+        ) : base(identifier: identifier, displayName: displayName, userData: userData, people: people, lighting: lighting, electricEquipment: electricEquipment, gasEquipment: gasEquipment, serviceHotWater: serviceHotWater, infiltration: infiltration, ventilation: ventilation, setpoint: setpoint)
         {
-            this.People = people;
-            this.Lighting = lighting;
-            this.ElectricEquipment = electricEquipment;
-            this.GasEquipment = gasEquipment;
-            this.ServiceHotWater = serviceHotWater;
-            this.Infiltration = infiltration;
-            this.Ventilation = ventilation;
-            this.Setpoint = setpoint;
 
             // Set readonly properties with defaultValue
             this.Type = "ProgramType";
@@ -75,86 +64,6 @@ namespace HoneybeeSchema
 
 	
 	
-        /// <summary>
-        /// People to describe the occupancy of the program. If None, no occupancy will be assumed for the program.
-        /// </summary>
-        [Summary(@"People to describe the occupancy of the program. If None, no occupancy will be assumed for the program.")]
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
-        [DataMember(Name = "people")] // For internal Serialization XML/JSON
-        [JsonProperty("people", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [System.Text.Json.Serialization.JsonPropertyName("people")] // For System.Text.Json
-        public People People { get; set; }
-
-        /// <summary>
-        /// Lighting to describe the lighting usage of the program. If None, no lighting will be assumed for the program.
-        /// </summary>
-        [Summary(@"Lighting to describe the lighting usage of the program. If None, no lighting will be assumed for the program.")]
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
-        [DataMember(Name = "lighting")] // For internal Serialization XML/JSON
-        [JsonProperty("lighting", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [System.Text.Json.Serialization.JsonPropertyName("lighting")] // For System.Text.Json
-        public Lighting Lighting { get; set; }
-
-        /// <summary>
-        /// ElectricEquipment to describe the usage of electric equipment within the program. If None, no electric equipment will be assumed.
-        /// </summary>
-        [Summary(@"ElectricEquipment to describe the usage of electric equipment within the program. If None, no electric equipment will be assumed.")]
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
-        [DataMember(Name = "electric_equipment")] // For internal Serialization XML/JSON
-        [JsonProperty("electric_equipment", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [System.Text.Json.Serialization.JsonPropertyName("electric_equipment")] // For System.Text.Json
-        public ElectricEquipment ElectricEquipment { get; set; }
-
-        /// <summary>
-        /// GasEquipment to describe the usage of gas equipment within the program. If None, no gas equipment will be assumed.
-        /// </summary>
-        [Summary(@"GasEquipment to describe the usage of gas equipment within the program. If None, no gas equipment will be assumed.")]
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
-        [DataMember(Name = "gas_equipment")] // For internal Serialization XML/JSON
-        [JsonProperty("gas_equipment", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [System.Text.Json.Serialization.JsonPropertyName("gas_equipment")] // For System.Text.Json
-        public GasEquipment GasEquipment { get; set; }
-
-        /// <summary>
-        /// ServiceHotWater object to describe the usage of hot water within the program. If None, no hot water will be assumed.
-        /// </summary>
-        [Summary(@"ServiceHotWater object to describe the usage of hot water within the program. If None, no hot water will be assumed.")]
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
-        [DataMember(Name = "service_hot_water")] // For internal Serialization XML/JSON
-        [JsonProperty("service_hot_water", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [System.Text.Json.Serialization.JsonPropertyName("service_hot_water")] // For System.Text.Json
-        public ServiceHotWater ServiceHotWater { get; set; }
-
-        /// <summary>
-        /// Infiltration to describe the outdoor air leakage of the program. If None, no infiltration will be assumed for the program.
-        /// </summary>
-        [Summary(@"Infiltration to describe the outdoor air leakage of the program. If None, no infiltration will be assumed for the program.")]
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
-        [DataMember(Name = "infiltration")] // For internal Serialization XML/JSON
-        [JsonProperty("infiltration", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [System.Text.Json.Serialization.JsonPropertyName("infiltration")] // For System.Text.Json
-        public Infiltration Infiltration { get; set; }
-
-        /// <summary>
-        /// Ventilation to describe the minimum outdoor air requirement of the program. If None, no ventilation requirement will be assumed.
-        /// </summary>
-        [Summary(@"Ventilation to describe the minimum outdoor air requirement of the program. If None, no ventilation requirement will be assumed.")]
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
-        [DataMember(Name = "ventilation")] // For internal Serialization XML/JSON
-        [JsonProperty("ventilation", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [System.Text.Json.Serialization.JsonPropertyName("ventilation")] // For System.Text.Json
-        public Ventilation Ventilation { get; set; }
-
-        /// <summary>
-        /// Setpoint object to describe the temperature and humidity setpoints of the program.  If None, the ProgramType cannot be assigned to a Room that is conditioned.
-        /// </summary>
-        [Summary(@"Setpoint object to describe the temperature and humidity setpoints of the program.  If None, the ProgramType cannot be assigned to a Room that is conditioned.")]
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
-        [DataMember(Name = "setpoint")] // For internal Serialization XML/JSON
-        [JsonProperty("setpoint", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [System.Text.Json.Serialization.JsonPropertyName("setpoint")] // For System.Text.Json
-        public Setpoint Setpoint { get; set; }
-
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -221,8 +130,8 @@ namespace HoneybeeSchema
         /// <summary>
         /// Creates a new instance with the same properties.
         /// </summary>
-        /// <returns>IDdEnergyBaseModel</returns>
-        public override IDdEnergyBaseModel DuplicateIDdEnergyBaseModel()
+        /// <returns>ProgramTypeAbridged</returns>
+        public override ProgramTypeAbridged DuplicateProgramTypeAbridged()
         {
             return DuplicateProgramType();
         }
@@ -249,15 +158,7 @@ namespace HoneybeeSchema
         {
             if (input == null)
                 return false;
-            return base.Equals(input) && 
-                    Extension.Equals(this.People, input.People) && 
-                    Extension.Equals(this.Lighting, input.Lighting) && 
-                    Extension.Equals(this.ElectricEquipment, input.ElectricEquipment) && 
-                    Extension.Equals(this.GasEquipment, input.GasEquipment) && 
-                    Extension.Equals(this.ServiceHotWater, input.ServiceHotWater) && 
-                    Extension.Equals(this.Infiltration, input.Infiltration) && 
-                    Extension.Equals(this.Ventilation, input.Ventilation) && 
-                    Extension.Equals(this.Setpoint, input.Setpoint);
+            return base.Equals(input);
         }
 
 
@@ -270,22 +171,6 @@ namespace HoneybeeSchema
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = base.GetHashCode();
-                if (this.People != null)
-                    hashCode = hashCode * 59 + this.People.GetHashCode();
-                if (this.Lighting != null)
-                    hashCode = hashCode * 59 + this.Lighting.GetHashCode();
-                if (this.ElectricEquipment != null)
-                    hashCode = hashCode * 59 + this.ElectricEquipment.GetHashCode();
-                if (this.GasEquipment != null)
-                    hashCode = hashCode * 59 + this.GasEquipment.GetHashCode();
-                if (this.ServiceHotWater != null)
-                    hashCode = hashCode * 59 + this.ServiceHotWater.GetHashCode();
-                if (this.Infiltration != null)
-                    hashCode = hashCode * 59 + this.Infiltration.GetHashCode();
-                if (this.Ventilation != null)
-                    hashCode = hashCode * 59 + this.Ventilation.GetHashCode();
-                if (this.Setpoint != null)
-                    hashCode = hashCode * 59 + this.Setpoint.GetHashCode();
                 return hashCode;
             }
         }

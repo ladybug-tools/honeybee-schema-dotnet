@@ -1,4 +1,4 @@
-﻿import { IsNumber, IsDefined, Min, IsString, IsOptional, Matches, IsEnum, Max, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsNumber, IsDefined, Min, IsString, IsOptional, Equals, IsEnum, Max, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { deepTransform } from '../deepTransform';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
@@ -17,7 +17,7 @@ export class EnergyMaterialNoMass extends IDdEnergyBaseModel {
     @Type(() => String)
     @IsString()
     @IsOptional()
-    @Matches(/^EnergyMaterialNoMass$/)
+    @Equals("EnergyMaterialNoMass")
     @Expose({ name: "type" })
     /** type */
     type: string = "EnergyMaterialNoMass";

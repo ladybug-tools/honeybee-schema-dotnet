@@ -1,11 +1,10 @@
-﻿import { IsNumber, IsDefined, Min, IsString, IsOptional, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsNumber, IsDefined, Min, IsString, IsOptional, Equals, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { deepTransform } from '../deepTransform';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { ScheduleFixedInterval } from "./ScheduleFixedInterval";
 import { ScheduleRuleset } from "./ScheduleRuleset";
 
-/** Base class for all objects requiring an EnergyPlus identifier and user_data. */
 export class Infiltration extends IDdEnergyBaseModel {
     @Type(() => Number)
     @IsNumber()
@@ -15,7 +14,15 @@ export class Infiltration extends IDdEnergyBaseModel {
     /** Number for the infiltration per exterior surface area in m3/s-m2. */
     flowPerExteriorArea!: number;
 	
-    @IsDefined()
+    @Type(() => String)
+    @IsString()
+    @IsOptional()
+    @Equals("Infiltration")
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "Infiltration";
+	
+    @IsOptional()
     @Expose({ name: "schedule" })
     @Transform(({ value }) => {
       const item = value;
@@ -23,16 +30,8 @@ export class Infiltration extends IDdEnergyBaseModel {
       else if (item?.type === 'ScheduleFixedInterval') return ScheduleFixedInterval.fromJS(item);
       else return item;
     })
-    /** The schedule for the infiltration over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the flow_per_exterior_area to yield a complete infiltration profile. */
-    schedule!: (ScheduleRuleset | ScheduleFixedInterval);
-	
-    @Type(() => String)
-    @IsString()
-    @IsOptional()
-    @Matches(/^Infiltration$/)
-    @Expose({ name: "type" })
-    /** type */
-    type: string = "Infiltration";
+    /** The schedule for the infiltration over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the flow_per_exterior_area to yield a complete infiltration profile. If None, an Always On schedule will be used. */
+    schedule?: (ScheduleRuleset | ScheduleFixedInterval);
 	
     @Type(() => Number)
     @IsNumber()
@@ -73,8 +72,8 @@ export class Infiltration extends IDdEnergyBaseModel {
         if (_data) {
             const obj = deepTransform(Infiltration, _data);
             this.flowPerExteriorArea = obj.flowPerExteriorArea;
-            this.schedule = obj.schedule;
             this.type = obj.type ?? "Infiltration";
+            this.schedule = obj.schedule;
             this.constantCoefficient = obj.constantCoefficient ?? 1;
             this.temperatureCoefficient = obj.temperatureCoefficient ?? 0;
             this.velocityCoefficient = obj.velocityCoefficient ?? 0;
@@ -103,8 +102,8 @@ export class Infiltration extends IDdEnergyBaseModel {
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["flow_per_exterior_area"] = this.flowPerExteriorArea;
-        data["schedule"] = this.schedule;
         data["type"] = this.type ?? "Infiltration";
+        data["schedule"] = this.schedule;
         data["constant_coefficient"] = this.constantCoefficient ?? 1;
         data["temperature_coefficient"] = this.temperatureCoefficient ?? 0;
         data["velocity_coefficient"] = this.velocityCoefficient ?? 0;

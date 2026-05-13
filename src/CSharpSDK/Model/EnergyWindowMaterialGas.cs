@@ -68,6 +68,7 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Thickness of the gas layer in meters. Default: 0.0125.")]
         // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [Range(0, double.MaxValue)]
         [DataMember(Name = "thickness")] // For internal Serialization XML/JSON
         [JsonProperty("thickness", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("thickness")] // For System.Text.Json

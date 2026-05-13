@@ -25,7 +25,7 @@ namespace HoneybeeSchema
     [Summary(@"Packaged Terminal Air Conditioning (PTAC/HP) HVAC system. (aka. System 1 or 2).\n\nEach room/zone receives its own packaged unit that supplies heating, cooling\nand ventilation. Cooling is always done via a single-speed direct expansion (DX)\ncooling coil. Heating can be done via a heating coil in the unit or via an\nexternal baseboard. Fans are constant volume.\n\nPTAC/HP systems are the traditional baseline system for residential buildings.")]
     [System.Serializable]
     [DataContract(Name = "PTAC")] // Enables DataMember rules. For internal Serialization XML/JSON
-    public partial class PTAC : IDdEnergyBaseModel, System.IEquatable<PTAC>
+    public partial class PTAC : TemplateSystem, System.IEquatable<PTAC>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="PTAC" /> class.
@@ -48,9 +48,8 @@ namespace HoneybeeSchema
         public PTAC
         (
             string identifier, string displayName = default, object userData = default, Vintages vintage = Vintages.ASHRAE_2019, PTACEquipmentType equipmentType = PTACEquipmentType.PTAC_ElectricBaseboard
-        ) : base(identifier: identifier, displayName: displayName, userData: userData)
+        ) : base(identifier: identifier, displayName: displayName, userData: userData, vintage: vintage)
         {
-            this.Vintage = vintage;
             this.EquipmentType = equipmentType;
 
             // Set readonly properties with defaultValue
@@ -63,16 +62,6 @@ namespace HoneybeeSchema
 
 	
 	
-        /// <summary>
-        /// Text for the vintage of the template system. This will be used to set efficiencies for various pieces of equipment within the system. Further information about these defaults can be found in the version of ASHRAE 90.1 corresponding to the selected vintage. Read-only versions of the standard can be found at: https://www.ashrae.org/technical-resources/standards-and-guidelines/read-only-versions-of-ashrae-standards
-        /// </summary>
-        [Summary(@"Text for the vintage of the template system. This will be used to set efficiencies for various pieces of equipment within the system. Further information about these defaults can be found in the version of ASHRAE 90.1 corresponding to the selected vintage. Read-only versions of the standard can be found at: https://www.ashrae.org/technical-resources/standards-and-guidelines/read-only-versions-of-ashrae-standards")]
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
-        [DataMember(Name = "vintage")] // For internal Serialization XML/JSON
-        [JsonProperty("vintage", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [System.Text.Json.Serialization.JsonPropertyName("vintage")] // For System.Text.Json
-        public Vintages Vintage { get; set; } = Vintages.ASHRAE_2019;
-
         /// <summary>
         /// Text for the specific type of system equipment from the PTACEquipmentType enumeration.
         /// </summary>
@@ -143,8 +132,8 @@ namespace HoneybeeSchema
         /// <summary>
         /// Creates a new instance with the same properties.
         /// </summary>
-        /// <returns>IDdEnergyBaseModel</returns>
-        public override IDdEnergyBaseModel DuplicateIDdEnergyBaseModel()
+        /// <returns>TemplateSystem</returns>
+        public override TemplateSystem DuplicateTemplateSystem()
         {
             return DuplicatePTAC();
         }
@@ -172,7 +161,6 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
             return base.Equals(input) && 
-                    Extension.Equals(this.Vintage, input.Vintage) && 
                     Extension.Equals(this.EquipmentType, input.EquipmentType);
         }
 
@@ -186,8 +174,6 @@ namespace HoneybeeSchema
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = base.GetHashCode();
-                if (this.Vintage != null)
-                    hashCode = hashCode * 59 + this.Vintage.GetHashCode();
                 if (this.EquipmentType != null)
                     hashCode = hashCode * 59 + this.EquipmentType.GetHashCode();
                 return hashCode;

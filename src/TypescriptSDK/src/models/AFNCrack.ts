@@ -1,4 +1,4 @@
-﻿import { IsNumber, IsDefined, IsString, IsOptional, Matches, Min, Max, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsNumber, IsDefined, IsString, IsOptional, Equals, Min, Max, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { deepTransform } from '../deepTransform';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
@@ -15,7 +15,7 @@ export class AFNCrack extends _OpenAPIGenBaseModel {
     @Type(() => String)
     @IsString()
     @IsOptional()
-    @Matches(/^AFNCrack$/)
+    @Equals("AFNCrack")
     @Expose({ name: "type" })
     /** type */
     type: string = "AFNCrack";

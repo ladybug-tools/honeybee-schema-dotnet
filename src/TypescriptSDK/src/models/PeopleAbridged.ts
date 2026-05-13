@@ -1,10 +1,9 @@
-﻿import { IsNumber, IsDefined, Min, IsString, MinLength, MaxLength, IsOptional, Matches, Max, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsNumber, IsDefined, Min, IsString, IsOptional, Equals, MinLength, MaxLength, Max, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { deepTransform } from '../deepTransform';
 import { Autocalculate } from "./Autocalculate";
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 
-/** Base class for all objects requiring an EnergyPlus identifier and user_data. */
 export class PeopleAbridged extends IDdEnergyBaseModel {
     @Type(() => Number)
     @IsNumber()
@@ -16,20 +15,20 @@ export class PeopleAbridged extends IDdEnergyBaseModel {
 	
     @Type(() => String)
     @IsString()
-    @IsDefined()
-    @MinLength(1)
-    @MaxLength(100)
-    @Expose({ name: "occupancy_schedule" })
-    /** Identifier of a schedule for the occupancy over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the people_per_area to yield a complete occupancy profile. */
-    occupancySchedule!: string;
+    @IsOptional()
+    @Equals("PeopleAbridged")
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "PeopleAbridged";
 	
     @Type(() => String)
     @IsString()
     @IsOptional()
-    @Matches(/^PeopleAbridged$/)
-    @Expose({ name: "type" })
-    /** type */
-    type: string = "PeopleAbridged";
+    @MinLength(1)
+    @MaxLength(100)
+    @Expose({ name: "occupancy_schedule" })
+    /** Identifier of a schedule for the occupancy over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the people_per_area to yield a complete occupancy profile. If None, an Always On schedule will be used. */
+    occupancySchedule?: string;
 	
     @Type(() => String)
     @IsString()
@@ -68,8 +67,8 @@ export class PeopleAbridged extends IDdEnergyBaseModel {
         if (_data) {
             const obj = deepTransform(PeopleAbridged, _data);
             this.peoplePerArea = obj.peoplePerArea;
-            this.occupancySchedule = obj.occupancySchedule;
             this.type = obj.type ?? "PeopleAbridged";
+            this.occupancySchedule = obj.occupancySchedule;
             this.activitySchedule = obj.activitySchedule;
             this.radiantFraction = obj.radiantFraction ?? 0.3;
             this.latentFraction = obj.latentFraction ?? new Autocalculate();
@@ -98,8 +97,8 @@ export class PeopleAbridged extends IDdEnergyBaseModel {
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["people_per_area"] = this.peoplePerArea;
-        data["occupancy_schedule"] = this.occupancySchedule;
         data["type"] = this.type ?? "PeopleAbridged";
+        data["occupancy_schedule"] = this.occupancySchedule;
         data["activity_schedule"] = this.activitySchedule;
         data["radiant_fraction"] = this.radiantFraction ?? 0.3;
         data["latent_fraction"] = this.latentFraction ?? new Autocalculate();

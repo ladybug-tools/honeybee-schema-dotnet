@@ -1,4 +1,4 @@
-﻿import { IsString, IsOptional, Matches, IsEnum, IsNumber, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, Equals, IsEnum, IsNumber, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { deepTransform } from '../deepTransform';
 import { Autocalculate } from "./Autocalculate";
@@ -10,7 +10,7 @@ export class SHWSystem extends IDdEnergyBaseModel {
     @Type(() => String)
     @IsString()
     @IsOptional()
-    @Matches(/^SHWSystem$/)
+    @Equals("SHWSystem")
     @Expose({ name: "type" })
     /** type */
     type: string = "SHWSystem";

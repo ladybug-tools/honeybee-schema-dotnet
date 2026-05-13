@@ -1,4 +1,4 @@
-﻿import { IsString, IsOptional, Matches, IsArray, IsInt, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, Equals, IsArray, IsInt, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { deepTransform } from '../deepTransform';
 import { DatedBaseModel } from "./DatedBaseModel";
@@ -8,7 +8,7 @@ export class DaylightSavingTime extends DatedBaseModel {
     @Type(() => String)
     @IsString()
     @IsOptional()
-    @Matches(/^DaylightSavingTime$/)
+    @Equals("DaylightSavingTime")
     @Expose({ name: "type" })
     /** type */
     type: string = "DaylightSavingTime";

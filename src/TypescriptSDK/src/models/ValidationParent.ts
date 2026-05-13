@@ -1,4 +1,4 @@
-﻿import { IsEnum, IsDefined, IsString, Matches, MinLength, MaxLength, IsOptional, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsEnum, IsDefined, IsString, Matches, MinLength, MaxLength, IsOptional, Equals, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { deepTransform } from '../deepTransform';
 import { ParentTypes } from "./ParentTypes";
@@ -24,7 +24,7 @@ export class ValidationParent {
     @Type(() => String)
     @IsString()
     @IsOptional()
-    @Matches(/^ValidationParent$/)
+    @Equals("ValidationParent")
     @Expose({ name: "type" })
     /** type */
     type: string = "ValidationParent";

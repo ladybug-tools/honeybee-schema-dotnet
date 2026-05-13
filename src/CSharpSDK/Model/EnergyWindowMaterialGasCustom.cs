@@ -100,6 +100,7 @@ namespace HoneybeeSchema
         [Summary(@"The A coefficient for gas viscosity in kg/(m-s).")]
         [Required] // For validation after deserialization
         // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
+        [Range(0, double.MaxValue)]
         [DataMember(Name = "viscosity_coeff_a", IsRequired = true)] // For internal Serialization XML/JSON
         [JsonProperty("viscosity_coeff_a", Required = Required.Always)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("viscosity_coeff_a")] // For System.Text.Json
@@ -111,6 +112,7 @@ namespace HoneybeeSchema
         [Summary(@"The A coefficient for gas specific heat in J/(kg-K).")]
         [Required] // For validation after deserialization
         // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
+        [Range(0, double.MaxValue)]
         [DataMember(Name = "specific_heat_coeff_a", IsRequired = true)] // For internal Serialization XML/JSON
         [JsonProperty("specific_heat_coeff_a", Required = Required.Always)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("specific_heat_coeff_a")] // For System.Text.Json
@@ -122,6 +124,7 @@ namespace HoneybeeSchema
         [Summary(@"The specific heat ratio for gas.")]
         [Required] // For validation after deserialization
         // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
+        [Range(1, double.MaxValue)]
         [DataMember(Name = "specific_heat_ratio", IsRequired = true)] // For internal Serialization XML/JSON
         [JsonProperty("specific_heat_ratio", Required = Required.Always)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("specific_heat_ratio")] // For System.Text.Json
@@ -144,6 +147,7 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Thickness of the gas layer in meters. Default: 0.0125.")]
         // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [Range(0, double.MaxValue)]
         [DataMember(Name = "thickness")] // For internal Serialization XML/JSON
         [JsonProperty("thickness", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("thickness")] // For System.Text.Json

@@ -19,10 +19,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace HoneybeeSchema
 {
-    /// <summary>
-    /// Base class for all objects that are not extensible with additional keys.\n\nThis effectively includes all objects except for the Properties classes\nthat are assigned to geometry objects.
-    /// </summary>
-    [Summary(@"Base class for all objects that are not extensible with additional keys.\n\nThis effectively includes all objects except for the Properties classes\nthat are assigned to geometry objects.")]
+    [Summary(@"")]
     [System.Serializable]
     [DataContract(Name = "ApertureEnergyPropertiesAbridged")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class ApertureEnergyPropertiesAbridged : OpenAPIGenBaseModel, System.IEquatable<ApertureEnergyPropertiesAbridged>

@@ -92,7 +92,7 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"The transmittance averaged over the solar spectrum. It is assumed independent of incidence angle. Default: 0.4.")]
         // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
-        [Range(0, double.MaxValue)]
+        [Range(0, 1)]
         [DataMember(Name = "solar_transmittance")] // For internal Serialization XML/JSON
         [JsonProperty("solar_transmittance", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("solar_transmittance")] // For System.Text.Json
@@ -103,7 +103,7 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"The reflectance averaged over the solar spectrum. It us assumed same on both sides of shade and independent of incidence angle. Default value is 0.5")]
         // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
-        [Range(0, double.MaxValue)]
+        [Range(0, 1)]
         [DataMember(Name = "solar_reflectance")] // For internal Serialization XML/JSON
         [JsonProperty("solar_reflectance", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("solar_reflectance")] // For System.Text.Json
@@ -114,7 +114,7 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"The transmittance averaged over the solar spectrum and weighted by the response of the human eye. It is assumed independent of incidence angle. Default: 0.4.")]
         // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
-        [Range(0, double.MaxValue)]
+        [Range(0, 1)]
         [DataMember(Name = "visible_transmittance")] // For internal Serialization XML/JSON
         [JsonProperty("visible_transmittance", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("visible_transmittance")] // For System.Text.Json
@@ -125,7 +125,7 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"The transmittance averaged over the solar spectrum and weighted by the response of the human eye. It is assumed independent of incidence angle. Default: 0.4")]
         // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
-        [Range(0, double.MaxValue)]
+        [Range(0, 1)]
         [DataMember(Name = "visible_reflectance")] // For internal Serialization XML/JSON
         [JsonProperty("visible_reflectance", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("visible_reflectance")] // For System.Text.Json
@@ -136,6 +136,7 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"The effective long-wave infrared hemispherical emissivity. It is assumed same on both sides of shade. Default: 0.9.")]
         // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [Range(0, 1)]
         [DataMember(Name = "emissivity")] // For internal Serialization XML/JSON
         [JsonProperty("emissivity", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("emissivity")] // For System.Text.Json
@@ -146,7 +147,7 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"The effective long-wave transmittance. It is assumed independent of incidence angle. Default: 0.")]
         // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
-        [Range(0, double.MaxValue)]
+        [Range(0, 1)]
         [DataMember(Name = "infrared_transmittance")] // For internal Serialization XML/JSON
         [JsonProperty("infrared_transmittance", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("infrared_transmittance")] // For System.Text.Json
@@ -157,6 +158,7 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"The thickness of the shade material in meters. Default: 0.005.")]
         // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [Range(0, double.MaxValue)]
         [DataMember(Name = "thickness")] // For internal Serialization XML/JSON
         [JsonProperty("thickness", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("thickness")] // For System.Text.Json
@@ -167,6 +169,7 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"The conductivity of the shade material in W/(m-K). Default value is 0.1.")]
         // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [Range(0, double.MaxValue)]
         [DataMember(Name = "conductivity")] // For internal Serialization XML/JSON
         [JsonProperty("conductivity", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("conductivity")] // For System.Text.Json

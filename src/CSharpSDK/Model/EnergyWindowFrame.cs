@@ -81,7 +81,7 @@ namespace HoneybeeSchema
         [Summary(@"Number for the width of frame in plane of window [m]. The frame width is assumed to be the same on all sides of window..")]
         [Required] // For validation after deserialization
         // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
-        [Range(double.MinValue, 1)]
+        [Range(0, 1)]
         [DataMember(Name = "width", IsRequired = true)] // For internal Serialization XML/JSON
         [JsonProperty("width", Required = Required.Always)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("width")] // For System.Text.Json
@@ -93,6 +93,7 @@ namespace HoneybeeSchema
         [Summary(@"Number for the thermal conductance of the frame material measured from inside to outside of the frame surface (no air films) and taking 2D conduction effects into account [W/m2-K].")]
         [Required] // For validation after deserialization
         // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
+        [Range(0, double.MaxValue)]
         [DataMember(Name = "conductance", IsRequired = true)] // For internal Serialization XML/JSON
         [JsonProperty("conductance", Required = Required.Always)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("conductance")] // For System.Text.Json
@@ -103,7 +104,7 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Number between 0 and 4 for the ratio of the glass conductance near the frame (excluding air films) divided by the glass conductance at the center of the glazing (excluding air films). This is used only for multi-pane glazing constructions. This ratio should usually be greater than 1.0 since the spacer material that separates the glass panes is usually more conductive than the gap between panes. A value of 1 effectively indicates no spacer. Values should usually be obtained from the LBNL WINDOW program so that the unique characteristics of the window construction can be accounted for.")]
         // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
-        [Range(double.MinValue, 4)]
+        [Range(0, 4)]
         [DataMember(Name = "edge_to_center_ratio")] // For internal Serialization XML/JSON
         [JsonProperty("edge_to_center_ratio", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("edge_to_center_ratio")] // For System.Text.Json
@@ -136,7 +137,7 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Fraction of incident long wavelength radiation that is absorbed by the frame material.")]
         // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
-        [Range(double.MinValue, 0.99999)]
+        [Range(0, 0.99999)]
         [DataMember(Name = "thermal_absorptance")] // For internal Serialization XML/JSON
         [JsonProperty("thermal_absorptance", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("thermal_absorptance")] // For System.Text.Json

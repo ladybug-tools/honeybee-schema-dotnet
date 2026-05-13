@@ -96,7 +96,7 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Fraction of incident long wavelength radiation that is absorbed by the material. Default: 0.9.")]
         // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
-        [Range(double.MinValue, 0.99999)]
+        [Range(0, 0.99999)]
         [DataMember(Name = "thermal_absorptance")] // For internal Serialization XML/JSON
         [JsonProperty("thermal_absorptance", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("thermal_absorptance")] // For System.Text.Json

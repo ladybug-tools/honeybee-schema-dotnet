@@ -100,7 +100,6 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Type")]
         // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
-        [RegularExpression(@"^Point3D$")]
         [DataMember(Name = "type")] // For internal Serialization XML/JSON
         [JsonProperty("type", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("type")] // For System.Text.Json

@@ -23,4 +23,5 @@ export enum BuildingTypes {
     QuickServiceRestaurant = "QuickServiceRestaurant",
     Laboratory = "Laboratory",
     Courthouse = "Courthouse",
+    College = "College",
 }

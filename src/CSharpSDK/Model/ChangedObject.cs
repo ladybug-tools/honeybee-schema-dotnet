@@ -22,7 +22,7 @@ namespace HoneybeeSchema
     [Summary(@"")]
     [System.Serializable]
     [DataContract(Name = "ChangedObject")] // Enables DataMember rules. For internal Serialization XML/JSON
-    public partial class ChangedObject : OpenAPIGenBaseModel, System.IEquatable<ChangedObject>
+    public partial class ChangedObject : DiffObjectBase, System.IEquatable<ChangedObject>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ChangedObject" /> class.
@@ -48,13 +48,10 @@ namespace HoneybeeSchema
         public ChangedObject
         (
             GeometryObjectTypes elementType, string elementId, bool geometryChanged, List<object> geometry, string elementName = default, bool energyChanged = false, bool radianceChanged = false, List<object> existingGeometry = default
-        ) : base()
+        ) : base(elementType: elementType, elementId: elementId, elementName: elementName)
         {
-            this.ElementType = elementType;
-            this.ElementId = elementId ?? throw new System.ArgumentNullException("elementId is a required property for ChangedObject and cannot be null");
             this.GeometryChanged = geometryChanged;
             this.Geometry = geometry ?? throw new System.ArgumentNullException("geometry is a required property for ChangedObject and cannot be null");
-            this.ElementName = elementName;
             this.EnergyChanged = energyChanged;
             this.RadianceChanged = radianceChanged;
             this.ExistingGeometry = existingGeometry;
@@ -69,31 +66,6 @@ namespace HoneybeeSchema
 
 	
 	
-        /// <summary>
-        /// Text for the type of object that has been changed.
-        /// </summary>
-        [Summary(@"Text for the type of object that has been changed.")]
-        [Required] // For validation after deserialization
-        // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
-        [DataMember(Name = "element_type", IsRequired = true)] // For internal Serialization XML/JSON
-        [JsonProperty("element_type", Required = Required.Always)] // For Newtonsoft.Json
-        // [System.Text.Json.Serialization.JsonPropertyName("element_type")] // For System.Text.Json
-        public GeometryObjectTypes ElementType { get; set; }
-
-        /// <summary>
-        /// Text string for the unique object ID that has changed.
-        /// </summary>
-        [Summary(@"Text string for the unique object ID that has changed.")]
-        [Required] // For validation after deserialization
-        // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
-        [RegularExpression(@"^[^,;!\n\t]+$")]
-        [MinLength(1)]
-        [MaxLength(100)]
-        [DataMember(Name = "element_id", IsRequired = true)] // For internal Serialization XML/JSON
-        [JsonProperty("element_id", Required = Required.Always)] // For Newtonsoft.Json
-        // [System.Text.Json.Serialization.JsonPropertyName("element_id")] // For System.Text.Json
-        public string ElementId { get; set; }
-
         /// <summary>
         /// A boolean to note whether the geometry of the object has changed (True) or not (False). For the case of a Room, any change in the geometry of child Faces, Apertures or Doors will cause this property to be True. Note that this property is only True if the change in geometry produces a visible change greater than the base model tolerance. So converting the model between different unit systems, removing colinear vertices, or doing other transformations that are common for export to simulation engines will not trigger this property to become True.
         /// </summary>
@@ -115,16 +87,6 @@ namespace HoneybeeSchema
         [JsonProperty("geometry", Required = Required.Always)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("geometry")] // For System.Text.Json
         public List<object> Geometry { get; set; }
-
-        /// <summary>
-        /// Text string for the display name of the object that has changed.
-        /// </summary>
-        [Summary(@"Text string for the display name of the object that has changed.")]
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
-        [DataMember(Name = "element_name")] // For internal Serialization XML/JSON
-        [JsonProperty("element_name", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [System.Text.Json.Serialization.JsonPropertyName("element_name")] // For System.Text.Json
-        public string ElementName { get; set; }
 
         /// <summary>
         /// A boolean to note whether the energy properties of the object have changed (True) or not (False) such that it is possible for the properties of the changed object to be applied to the base model. For Rooms, this property will only be true if the energy property assigned to the Room has changed and will not be true if a property assigned to an individual child Face or Aperture has changed.
@@ -219,8 +181,8 @@ namespace HoneybeeSchema
         /// <summary>
         /// Creates a new instance with the same properties.
         /// </summary>
-        /// <returns>OpenAPIGenBaseModel</returns>
-        public override OpenAPIGenBaseModel DuplicateOpenAPIGenBaseModel()
+        /// <returns>DiffObjectBase</returns>
+        public override DiffObjectBase DuplicateDiffObjectBase()
         {
             return DuplicateChangedObject();
         }
@@ -248,11 +210,8 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
             return base.Equals(input) && 
-                    Extension.Equals(this.ElementType, input.ElementType) && 
-                    Extension.Equals(this.ElementId, input.ElementId) && 
                     Extension.Equals(this.GeometryChanged, input.GeometryChanged) && 
                     Extension.AllEquals(this.Geometry, input.Geometry) && 
-                    Extension.Equals(this.ElementName, input.ElementName) && 
                     Extension.Equals(this.EnergyChanged, input.EnergyChanged) && 
                     Extension.Equals(this.RadianceChanged, input.RadianceChanged) && 
                     Extension.AllEquals(this.ExistingGeometry, input.ExistingGeometry);
@@ -268,16 +227,10 @@ namespace HoneybeeSchema
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = base.GetHashCode();
-                if (this.ElementType != null)
-                    hashCode = hashCode * 59 + this.ElementType.GetHashCode();
-                if (this.ElementId != null)
-                    hashCode = hashCode * 59 + this.ElementId.GetHashCode();
                 if (this.GeometryChanged != null)
                     hashCode = hashCode * 59 + this.GeometryChanged.GetHashCode();
                 if (this.Geometry != null)
                     hashCode = hashCode * 59 + this.Geometry.GetHashCode();
-                if (this.ElementName != null)
-                    hashCode = hashCode * 59 + this.ElementName.GetHashCode();
                 if (this.EnergyChanged != null)
                     hashCode = hashCode * 59 + this.EnergyChanged.GetHashCode();
                 if (this.RadianceChanged != null)

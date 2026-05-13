@@ -1,4 +1,4 @@
-﻿import { IsNumber, IsDefined, Min, IsString, IsOptional, Matches, Max, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsNumber, IsDefined, Min, IsString, IsOptional, Equals, Max, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { deepTransform } from '../deepTransform';
 import { Autocalculate } from "./Autocalculate";
@@ -6,7 +6,6 @@ import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { ScheduleFixedInterval } from "./ScheduleFixedInterval";
 import { ScheduleRuleset } from "./ScheduleRuleset";
 
-/** Base class for all objects requiring an EnergyPlus identifier and user_data. */
 export class People extends IDdEnergyBaseModel {
     @Type(() => Number)
     @IsNumber()
@@ -16,7 +15,15 @@ export class People extends IDdEnergyBaseModel {
     /** People per floor area expressed as [people/m2] */
     peoplePerArea!: number;
 	
-    @IsDefined()
+    @Type(() => String)
+    @IsString()
+    @IsOptional()
+    @Equals("People")
+    @Expose({ name: "type" })
+    /** type */
+    type: string = "People";
+	
+    @IsOptional()
     @Expose({ name: "occupancy_schedule" })
     @Transform(({ value }) => {
       const item = value;
@@ -24,16 +31,8 @@ export class People extends IDdEnergyBaseModel {
       else if (item?.type === 'ScheduleFixedInterval') return ScheduleFixedInterval.fromJS(item);
       else return item;
     })
-    /** A schedule for the occupancy over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the people_per_area to yield a complete occupancy profile. */
-    occupancySchedule!: (ScheduleRuleset | ScheduleFixedInterval);
-	
-    @Type(() => String)
-    @IsString()
-    @IsOptional()
-    @Matches(/^People$/)
-    @Expose({ name: "type" })
-    /** type */
-    type: string = "People";
+    /** A schedule for the occupancy over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the people_per_area to yield a complete occupancy profile. If None, an Always On schedule will be used. */
+    occupancySchedule?: (ScheduleRuleset | ScheduleFixedInterval);
 	
     @IsOptional()
     @Expose({ name: "activity_schedule" })
@@ -74,8 +73,8 @@ export class People extends IDdEnergyBaseModel {
         if (_data) {
             const obj = deepTransform(People, _data);
             this.peoplePerArea = obj.peoplePerArea;
-            this.occupancySchedule = obj.occupancySchedule;
             this.type = obj.type ?? "People";
+            this.occupancySchedule = obj.occupancySchedule;
             this.activitySchedule = obj.activitySchedule;
             this.radiantFraction = obj.radiantFraction ?? 0.3;
             this.latentFraction = obj.latentFraction ?? new Autocalculate();
@@ -104,8 +103,8 @@ export class People extends IDdEnergyBaseModel {
 	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["people_per_area"] = this.peoplePerArea;
-        data["occupancy_schedule"] = this.occupancySchedule;
         data["type"] = this.type ?? "People";
+        data["occupancy_schedule"] = this.occupancySchedule;
         data["activity_schedule"] = this.activitySchedule;
         data["radiant_fraction"] = this.radiantFraction ?? 0.3;
         data["latent_fraction"] = this.latentFraction ?? new Autocalculate();

@@ -19,10 +19,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace HoneybeeSchema
 {
-    /// <summary>
-    /// Base class for all objects requiring a identifiers acceptable for all engines.
-    /// </summary>
-    [Summary(@"Base class for all objects requiring a identifiers acceptable for all engines.")]
+    [Summary(@"")]
     [System.Serializable]
     [DataContract(Name = "Model")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class Model : IDdBaseModel, System.IEquatable<Model>
@@ -36,7 +33,7 @@ namespace HoneybeeSchema
         { 
             // Set readonly properties with defaultValue
             this.Type = "Model";
-            this.Version = "1.59.1";
+            this.Version = "2.0.5";
         }
         /// <summary>
         /// Initializes a new instance of the <see cref="Model" /> class.
@@ -72,7 +69,7 @@ namespace HoneybeeSchema
 
             // Set readonly properties with defaultValue
             this.Type = "Model";
-            this.Version = "1.59.1";
+            this.Version = "2.0.5";
 
             // check if object is valid, only check for inherited class
             if (this.GetType() == typeof(Model))
@@ -97,11 +94,11 @@ namespace HoneybeeSchema
         /// </summary>
         [Summary(@"Text string for the current version of the schema.")]
         // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
-        [RegularExpression(@"([0-9]+)\.([0-9]+)\.([0-9]+)")]
+        [RegularExpression(@"^([0-9]+)\.([0-9]+)\.([0-9]+)$")]
         [DataMember(Name = "version")] // For internal Serialization XML/JSON
         [JsonProperty("version", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("version")] // For System.Text.Json
-        public string Version { get; protected set; } = "1.59.1";
+        public string Version { get; protected set; } = "2.0.5";
 
         /// <summary>
         /// A list of Rooms in the model.
