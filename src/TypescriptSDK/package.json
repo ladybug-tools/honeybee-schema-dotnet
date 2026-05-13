@@ -1,7 +1,7 @@
 {
   "name": "honeybee-schema",
   "license": "MIT",
-  "version": "1.5901.4",
+  "version": "0.0.1",
   "description": "Honeybee Schema's typescript version",
   "author": "Ladybug Tools",
   "type": "module",
@@ -20,7 +20,7 @@
     "build": "npm run clean && npm run check && npm run build:tsup",
     "custom-pack": "npm run build && npm pack",
     "lint": "gts lint",
-    "clean": "gts clean",
+    "clean": "rm -rf ./dist",
     "compile": "tsc",
     "fix": "gts fix"
   },
