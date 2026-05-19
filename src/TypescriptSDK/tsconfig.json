@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "ES2017",
+    "target": "ES2015",
     "useDefineForClassFields": true,
     "module": "ES2015",
     "skipLibCheck": true,
@@ -8,13 +8,13 @@
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
     // "declarationDir": "./dist/types",
-    // "outDir": "./dist",
+    "outDir": "./dist",
     // "incremental": true,                              /* Enable incremental compilation */
     // "composite": true,                                /* Enable constraints that allow a TypeScript project to be used with project references. */
     // "sourceMap": true,
 
     /* Bundler mode */
-    "moduleResolution": "bundler",
+    "moduleResolution": "Node",
     // "allowImportingTsExtensions": true,
     "isolatedModules": true,
     "moduleDetection": "force",
