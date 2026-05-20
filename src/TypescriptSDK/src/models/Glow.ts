@@ -1,4 +1,4 @@
-﻿import { IsNumber, IsOptional, IsString, Equals, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsNumber, IsOptional, IsString, Equals, IsArray, Min, Max, IsDefined, Matches, MinLength, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { deepTransform } from '../deepTransform';
 import { BSDF } from "./BSDF";
@@ -11,7 +11,7 @@ import { Trans } from "./Trans";
 import { Void } from "./Void";
 
 /** Radiance Glow material. */
-export class Glow extends Light {
+export class Glow {
     @Type(() => Number)
     @IsNumber()
     @IsOptional()
@@ -27,15 +27,97 @@ export class Glow extends Light {
     /** type */
     type: string = "Glow";
 	
+    @IsOptional()
+    @Expose({ name: "modifier" })
+    @Transform(({ value }) => {
+      const item = value;
+      if (item?.type === 'Plastic') return Plastic.fromJS(item);
+      else if (item?.type === 'Glass') return Glass.fromJS(item);
+      else if (item?.type === 'BSDF') return BSDF.fromJS(item);
+      else if (item?.type === 'Glow') return Glow.fromJS(item);
+      else if (item?.type === 'Light') return Light.fromJS(item);
+      else if (item?.type === 'Trans') return Trans.fromJS(item);
+      else if (item?.type === 'Metal') return Metal.fromJS(item);
+      else if (item?.type === 'Void') return Void.fromJS(item);
+      else if (item?.type === 'Mirror') return Mirror.fromJS(item);
+      else return item;
+    })
+    /** Material modifier. */
+    modifier: (Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror) = new Void();
+	
+    @IsArray()
+    @IsOptional()
+    @Expose({ name: "dependencies" })
+    @Transform(({ value }) => value?.map((item: any) => {
+      if (item?.type === 'Plastic') return Plastic.fromJS(item);
+      else if (item?.type === 'Glass') return Glass.fromJS(item);
+      else if (item?.type === 'BSDF') return BSDF.fromJS(item);
+      else if (item?.type === 'Glow') return Glow.fromJS(item);
+      else if (item?.type === 'Light') return Light.fromJS(item);
+      else if (item?.type === 'Trans') return Trans.fromJS(item);
+      else if (item?.type === 'Metal') return Metal.fromJS(item);
+      else if (item?.type === 'Void') return Void.fromJS(item);
+      else if (item?.type === 'Mirror') return Mirror.fromJS(item);
+      else return item;
+    }))
+    /** List of modifiers that this modifier depends on. This argument is only useful for defining advanced modifiers where the modifier is defined based on other modifiers. */
+    dependencies?: (Plastic | Glass | BSDF | Glow | Light | Trans | Metal | Void | Mirror)[];
+	
+    @Type(() => Number)
+    @IsNumber()
+    @IsOptional()
+    @Min(0)
+    @Max(1)
+    @Expose({ name: "r_emittance" })
+    /** A value between 0 and 1 for the red channel of the modifier. */
+    rEmittance: number = 0;
+	
+    @Type(() => Number)
+    @IsNumber()
+    @IsOptional()
+    @Min(0)
+    @Max(1)
+    @Expose({ name: "g_emittance" })
+    /** A value between 0 and 1 for the green channel of the modifier. */
+    gEmittance: number = 0;
+	
+    @Type(() => Number)
+    @IsNumber()
+    @IsOptional()
+    @Min(0)
+    @Max(1)
+    @Expose({ name: "b_emittance" })
+    /** A value between 0 and 1 for the blue channel of the modifier. */
+    bEmittance: number = 0;
+	
+    @Type(() => String)
+    @IsString()
+    @IsDefined()
+    @Matches(/^[.A-Za-z0-9_-]+$/)
+    @MinLength(1)
+    @Expose({ name: "identifier" })
+    /** Text string for a unique Radiance object. Must not contain spaces or special characters. This will be used to identify the object across a model and in the exported Radiance files. */
+    identifier!: string;
+	
+    @Type(() => String)
+    @IsString()
+    @IsOptional()
+    @Expose({ name: "display_name" })
+    /** Display name of the object with no character restrictions. */
+    displayName?: string;
+	
 
     constructor() {
-        super();
         this.maxRadius = 0;
         this.type = "Glow";
+        this.modifier = new Void();
+        this.rEmittance = 0;
+        this.gEmittance = 0;
+        this.bEmittance = 0;
     }
 
 
-    override init(_data?: any) {
+    init(_data?: any) {
 
         if (_data) {
             const obj = deepTransform(Glow, _data);
@@ -52,7 +134,7 @@ export class Glow extends Light {
     }
 
 
-    static override fromJS(data: any): Glow {
+    static fromJS(data: any): Glow {
         data = typeof data === 'object' ? data : {};
 
         if (Array.isArray(data)) {
@@ -67,11 +149,17 @@ export class Glow extends Light {
         return result;
     }
 
-	override toJSON(data?: any) {
+	toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["max_radius"] = this.maxRadius ?? 0;
         data["type"] = this.type ?? "Glow";
-        data = super.toJSON(data);
+        data["modifier"] = this.modifier ?? new Void();
+        data["dependencies"] = this.dependencies;
+        data["r_emittance"] = this.rEmittance ?? 0;
+        data["g_emittance"] = this.gEmittance ?? 0;
+        data["b_emittance"] = this.bEmittance ?? 0;
+        data["identifier"] = this.identifier;
+        data["display_name"] = this.displayName;
         return instanceToPlain(data, { exposeUnsetFields: false });
     }
 

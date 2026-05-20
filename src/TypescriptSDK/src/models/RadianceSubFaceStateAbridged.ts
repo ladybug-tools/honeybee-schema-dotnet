@@ -1,11 +1,11 @@
-﻿import { IsInstance, ValidateNested, IsOptional, IsString, Equals, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsInstance, ValidateNested, IsOptional, IsString, Equals, IsArray, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { deepTransform } from '../deepTransform';
 import { Face3D } from "./Face3D";
-import { RadianceShadeStateAbridged } from "./RadianceShadeStateAbridged";
+import { StateGeometryAbridged } from "./StateGeometryAbridged";
 
 /** RadianceSubFaceStateAbridged is an abridged state for a dynamic Aperture or Door.\n     */
-export class RadianceSubFaceStateAbridged extends RadianceShadeStateAbridged {
+export class RadianceSubFaceStateAbridged {
     @Type(() => Face3D)
     @IsInstance(Face3D)
     @ValidateNested()
@@ -30,14 +30,36 @@ export class RadianceSubFaceStateAbridged extends RadianceShadeStateAbridged {
     /** type */
     type: string = "RadianceSubFaceStateAbridged";
 	
+    @Type(() => String)
+    @IsString()
+    @IsOptional()
+    @Expose({ name: "modifier" })
+    /** A Radiance Modifier identifier (default: None). */
+    modifier?: string;
+	
+    @Type(() => String)
+    @IsString()
+    @IsOptional()
+    @Expose({ name: "modifier_direct" })
+    /** A Radiance Modifier identifier (default: None). */
+    modifierDirect?: string;
+	
+    @IsArray()
+    @Type(() => StateGeometryAbridged)
+    @IsInstance(StateGeometryAbridged, { each: true })
+    @ValidateNested({ each: true })
+    @IsOptional()
+    @Expose({ name: "shades" })
+    /** A list of StateGeometryAbridged objects (default: None). */
+    shades?: StateGeometryAbridged[];
+	
 
     constructor() {
-        super();
         this.type = "RadianceSubFaceStateAbridged";
     }
 
 
-    override init(_data?: any) {
+    init(_data?: any) {
 
         if (_data) {
             const obj = deepTransform(RadianceSubFaceStateAbridged, _data);
@@ -51,7 +73,7 @@ export class RadianceSubFaceStateAbridged extends RadianceShadeStateAbridged {
     }
 
 
-    static override fromJS(data: any): RadianceSubFaceStateAbridged {
+    static fromJS(data: any): RadianceSubFaceStateAbridged {
         data = typeof data === 'object' ? data : {};
 
         if (Array.isArray(data)) {
@@ -66,12 +88,14 @@ export class RadianceSubFaceStateAbridged extends RadianceShadeStateAbridged {
         return result;
     }
 
-	override toJSON(data?: any) {
+	toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["vmtx_geometry"] = this.vmtxGeometry;
         data["dmtx_geometry"] = this.dmtxGeometry;
         data["type"] = this.type ?? "RadianceSubFaceStateAbridged";
-        data = super.toJSON(data);
+        data["modifier"] = this.modifier;
+        data["modifier_direct"] = this.modifierDirect;
+        data["shades"] = this.shades;
         return instanceToPlain(data, { exposeUnsetFields: false });
     }
 

@@ -1,7 +1,7 @@
 {
   "name": "honeybee-schema",
   "license": "MIT",
-  "version": "1.5901.4",
+  "version": "1.5901.9",
   "description": "Honeybee Schema's typescript version",
   "author": "Ladybug Tools",
   "type": "module",
@@ -9,13 +9,18 @@
     "dist"
   ],
   "main": "dist/index.cjs",
-  "browser": "dist/index.js",
+  "module": "dist/index.js",
   "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.js"
+    }
+  },
   "scripts": {
     "dev": "tsc --watch",
     "check": "tsc --noEmit",
-    "build:tsc": "npm run clean && tsc --build",
-    "build:dts": "tsc --emitDeclarationOnly",
     "build:tsup": "tsup src/index.ts --out-dir ./dist --sourcemap --dts --clean --format cjs,esm --external class-validator,class-transformer,reflect-metadata",
     "build": "npm run clean && npm run check && npm run build:tsup",
     "custom-pack": "npm run build && npm pack",

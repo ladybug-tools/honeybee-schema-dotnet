@@ -1,10 +1,9 @@
-﻿import { IsNumber, IsDefined, Min, Max, IsString, IsOptional, Equals, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsNumber, IsDefined, Min, Max, IsString, IsOptional, Equals, IsArray, IsInt, IsBoolean, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { deepTransform } from '../deepTransform';
-import { _SkyCondition } from "./_SkyCondition";
 
 /** Used to specify sky conditions on a design day. */
-export class ASHRAETau extends _SkyCondition {
+export class ASHRAETau {
     @Type(() => Number)
     @IsNumber()
     @IsDefined()
@@ -31,14 +30,29 @@ export class ASHRAETau extends _SkyCondition {
     /** type */
     type: string = "ASHRAETau";
 	
+    @IsArray()
+    @Type(() => Number)
+    @IsInt({ each: true })
+    @IsDefined()
+    @Expose({ name: "date" })
+    /** A list of two integers for [month, day], representing the date for the day of the year on which the design day occurs. A third integer may be added to denote whether the date should be re-serialized for a leap year (it should be a 1 in this case). */
+    date!: number[];
+	
+    @Type(() => Boolean)
+    @IsBoolean()
+    @IsOptional()
+    @Expose({ name: "daylight_savings" })
+    /** Boolean to indicate whether daylight savings time is active on the design day. */
+    daylightSavings: boolean = false;
+	
 
     constructor() {
-        super();
         this.type = "ASHRAETau";
+        this.daylightSavings = false;
     }
 
 
-    override init(_data?: any) {
+    init(_data?: any) {
 
         if (_data) {
             const obj = deepTransform(ASHRAETau, _data);
@@ -51,7 +65,7 @@ export class ASHRAETau extends _SkyCondition {
     }
 
 
-    static override fromJS(data: any): ASHRAETau {
+    static fromJS(data: any): ASHRAETau {
         data = typeof data === 'object' ? data : {};
 
         if (Array.isArray(data)) {
@@ -66,12 +80,13 @@ export class ASHRAETau extends _SkyCondition {
         return result;
     }
 
-	override toJSON(data?: any) {
+	toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["tau_b"] = this.tauB;
         data["tau_d"] = this.tauD;
         data["type"] = this.type ?? "ASHRAETau";
-        data = super.toJSON(data);
+        data["date"] = this.date;
+        data["daylight_savings"] = this.daylightSavings ?? false;
         return instanceToPlain(data, { exposeUnsetFields: false });
     }
 

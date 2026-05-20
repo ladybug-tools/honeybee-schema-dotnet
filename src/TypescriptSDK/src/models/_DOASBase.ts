@@ -1,11 +1,10 @@
-﻿import { IsNumber, IsOptional, Min, Max, IsBoolean, IsString, MinLength, MaxLength, Matches, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsNumber, IsOptional, Min, Max, IsBoolean, IsString, MinLength, MaxLength, Matches, IsEnum, IsDefined, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { deepTransform } from '../deepTransform';
-import { _TemplateSystem } from "./_TemplateSystem";
 import { Vintages } from "./Vintages";
 
 /** Base class for Dedicated Outdoor Air System (DOAS) HVACs.\n\nDOAS systems separate minimum ventilation supply from the satisfaction of heating\n+ cooling demand. Ventilation air tends to be supplied at neutral temperatures\n(close to room air temperature) and heating / cooling loads are met with additional\npieces of zone equipment (eg. Fan Coil Units (FCUs)).\n\nBecause DOAS systems only have to cool down and re-heat the minimum ventilation air,\nthey tend to use less energy than all-air systems. They also tend to use less energy\nto distribute heating + cooling by pumping around hot/cold water or refrigerant\ninstead of blowing hot/cold air. However, they do not provide as good of control\nover humidity and so they may not be appropriate for rooms with high latent loads\nlike auditoriums, kitchens, laundromats, etc. */
-export class _DOASBase extends _TemplateSystem {
+export class _DOASBase {
     @Type(() => Number)
     @IsNumber()
     @IsOptional()
@@ -48,17 +47,46 @@ export class _DOASBase extends _TemplateSystem {
     /** type */
     type: string = "_DOASBase";
 	
+    @Type(() => String)
+    @IsEnum(Vintages)
+    @IsOptional()
+    @Expose({ name: "vintage" })
+    /** Text for the vintage of the template system. This will be used to set efficiencies for various pieces of equipment within the system. Further information about these defaults can be found in the version of ASHRAE 90.1 corresponding to the selected vintage. Read-only versions of the standard can be found at: https://www.ashrae.org/technical-resources/standards-and-guidelines/read-only-versions-of-ashrae-standards */
+    vintage: Vintages = Vintages.ASHRAE_2019;
+	
+    @IsOptional()
+    @Expose({ name: "user_data" })
+    /** Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list). */
+    userData?: Object;
+	
+    @Type(() => String)
+    @IsString()
+    @IsDefined()
+    @Matches(/^[^,;!\n\t]+$/)
+    @MinLength(1)
+    @MaxLength(100)
+    @Expose({ name: "identifier" })
+    /** Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be < 100 characters, use only ASCII characters and exclude (, ; ! \n \t). */
+    identifier!: string;
+	
+    @Type(() => String)
+    @IsString()
+    @IsOptional()
+    @Expose({ name: "display_name" })
+    /** Display name of the object with no character restrictions. */
+    displayName?: string;
+	
 
     constructor() {
-        super();
         this.sensibleHeatRecovery = 0;
         this.latentHeatRecovery = 0;
         this.demandControlledVentilation = false;
         this.type = "_DOASBase";
+        this.vintage = Vintages.ASHRAE_2019;
     }
 
 
-    override init(_data?: any) {
+    init(_data?: any) {
 
         if (_data) {
             const obj = deepTransform(_DOASBase, _data);
@@ -75,7 +103,7 @@ export class _DOASBase extends _TemplateSystem {
     }
 
 
-    static override fromJS(data: any): _DOASBase {
+    static fromJS(data: any): _DOASBase {
         data = typeof data === 'object' ? data : {};
 
         if (Array.isArray(data)) {
@@ -90,14 +118,17 @@ export class _DOASBase extends _TemplateSystem {
         return result;
     }
 
-	override toJSON(data?: any) {
+	toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["sensible_heat_recovery"] = this.sensibleHeatRecovery ?? 0;
         data["latent_heat_recovery"] = this.latentHeatRecovery ?? 0;
         data["demand_controlled_ventilation"] = this.demandControlledVentilation ?? false;
         data["doas_availability_schedule"] = this.doasAvailabilitySchedule;
         data["type"] = this.type ?? "_DOASBase";
-        data = super.toJSON(data);
+        data["vintage"] = this.vintage ?? Vintages.ASHRAE_2019;
+        data["user_data"] = this.userData;
+        data["identifier"] = this.identifier;
+        data["display_name"] = this.displayName;
         return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
