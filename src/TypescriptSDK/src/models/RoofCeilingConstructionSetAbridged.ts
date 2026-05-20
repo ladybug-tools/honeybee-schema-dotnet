@@ -1,10 +1,9 @@
-﻿import { IsString, IsOptional, Equals, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, Equals, MinLength, MaxLength, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { deepTransform } from '../deepTransform';
-import { _FaceSubSetAbridged } from "./_FaceSubSetAbridged";
 
 /** A set of constructions for roof and ceiling assemblies. */
-export class RoofCeilingConstructionSetAbridged extends _FaceSubSetAbridged {
+export class RoofCeilingConstructionSetAbridged {
     @Type(() => String)
     @IsString()
     @IsOptional()
@@ -13,14 +12,40 @@ export class RoofCeilingConstructionSetAbridged extends _FaceSubSetAbridged {
     /** type */
     type: string = "RoofCeilingConstructionSetAbridged";
 	
+    @Type(() => String)
+    @IsString()
+    @IsOptional()
+    @MinLength(1)
+    @MaxLength(100)
+    @Expose({ name: "interior_construction" })
+    /** Identifier for an OpaqueConstruction for faces with a Surface or Adiabatic boundary condition. */
+    interiorConstruction?: string;
+	
+    @Type(() => String)
+    @IsString()
+    @IsOptional()
+    @MinLength(1)
+    @MaxLength(100)
+    @Expose({ name: "exterior_construction" })
+    /** Identifier for an OpaqueConstruction for faces with an Outdoors boundary condition. */
+    exteriorConstruction?: string;
+	
+    @Type(() => String)
+    @IsString()
+    @IsOptional()
+    @MinLength(1)
+    @MaxLength(100)
+    @Expose({ name: "ground_construction" })
+    /** Identifier for an OpaqueConstruction for faces with a Ground boundary condition. */
+    groundConstruction?: string;
+	
 
     constructor() {
-        super();
         this.type = "RoofCeilingConstructionSetAbridged";
     }
 
 
-    override init(_data?: any) {
+    init(_data?: any) {
 
         if (_data) {
             const obj = deepTransform(RoofCeilingConstructionSetAbridged, _data);
@@ -32,7 +57,7 @@ export class RoofCeilingConstructionSetAbridged extends _FaceSubSetAbridged {
     }
 
 
-    static override fromJS(data: any): RoofCeilingConstructionSetAbridged {
+    static fromJS(data: any): RoofCeilingConstructionSetAbridged {
         data = typeof data === 'object' ? data : {};
 
         if (Array.isArray(data)) {
@@ -47,10 +72,12 @@ export class RoofCeilingConstructionSetAbridged extends _FaceSubSetAbridged {
         return result;
     }
 
-	override toJSON(data?: any) {
+	toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["type"] = this.type ?? "RoofCeilingConstructionSetAbridged";
-        data = super.toJSON(data);
+        data["interior_construction"] = this.interiorConstruction;
+        data["exterior_construction"] = this.exteriorConstruction;
+        data["ground_construction"] = this.groundConstruction;
         return instanceToPlain(data, { exposeUnsetFields: false });
     }
 

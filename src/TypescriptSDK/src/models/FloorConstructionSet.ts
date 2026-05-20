@@ -1,10 +1,10 @@
-﻿import { IsString, IsOptional, Equals, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, Equals, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { deepTransform } from '../deepTransform';
-import { _FaceSubSet } from "./_FaceSubSet";
+import { OpaqueConstruction } from "./OpaqueConstruction";
 
 /** A set of constructions for floor assemblies. */
-export class FloorConstructionSet extends _FaceSubSet {
+export class FloorConstructionSet {
     @Type(() => String)
     @IsString()
     @IsOptional()
@@ -13,14 +13,37 @@ export class FloorConstructionSet extends _FaceSubSet {
     /** type */
     type: string = "FloorConstructionSet";
 	
+    @Type(() => OpaqueConstruction)
+    @IsInstance(OpaqueConstruction)
+    @ValidateNested()
+    @IsOptional()
+    @Expose({ name: "interior_construction" })
+    /** An OpaqueConstruction for walls with a Surface or Adiabatic boundary condition. */
+    interiorConstruction?: OpaqueConstruction;
+	
+    @Type(() => OpaqueConstruction)
+    @IsInstance(OpaqueConstruction)
+    @ValidateNested()
+    @IsOptional()
+    @Expose({ name: "exterior_construction" })
+    /** An OpaqueConstruction for walls with an Outdoors boundary condition. */
+    exteriorConstruction?: OpaqueConstruction;
+	
+    @Type(() => OpaqueConstruction)
+    @IsInstance(OpaqueConstruction)
+    @ValidateNested()
+    @IsOptional()
+    @Expose({ name: "ground_construction" })
+    /** An OpaqueConstruction for walls with a Ground boundary condition. */
+    groundConstruction?: OpaqueConstruction;
+	
 
     constructor() {
-        super();
         this.type = "FloorConstructionSet";
     }
 
 
-    override init(_data?: any) {
+    init(_data?: any) {
 
         if (_data) {
             const obj = deepTransform(FloorConstructionSet, _data);
@@ -32,7 +55,7 @@ export class FloorConstructionSet extends _FaceSubSet {
     }
 
 
-    static override fromJS(data: any): FloorConstructionSet {
+    static fromJS(data: any): FloorConstructionSet {
         data = typeof data === 'object' ? data : {};
 
         if (Array.isArray(data)) {
@@ -47,10 +70,12 @@ export class FloorConstructionSet extends _FaceSubSet {
         return result;
     }
 
-	override toJSON(data?: any) {
+	toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["type"] = this.type ?? "FloorConstructionSet";
-        data = super.toJSON(data);
+        data["interior_construction"] = this.interiorConstruction;
+        data["exterior_construction"] = this.exteriorConstruction;
+        data["ground_construction"] = this.groundConstruction;
         return instanceToPlain(data, { exposeUnsetFields: false });
     }
 

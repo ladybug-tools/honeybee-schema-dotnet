@@ -1,2 +1,2 @@
 export * from "./models/index";
-export * from "./helpers/class-validator"
+export * from "./helpers/class-validator";
