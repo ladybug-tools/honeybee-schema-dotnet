@@ -99,12 +99,13 @@ test('test toJson', () => {
 
 test('test toJson2', () => {
   let obj = new Face();
-  expect(obj).toHaveProperty('apertures');
+  expect(obj).not.toHaveProperty('apertures');
   expect(obj.apertures).toBeUndefined();
 
+
   let jsonObj = obj.toJSON();
-  const hasProp = jsonObj.hasOwnProperty('apertures');
-  expect(hasProp).toBe(false);
+  expect(jsonObj).not.toHaveProperty('apertures');
+
 });
 
 
