@@ -124,6 +124,15 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+      - name: Download artifact - nuget
+        uses: actions/download-artifact@v4
+        with:
+          name: nugetPackage
+
+      - name: Download artifact - npm
+        uses: actions/download-artifact@v4
+        with:
+          name: npmPackage
 
       - name: Create Github Release
         env:
@@ -166,7 +175,7 @@ jobs:
           npm set //registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}
           npm publish ./*.tgz --access public
 
-  updateDownstremRepo:
+  updateDownstreamRepo:
     name: Update dependencies
     if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
