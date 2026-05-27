@@ -114,8 +114,8 @@ jobs:
           name: npmPackage
           path: ./*.tgz
 
-  release:
-    name: Release both CSharp and TypeScript SDK
+  releaseGithub:
+    name: Create Github Release
     if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     needs: [genNewVersion, buildCSharp, buildTypeScript]
@@ -124,16 +124,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-
-      - name: Download artifact - nuget
-        uses: actions/download-artifact@v4
-        with:
-          name: nugetPackage
-
-      - name: Download artifact - npm
-        uses: actions/download-artifact@v4
-        with:
-          name: npmPackage
 
       - name: Create Github Release
         env:
@@ -144,8 +134,32 @@ jobs:
             --generate-notes \
             *.nupkg *.tgz
 
+  releaseNuget:
+    name: Release CSharp SDK
+    if: github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    needs: [genNewVersion, buildCSharp, buildTypeScript]
+
+    steps:
+      - name: Download artifact - nuget
+        uses: actions/download-artifact@v4
+        with:
+          name: nugetPackage
+
       - name: Release CSharp
         run: dotnet nuget push ./*.nupkg -k ${{secrets.NUGET_API_KEY}} -s https://api.nuget.org/v3/index.json
+
+  releaseNpm:
+    name: Release TypeScript SDK
+    if: github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    needs: [genNewVersion, buildCSharp, buildTypeScript]
+
+    steps:
+      - name: Download artifact - npm
+        uses: actions/download-artifact@v4
+        with:
+          name: npmPackage
 
       - name: Publish to npm
         run: |
@@ -156,7 +170,7 @@ jobs:
     name: Update dependencies
     if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
-    needs: [release, genNewVersion]
+    needs: [releaseNuget, genNewVersion]
     env:
       RELEASE_VERSION: ${{ needs.genNewVersion.outputs.ReleaseVersion }}
 
