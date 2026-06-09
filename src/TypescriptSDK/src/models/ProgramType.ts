@@ -1,16 +1,17 @@
-﻿import { IsString, IsOptional, Equals, IsInstance, ValidateNested, IsDefined, Matches, MinLength, MaxLength, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, Equals, IsInstance, ValidateNested, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { deepTransform } from '../deepTransform';
-import { ElectricEquipmentAbridged } from "./ElectricEquipmentAbridged";
-import { GasEquipmentAbridged } from "./GasEquipmentAbridged";
-import { InfiltrationAbridged } from "./InfiltrationAbridged";
-import { LightingAbridged } from "./LightingAbridged";
-import { PeopleAbridged } from "./PeopleAbridged";
-import { ServiceHotWaterAbridged } from "./ServiceHotWaterAbridged";
-import { SetpointAbridged } from "./SetpointAbridged";
-import { VentilationAbridged } from "./VentilationAbridged";
+import { ElectricEquipment } from "./ElectricEquipment";
+import { GasEquipment } from "./GasEquipment";
+import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
+import { Infiltration } from "./Infiltration";
+import { Lighting } from "./Lighting";
+import { People } from "./People";
+import { ServiceHotWater } from "./ServiceHotWater";
+import { Setpoint } from "./Setpoint";
+import { Ventilation } from "./Ventilation";
 
-export class ProgramType {
+export class ProgramType extends IDdEnergyBaseModel {
     @Type(() => String)
     @IsString()
     @IsOptional()
@@ -19,99 +20,78 @@ export class ProgramType {
     /** type */
     type: string = "ProgramType";
 	
-    @Type(() => PeopleAbridged)
-    @IsInstance(PeopleAbridged)
+    @Type(() => People)
+    @IsInstance(People)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "people" })
     /** People to describe the occupancy of the program. If None, no occupancy will be assumed for the program. */
-    people?: PeopleAbridged;
+    people?: People;
 	
-    @Type(() => LightingAbridged)
-    @IsInstance(LightingAbridged)
+    @Type(() => Lighting)
+    @IsInstance(Lighting)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "lighting" })
     /** Lighting to describe the lighting usage of the program. If None, no lighting will be assumed for the program. */
-    lighting?: LightingAbridged;
+    lighting?: Lighting;
 	
-    @Type(() => ElectricEquipmentAbridged)
-    @IsInstance(ElectricEquipmentAbridged)
+    @Type(() => ElectricEquipment)
+    @IsInstance(ElectricEquipment)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "electric_equipment" })
     /** ElectricEquipment to describe the usage of electric equipment within the program. If None, no electric equipment will be assumed. */
-    electricEquipment?: ElectricEquipmentAbridged;
+    electricEquipment?: ElectricEquipment;
 	
-    @Type(() => GasEquipmentAbridged)
-    @IsInstance(GasEquipmentAbridged)
+    @Type(() => GasEquipment)
+    @IsInstance(GasEquipment)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "gas_equipment" })
     /** GasEquipment to describe the usage of gas equipment within the program. If None, no gas equipment will be assumed. */
-    gasEquipment?: GasEquipmentAbridged;
+    gasEquipment?: GasEquipment;
 	
-    @Type(() => ServiceHotWaterAbridged)
-    @IsInstance(ServiceHotWaterAbridged)
+    @Type(() => ServiceHotWater)
+    @IsInstance(ServiceHotWater)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "service_hot_water" })
     /** ServiceHotWater object to describe the usage of hot water within the program. If None, no hot water will be assumed. */
-    serviceHotWater?: ServiceHotWaterAbridged;
+    serviceHotWater?: ServiceHotWater;
 	
-    @Type(() => InfiltrationAbridged)
-    @IsInstance(InfiltrationAbridged)
+    @Type(() => Infiltration)
+    @IsInstance(Infiltration)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "infiltration" })
     /** Infiltration to describe the outdoor air leakage of the program. If None, no infiltration will be assumed for the program. */
-    infiltration?: InfiltrationAbridged;
+    infiltration?: Infiltration;
 	
-    @Type(() => VentilationAbridged)
-    @IsInstance(VentilationAbridged)
+    @Type(() => Ventilation)
+    @IsInstance(Ventilation)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "ventilation" })
     /** Ventilation to describe the minimum outdoor air requirement of the program. If None, no ventilation requirement will be assumed. */
-    ventilation?: VentilationAbridged;
+    ventilation?: Ventilation;
 	
-    @Type(() => SetpointAbridged)
-    @IsInstance(SetpointAbridged)
+    @Type(() => Setpoint)
+    @IsInstance(Setpoint)
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "setpoint" })
     /** Setpoint object to describe the temperature and humidity setpoints of the program.  If None, the ProgramType cannot be assigned to a Room that is conditioned. */
-    setpoint?: SetpointAbridged;
-	
-    @IsOptional()
-    @Expose({ name: "user_data" })
-    /** Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list). */
-    userData?: Object;
-	
-    @Type(() => String)
-    @IsString()
-    @IsDefined()
-    @Matches(/^[^,;!\n\t]+$/)
-    @MinLength(1)
-    @MaxLength(100)
-    @Expose({ name: "identifier" })
-    /** Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be < 100 characters, use only ASCII characters and exclude (, ; ! \n \t). */
-    identifier!: string;
-	
-    @Type(() => String)
-    @IsString()
-    @IsOptional()
-    @Expose({ name: "display_name" })
-    /** Display name of the object with no character restrictions. */
-    displayName?: string;
+    setpoint?: Setpoint;
 	
 
     constructor() {
+        super();
         this.type = "ProgramType";
     }
 
 
-    init(_data?: any) {
+    override init(_data?: any) {
 
         if (_data) {
             const obj = deepTransform(ProgramType, _data);
@@ -131,7 +111,7 @@ export class ProgramType {
     }
 
 
-    static fromJS(data: any): ProgramType {
+    static override fromJS(data: any): ProgramType {
         data = typeof data === 'object' ? data : {};
 
         if (Array.isArray(data)) {
@@ -146,7 +126,7 @@ export class ProgramType {
         return result;
     }
 
-	toJSON(data?: any) {
+	override toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["type"] = this.type ?? "ProgramType";
         data["people"] = this.people;
@@ -157,9 +137,7 @@ export class ProgramType {
         data["infiltration"] = this.infiltration;
         data["ventilation"] = this.ventilation;
         data["setpoint"] = this.setpoint;
-        data["user_data"] = this.userData;
-        data["identifier"] = this.identifier;
-        data["display_name"] = this.displayName;
+        data = super.toJSON(data);
         return instanceToPlain(data, { exposeUnsetFields: false });
     }
 

@@ -3,7 +3,7 @@
   "servers": [],
   "info": {
     "description": "Documentation for Honeybee model schema",
-    "version": "2.0.5",
+    "version": "2.0.6",
     "title": "Honeybee Model Schema",
     "contact": {
       "name": "Ladybug Tools",
@@ -8066,7 +8066,7 @@
                 "readOnly": true
               },
               "version": {
-                "default": "2.0.5",
+                "default": "2.0.6",
                 "description": "Text string for the current version of the schema.",
                 "pattern": "^([0-9]+)\\.([0-9]+)\\.([0-9]+)$",
                 "title": "Version",
@@ -10525,7 +10525,7 @@
       "ProgramType": {
         "allOf": [
           {
-            "$ref": "#/components/schemas/ProgramTypeAbridged"
+            "$ref": "#/components/schemas/IDdEnergyBaseModel"
           },
           {
             "type": "object",
@@ -10537,6 +10537,102 @@
                 "title": "Type",
                 "type": "string",
                 "readOnly": true
+              },
+              "people": {
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schemas/People"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "description": "People to describe the occupancy of the program. If None, no occupancy will be assumed for the program."
+              },
+              "lighting": {
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schemas/Lighting"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "description": "Lighting to describe the lighting usage of the program. If None, no lighting will be assumed for the program."
+              },
+              "electric_equipment": {
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schemas/ElectricEquipment"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "description": "ElectricEquipment to describe the usage of electric equipment within the program. If None, no electric equipment will be assumed."
+              },
+              "gas_equipment": {
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schemas/GasEquipment"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "description": "GasEquipment to describe the usage of gas equipment within the program. If None, no gas equipment will be assumed."
+              },
+              "service_hot_water": {
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schemas/ServiceHotWater"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "description": "ServiceHotWater object to describe the usage of hot water within the program. If None, no hot water will be assumed."
+              },
+              "infiltration": {
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schemas/Infiltration"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "description": "Infiltration to describe the outdoor air leakage of the program. If None, no infiltration will be assumed for the program."
+              },
+              "ventilation": {
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schemas/Ventilation"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "description": "Ventilation to describe the minimum outdoor air requirement of the program. If None, no ventilation requirement will be assumed."
+              },
+              "setpoint": {
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schemas/Setpoint"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "description": "Setpoint object to describe the temperature and humidity setpoints of the program.  If None, the ProgramType cannot be assigned to a Room that is conditioned."
               }
             },
             "additionalProperties": false
