@@ -34,7 +34,7 @@ export class Model extends IDdBaseModel {
     @Matches(/^([0-9]+)\.([0-9]+)\.([0-9]+)$/)
     @Expose({ name: "version" })
     /** Text string for the current version of the schema. */
-    version: string = "2.0.5";
+    version: string = "2.0.6";
 	
     @IsArray()
     @Type(() => Room)
@@ -117,7 +117,7 @@ export class Model extends IDdBaseModel {
     constructor() {
         super();
         this.type = "Model";
-        this.version = "2.0.5";
+        this.version = "2.0.6";
         this.units = Units.Meters;
         this.tolerance = 0.01;
         this.angleTolerance = 1;
@@ -130,7 +130,7 @@ export class Model extends IDdBaseModel {
             const obj = deepTransform(Model, _data);
             this.properties = obj.properties;
             this.type = obj.type ?? "Model";
-            this.version = obj.version ?? "2.0.5";
+            this.version = obj.version ?? "2.0.6";
             this.rooms = obj.rooms;
             this.orphanedFaces = obj.orphanedFaces;
             this.orphanedShades = obj.orphanedShades;
@@ -166,7 +166,7 @@ export class Model extends IDdBaseModel {
         data = typeof data === 'object' ? data : {};
         data["properties"] = this.properties;
         data["type"] = this.type ?? "Model";
-        data["version"] = this.version ?? "2.0.5";
+        data["version"] = this.version ?? "2.0.6";
         data["rooms"] = this.rooms;
         data["orphaned_faces"] = this.orphanedFaces;
         data["orphaned_shades"] = this.orphanedShades;
