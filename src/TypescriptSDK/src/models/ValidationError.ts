@@ -6,6 +6,7 @@ import { Face3D } from "./Face3D";
 import { LineSegment3D } from "./LineSegment3D";
 import { ObjectTypes } from "./ObjectTypes";
 import { Point3D } from "./Point3D";
+import { SuggestedFix } from "./SuggestedFix";
 import { ValidationParent } from "./ValidationParent";
 
 export class ValidationError {
@@ -104,6 +105,15 @@ export class ValidationError {
     /** An optional list of geometry objects that helps illustrate where exactly issues with invalid geometry exist within the Honeybee object. Examples include the naked and non-manifold line segments for non-solid Room geometries, the points of self-intersection for cases of self-intersecting geometry and out-of-plane vertices for non-planar objects. Oftentimes, zooming directly to these helper geometries will help end users understand invalid situations in their model faster than simple zooming to the invalid Honeybee object in its totality. */
     helperGeometry?: (Point3D | LineSegment3D | Face3D)[];
 	
+    @IsArray()
+    @Type(() => SuggestedFix)
+    @IsInstance(SuggestedFix, { each: true })
+    @ValidateNested({ each: true })
+    @IsOptional()
+    @Expose({ name: "suggested_fixes" })
+    /** An optional list of SuggestedFix objects with recommendations for how to fix the error. Multiple objects can be included to represent different methods for fixing the error. */
+    suggestedFixes?: SuggestedFix[];
+	
 
     constructor() {
         this.type = "ValidationError";
@@ -125,6 +135,7 @@ export class ValidationError {
             this.parents = obj.parents;
             this.topParents = obj.topParents;
             this.helperGeometry = obj.helperGeometry;
+            this.suggestedFixes = obj.suggestedFixes;
         }
     }
 
@@ -157,6 +168,7 @@ export class ValidationError {
         data["parents"] = this.parents;
         data["top_parents"] = this.topParents;
         data["helper_geometry"] = this.helperGeometry;
+        data["suggested_fixes"] = this.suggestedFixes;
         return instanceToPlain(data, { exposeUnsetFields: false });
     }
 

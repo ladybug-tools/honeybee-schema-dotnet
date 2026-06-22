@@ -65,6 +65,28 @@ export class Ventilation extends IDdEnergyBaseModel {
     /** Text to set how the ventilation criteria are reconciled against one another. */
     method: VentilationMethod = VentilationMethod.Sum;
 	
+    @Type(() => Number)
+    @IsNumber()
+    @IsOptional()
+    @Expose({ name: "effectiveness_cooling" })
+    /** A positive number to note the air distribution effectiveness of the ventilation system when it operates in cooling mode (or how well the system is able to mix the air when cooling). A valueof 1 means that air is well mixed and specified outdoor air flows are not adjusted in the course of simulation. Values less than 1 indicate systems that do not mix the air as well and so the specified airflows are increased. Values greater than 1 indicate systems that are particularly good at delivering outdoor air to the breathing zone of a room and so the specified airflows can be reduced. */
+    effectivenessCooling: number = 1;
+	
+    @Type(() => Number)
+    @IsNumber()
+    @IsOptional()
+    @Expose({ name: "effectiveness_heating" })
+    /** A positive number to note the air distribution effectiveness of the ventilation system when it operates in heating mode (or how well the system is able to mix the air when heating). A valueof 1 means that air is well mixed and specified outdoor air flows are not adjusted in the course of simulation. Values less than 1 indicate systems that do not mix the air as well and so the specified airflows are increased. Values greater than 1 indicate systems that are particularly good at delivering outdoor air to the breathing zone of a room and so the specified airflows can be reduced. */
+    effectivenessHeating: number = 1;
+	
+    @Type(() => Number)
+    @IsNumber()
+    @IsOptional()
+    @Min(0)
+    @Expose({ name: "secondary_recirculation" })
+    /** A number that is greater than or equal to zero, which notes the fraction of a zone recirculation air that does not directly mix with the outdoor air. Used in cases where a central ventilation system supplies several zones and the return air is not collected through ducts back to the central air handler (eg. a plenum return system is used). This means unused outdoor ventilation air from other zones in the central system can be credited to the room. (Default: 0). */
+    secondaryRecirculation: number = 0;
+	
 
     constructor() {
         super();
@@ -74,6 +96,9 @@ export class Ventilation extends IDdEnergyBaseModel {
         this.airChangesPerHour = 0;
         this.flowPerZone = 0;
         this.method = VentilationMethod.Sum;
+        this.effectivenessCooling = 1;
+        this.effectivenessHeating = 1;
+        this.secondaryRecirculation = 0;
     }
 
 
@@ -88,6 +113,9 @@ export class Ventilation extends IDdEnergyBaseModel {
             this.flowPerZone = obj.flowPerZone ?? 0;
             this.schedule = obj.schedule;
             this.method = obj.method ?? VentilationMethod.Sum;
+            this.effectivenessCooling = obj.effectivenessCooling ?? 1;
+            this.effectivenessHeating = obj.effectivenessHeating ?? 1;
+            this.secondaryRecirculation = obj.secondaryRecirculation ?? 0;
             this.userData = obj.userData;
             this.identifier = obj.identifier;
             this.displayName = obj.displayName;
@@ -119,6 +147,9 @@ export class Ventilation extends IDdEnergyBaseModel {
         data["flow_per_zone"] = this.flowPerZone ?? 0;
         data["schedule"] = this.schedule;
         data["method"] = this.method ?? VentilationMethod.Sum;
+        data["effectiveness_cooling"] = this.effectivenessCooling ?? 1;
+        data["effectiveness_heating"] = this.effectivenessHeating ?? 1;
+        data["secondary_recirculation"] = this.secondaryRecirculation ?? 0;
         data = super.toJSON(data);
         return instanceToPlain(data, { exposeUnsetFields: false });
     }

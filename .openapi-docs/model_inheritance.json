@@ -3,7 +3,7 @@
   "servers": [],
   "info": {
     "description": "Documentation for Honeybee model schema",
-    "version": "2.0.6",
+    "version": "2.1.1",
     "title": "Honeybee Model Schema",
     "contact": {
       "name": "Ladybug Tools",
@@ -8066,7 +8066,7 @@
                 "readOnly": true
               },
               "version": {
-                "default": "2.0.6",
+                "default": "2.1.1",
                 "description": "Text string for the current version of the schema.",
                 "pattern": "^([0-9]+)\\.([0-9]+)\\.([0-9]+)$",
                 "title": "Version",
@@ -13745,6 +13745,30 @@
                 "$ref": "#/components/schemas/VentilationMethod",
                 "default": "Sum",
                 "description": "Text to set how the ventilation criteria are reconciled against one another."
+              },
+              "effectiveness_cooling": {
+                "default": 1,
+                "description": "A positive number to note the air distribution effectiveness of the ventilation system when it operates in cooling mode (or how well the system is able to mix the air when cooling). A valueof 1 means that air is well mixed and specified outdoor air flows are not adjusted in the course of simulation. Values less than 1 indicate systems that do not mix the air as well and so the specified airflows are increased. Values greater than 1 indicate systems that are particularly good at delivering outdoor air to the breathing zone of a room and so the specified airflows can be reduced.",
+                "exclusiveMinimum": 0,
+                "title": "Effectiveness Cooling",
+                "type": "number",
+                "format": "double"
+              },
+              "effectiveness_heating": {
+                "default": 1,
+                "description": "A positive number to note the air distribution effectiveness of the ventilation system when it operates in heating mode (or how well the system is able to mix the air when heating). A valueof 1 means that air is well mixed and specified outdoor air flows are not adjusted in the course of simulation. Values less than 1 indicate systems that do not mix the air as well and so the specified airflows are increased. Values greater than 1 indicate systems that are particularly good at delivering outdoor air to the breathing zone of a room and so the specified airflows can be reduced.",
+                "exclusiveMinimum": 0,
+                "title": "Effectiveness Heating",
+                "type": "number",
+                "format": "double"
+              },
+              "secondary_recirculation": {
+                "default": 0,
+                "description": "A number that is greater than or equal to zero, which notes the fraction of a zone recirculation air that does not directly mix with the outdoor air. Used in cases where a central ventilation system supplies several zones and the return air is not collected through ducts back to the central air handler (eg. a plenum return system is used). This means unused outdoor ventilation air from other zones in the central system can be credited to the room. (Default: 0).",
+                "minimum": 0,
+                "title": "Secondary Recirculation",
+                "type": "number",
+                "format": "double"
               }
             },
             "additionalProperties": false
@@ -13822,6 +13846,30 @@
                 "$ref": "#/components/schemas/VentilationMethod",
                 "default": "Sum",
                 "description": "Text to set how the ventilation criteria are reconciled against one another."
+              },
+              "effectiveness_cooling": {
+                "default": 1,
+                "description": "A positive number to note the air distribution effectiveness of the ventilation system when it operates in cooling mode (or how well the system is able to mix the air when cooling). A valueof 1 means that air is well mixed and specified outdoor air flows are not adjusted in the course of simulation. Values less than 1 indicate systems that do not mix the air as well and so the specified airflows are increased. Values greater than 1 indicate systems that are particularly good at delivering outdoor air to the breathing zone of a room and so the specified airflows can be reduced.",
+                "exclusiveMinimum": 0,
+                "title": "Effectiveness Cooling",
+                "type": "number",
+                "format": "double"
+              },
+              "effectiveness_heating": {
+                "default": 1,
+                "description": "A positive number to note the air distribution effectiveness of the ventilation system when it operates in heating mode (or how well the system is able to mix the air when heating). A valueof 1 means that air is well mixed and specified outdoor air flows are not adjusted in the course of simulation. Values less than 1 indicate systems that do not mix the air as well and so the specified airflows are increased. Values greater than 1 indicate systems that are particularly good at delivering outdoor air to the breathing zone of a room and so the specified airflows can be reduced.",
+                "exclusiveMinimum": 0,
+                "title": "Effectiveness Heating",
+                "type": "number",
+                "format": "double"
+              },
+              "secondary_recirculation": {
+                "default": 0,
+                "description": "A number that is greater than or equal to zero, which notes the fraction of a zone recirculation air that does not directly mix with the outdoor air. Used in cases where a central ventilation system supplies several zones and the return air is not collected through ducts back to the central air handler (eg. a plenum return system is used). This means unused outdoor ventilation air from other zones in the central system can be credited to the room. (Default: 0).",
+                "minimum": 0,
+                "title": "Secondary Recirculation",
+                "type": "number",
+                "format": "double"
               }
             },
             "additionalProperties": false

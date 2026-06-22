@@ -46,9 +46,12 @@ namespace HoneybeeSchema
         /// <param name="flowPerZone">Intensity of ventilation in m3/s for the entire Room.</param>
         /// <param name="schedule">Schedule for the ventilation over the course of the year. The type of this schedule should be Fractional and the fractional values will get multiplied by the total design flow rate (determined from the sum of the other 4 fields) to yield a complete ventilation profile.</param>
         /// <param name="method">Text to set how the ventilation criteria are reconciled against one another.</param>
+        /// <param name="effectivenessCooling">A positive number to note the air distribution effectiveness of the ventilation system when it operates in cooling mode (or how well the system is able to mix the air when cooling). A valueof 1 means that air is well mixed and specified outdoor air flows are not adjusted in the course of simulation. Values less than 1 indicate systems that do not mix the air as well and so the specified airflows are increased. Values greater than 1 indicate systems that are particularly good at delivering outdoor air to the breathing zone of a room and so the specified airflows can be reduced.</param>
+        /// <param name="effectivenessHeating">A positive number to note the air distribution effectiveness of the ventilation system when it operates in heating mode (or how well the system is able to mix the air when heating). A valueof 1 means that air is well mixed and specified outdoor air flows are not adjusted in the course of simulation. Values less than 1 indicate systems that do not mix the air as well and so the specified airflows are increased. Values greater than 1 indicate systems that are particularly good at delivering outdoor air to the breathing zone of a room and so the specified airflows can be reduced.</param>
+        /// <param name="secondaryRecirculation">A number that is greater than or equal to zero, which notes the fraction of a zone recirculation air that does not directly mix with the outdoor air. Used in cases where a central ventilation system supplies several zones and the return air is not collected through ducts back to the central air handler (eg. a plenum return system is used). This means unused outdoor ventilation air from other zones in the central system can be credited to the room. (Default: 0).</param>
         public Ventilation
         (
-            string identifier, string displayName = default, object userData = default, double flowPerPerson = 0D, double flowPerArea = 0D, double airChangesPerHour = 0D, double flowPerZone = 0D, AnyOf<ScheduleRuleset, ScheduleFixedInterval> schedule = default, VentilationMethod method = VentilationMethod.Sum
+            string identifier, string displayName = default, object userData = default, double flowPerPerson = 0D, double flowPerArea = 0D, double airChangesPerHour = 0D, double flowPerZone = 0D, AnyOf<ScheduleRuleset, ScheduleFixedInterval> schedule = default, VentilationMethod method = VentilationMethod.Sum, double effectivenessCooling = 1D, double effectivenessHeating = 1D, double secondaryRecirculation = 0D
         ) : base(identifier: identifier, displayName: displayName, userData: userData)
         {
             this.FlowPerPerson = flowPerPerson;
@@ -57,6 +60,9 @@ namespace HoneybeeSchema
             this.FlowPerZone = flowPerZone;
             this.Schedule = schedule;
             this.Method = method;
+            this.EffectivenessCooling = effectivenessCooling;
+            this.EffectivenessHeating = effectivenessHeating;
+            this.SecondaryRecirculation = secondaryRecirculation;
 
             // Set readonly properties with defaultValue
             this.Type = "Ventilation";
@@ -132,6 +138,39 @@ namespace HoneybeeSchema
         // [System.Text.Json.Serialization.JsonPropertyName("method")] // For System.Text.Json
         public VentilationMethod Method { get; set; } = VentilationMethod.Sum;
 
+        /// <summary>
+        /// A positive number to note the air distribution effectiveness of the ventilation system when it operates in cooling mode (or how well the system is able to mix the air when cooling). A valueof 1 means that air is well mixed and specified outdoor air flows are not adjusted in the course of simulation. Values less than 1 indicate systems that do not mix the air as well and so the specified airflows are increased. Values greater than 1 indicate systems that are particularly good at delivering outdoor air to the breathing zone of a room and so the specified airflows can be reduced.
+        /// </summary>
+        [Summary(@"A positive number to note the air distribution effectiveness of the ventilation system when it operates in cooling mode (or how well the system is able to mix the air when cooling). A valueof 1 means that air is well mixed and specified outdoor air flows are not adjusted in the course of simulation. Values less than 1 indicate systems that do not mix the air as well and so the specified airflows are increased. Values greater than 1 indicate systems that are particularly good at delivering outdoor air to the breathing zone of a room and so the specified airflows can be reduced.")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [Range(0, double.MaxValue)]
+        [DataMember(Name = "effectiveness_cooling")] // For internal Serialization XML/JSON
+        [JsonProperty("effectiveness_cooling", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("effectiveness_cooling")] // For System.Text.Json
+        public double EffectivenessCooling { get; set; } = 1D;
+
+        /// <summary>
+        /// A positive number to note the air distribution effectiveness of the ventilation system when it operates in heating mode (or how well the system is able to mix the air when heating). A valueof 1 means that air is well mixed and specified outdoor air flows are not adjusted in the course of simulation. Values less than 1 indicate systems that do not mix the air as well and so the specified airflows are increased. Values greater than 1 indicate systems that are particularly good at delivering outdoor air to the breathing zone of a room and so the specified airflows can be reduced.
+        /// </summary>
+        [Summary(@"A positive number to note the air distribution effectiveness of the ventilation system when it operates in heating mode (or how well the system is able to mix the air when heating). A valueof 1 means that air is well mixed and specified outdoor air flows are not adjusted in the course of simulation. Values less than 1 indicate systems that do not mix the air as well and so the specified airflows are increased. Values greater than 1 indicate systems that are particularly good at delivering outdoor air to the breathing zone of a room and so the specified airflows can be reduced.")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [Range(0, double.MaxValue)]
+        [DataMember(Name = "effectiveness_heating")] // For internal Serialization XML/JSON
+        [JsonProperty("effectiveness_heating", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("effectiveness_heating")] // For System.Text.Json
+        public double EffectivenessHeating { get; set; } = 1D;
+
+        /// <summary>
+        /// A number that is greater than or equal to zero, which notes the fraction of a zone recirculation air that does not directly mix with the outdoor air. Used in cases where a central ventilation system supplies several zones and the return air is not collected through ducts back to the central air handler (eg. a plenum return system is used). This means unused outdoor ventilation air from other zones in the central system can be credited to the room. (Default: 0).
+        /// </summary>
+        [Summary(@"A number that is greater than or equal to zero, which notes the fraction of a zone recirculation air that does not directly mix with the outdoor air. Used in cases where a central ventilation system supplies several zones and the return air is not collected through ducts back to the central air handler (eg. a plenum return system is used). This means unused outdoor ventilation air from other zones in the central system can be credited to the room. (Default: 0).")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [Range(0, double.MaxValue)]
+        [DataMember(Name = "secondary_recirculation")] // For internal Serialization XML/JSON
+        [JsonProperty("secondary_recirculation", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("secondary_recirculation")] // For System.Text.Json
+        public double SecondaryRecirculation { get; set; } = 0D;
+
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -164,6 +203,9 @@ namespace HoneybeeSchema
             sb.Append("  FlowPerZone: ").Append(this.FlowPerZone).Append("\n");
             sb.Append("  Schedule: ").Append(this.Schedule).Append("\n");
             sb.Append("  Method: ").Append(this.Method).Append("\n");
+            sb.Append("  EffectivenessCooling: ").Append(this.EffectivenessCooling).Append("\n");
+            sb.Append("  EffectivenessHeating: ").Append(this.EffectivenessHeating).Append("\n");
+            sb.Append("  SecondaryRecirculation: ").Append(this.SecondaryRecirculation).Append("\n");
             return sb.ToString();
         }
 
@@ -230,7 +272,10 @@ namespace HoneybeeSchema
                     Extension.Equals(this.AirChangesPerHour, input.AirChangesPerHour) && 
                     Extension.Equals(this.FlowPerZone, input.FlowPerZone) && 
                     Extension.Equals(this.Schedule, input.Schedule) && 
-                    Extension.Equals(this.Method, input.Method);
+                    Extension.Equals(this.Method, input.Method) && 
+                    Extension.Equals(this.EffectivenessCooling, input.EffectivenessCooling) && 
+                    Extension.Equals(this.EffectivenessHeating, input.EffectivenessHeating) && 
+                    Extension.Equals(this.SecondaryRecirculation, input.SecondaryRecirculation);
         }
 
 
@@ -255,6 +300,12 @@ namespace HoneybeeSchema
                     hashCode = hashCode * 59 + this.Schedule.GetHashCode();
                 if (this.Method != null)
                     hashCode = hashCode * 59 + this.Method.GetHashCode();
+                if (this.EffectivenessCooling != null)
+                    hashCode = hashCode * 59 + this.EffectivenessCooling.GetHashCode();
+                if (this.EffectivenessHeating != null)
+                    hashCode = hashCode * 59 + this.EffectivenessHeating.GetHashCode();
+                if (this.SecondaryRecirculation != null)
+                    hashCode = hashCode * 59 + this.SecondaryRecirculation.GetHashCode();
                 return hashCode;
             }
         }
