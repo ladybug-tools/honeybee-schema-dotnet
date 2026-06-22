@@ -3,7 +3,7 @@
   "servers": [],
   "info": {
     "description": "Honeybee validation-report schema.",
-    "version": "2.0.6",
+    "version": "2.1.1",
     "title": "Honeybee Validation Report Schema",
     "contact": {
       "name": "Ladybug Tools",
@@ -55,9 +55,19 @@
       "description": "<SchemaDefinition schemaRef=\"#/components/schemas/Plane\" />\n"
     },
     {
+      "name": "platforms_model",
+      "x-displayName": "Platforms",
+      "description": "<SchemaDefinition schemaRef=\"#/components/schemas/Platforms\" />\n"
+    },
+    {
       "name": "point3d_model",
       "x-displayName": "Point3D",
       "description": "<SchemaDefinition schemaRef=\"#/components/schemas/Point3D\" />\n"
+    },
+    {
+      "name": "suggestedfix_model",
+      "x-displayName": "SuggestedFix",
+      "description": "<SchemaDefinition schemaRef=\"#/components/schemas/SuggestedFix\" />\n"
     },
     {
       "name": "validationerror_model",
@@ -85,7 +95,9 @@
         "objecttypes_model",
         "parenttypes_model",
         "plane_model",
+        "platforms_model",
         "point3d_model",
+        "suggestedfix_model",
         "validationerror_model",
         "validationparent_model",
         "validationreport_model"
@@ -316,6 +328,17 @@
         "title": "Plane",
         "type": "object"
       },
+      "Platforms": {
+        "description": "A list of platforms where validation errors can be fixed.",
+        "enum": [
+          "LBT Python",
+          "LBT Grasshopper",
+          "Pollination Rhino",
+          "Model Editor"
+        ],
+        "title": "Platforms",
+        "type": "string"
+      },
       "Point3D": {
         "additionalProperties": false,
         "description": "A point object in 3D space.",
@@ -352,6 +375,46 @@
           "z"
         ],
         "title": "Point3D",
+        "type": "object"
+      },
+      "SuggestedFix": {
+        "properties": {
+          "platform": {
+            "$ref": "#/components/schemas/Platforms",
+            "description": "Text string for the platform on which the command can be run to fix the error."
+          },
+          "command": {
+            "description": "Text string for name of the command to be used as a suggested fix.",
+            "title": "Command",
+            "type": "string"
+          },
+          "type": {
+            "const": "SuggestedFix",
+            "default": "SuggestedFix",
+            "title": "Type",
+            "type": "string",
+            "readOnly": true
+          },
+          "inputs": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Dictionary containing inputs for the command to enable it to fix the ValidationError. The keys of this dictionary should correspond to the name of the input and the values should be the recommended input value. When None, the assumption is that all command defaults are used.",
+            "title": "Inputs"
+          }
+        },
+        "required": [
+          "platform",
+          "command"
+        ],
+        "title": "SuggestedFix",
         "type": "object"
       },
       "ValidationError": {
@@ -447,6 +510,15 @@
               ]
             },
             "title": "Helper Geometry",
+            "type": "array"
+          },
+          "suggested_fixes": {
+            "default": null,
+            "description": "An optional list of SuggestedFix objects with recommendations for how to fix the error. Multiple objects can be included to represent different methods for fixing the error.",
+            "items": {
+              "$ref": "#/components/schemas/SuggestedFix"
+            },
+            "title": "Suggested Fixes",
             "type": "array"
           }
         },
