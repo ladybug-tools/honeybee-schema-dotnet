@@ -33,7 +33,7 @@ namespace HoneybeeSchema
         { 
             // Set readonly properties with defaultValue
             this.Type = "Model";
-            this.Version = "2.1.1";
+            this.Version = "2.1.2";
         }
         /// <summary>
         /// Initializes a new instance of the <see cref="Model" /> class.
@@ -69,7 +69,7 @@ namespace HoneybeeSchema
 
             // Set readonly properties with defaultValue
             this.Type = "Model";
-            this.Version = "2.1.1";
+            this.Version = "2.1.2";
 
             // check if object is valid, only check for inherited class
             if (this.GetType() == typeof(Model))
@@ -98,7 +98,7 @@ namespace HoneybeeSchema
         [DataMember(Name = "version")] // For internal Serialization XML/JSON
         [JsonProperty("version", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("version")] // For System.Text.Json
-        public string Version { get; protected set; } = "2.1.1";
+        public string Version { get; protected set; } = "2.1.2";
 
         /// <summary>
         /// A list of Rooms in the model.

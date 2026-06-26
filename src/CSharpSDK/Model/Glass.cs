@@ -50,7 +50,7 @@ namespace HoneybeeSchema
         /// <param name="refractionIndex">A value greater than 1 for the index of refraction. Typical values are 1.52 for float glass and 1.4 for ETFE.</param>
         public Glass
         (
-            string identifier, string displayName = default, AnyOf<Plastic, Glass, BSDF, Glow, Light, Trans, Metal, Void, Mirror> modifier = default, List<AnyOf<Plastic, Glass, BSDF, Glow, Light, Trans, Metal, Void, Mirror>> dependencies = default, double rTransmissivity = 0D, double gTransmissivity = 0D, double bTransmissivity = 0D, double refractionIndex = 1.52D
+            string identifier, string displayName = default, AnyOf<Plastic, Glass, BSDF, Glow, Light, Trans, Metal, Void, Mirror> modifier = default, List<AnyOf<Plastic, Glass, BSDF, Glow, Light, Trans, Metal, Void, Mirror>> dependencies = default, double rTransmissivity = 0D, double gTransmissivity = 0D, double bTransmissivity = 0D, double? refractionIndex = 1.52D
         ) : base(identifier: identifier, displayName: displayName)
         {
             this.Modifier = modifier ?? new Void();
@@ -132,7 +132,7 @@ namespace HoneybeeSchema
         [DataMember(Name = "refraction_index")] // For internal Serialization XML/JSON
         [JsonProperty("refraction_index", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("refraction_index")] // For System.Text.Json
-        public double RefractionIndex { get; set; } = 1.52D;
+        public double? RefractionIndex { get; set; } = 1.52D;
 
 
         /// <summary>

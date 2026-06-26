@@ -51,7 +51,7 @@ namespace HoneybeeSchema
         /// <param name="schedule">An optional schedule identifier to be applied on top of the control_type. If None, the control_type will govern all behavior of the construction.</param>
         public WindowConstructionShadeAbridged
         (
-            string identifier, WindowConstructionAbridged windowConstruction, string shadeMaterial, string displayName = default, object userData = default, ShadeLocation shadeLocation = ShadeLocation.Interior, ControlType controlType = ControlType.AlwaysOn, double setpoint = default, string schedule = default
+            string identifier, WindowConstructionAbridged windowConstruction, string shadeMaterial, string displayName = default, object userData = default, ShadeLocation shadeLocation = ShadeLocation.Interior, ControlType controlType = ControlType.AlwaysOn, double? setpoint = default, string schedule = default
         ) : base(identifier: identifier, displayName: displayName, userData: userData)
         {
             this.WindowConstruction = windowConstruction ?? throw new System.ArgumentNullException("windowConstruction is a required property for WindowConstructionShadeAbridged and cannot be null");
@@ -123,7 +123,7 @@ namespace HoneybeeSchema
         [DataMember(Name = "setpoint")] // For internal Serialization XML/JSON
         [JsonProperty("setpoint", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("setpoint")] // For System.Text.Json
-        public double Setpoint { get; set; }
+        public double? Setpoint { get; set; }
 
         /// <summary>
         /// An optional schedule identifier to be applied on top of the control_type. If None, the control_type will govern all behavior of the construction.

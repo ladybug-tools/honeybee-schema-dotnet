@@ -48,7 +48,7 @@ namespace HoneybeeSchema
         /// <param name="vintage">A list of building vintages (e.g. ASHRAE_2019, ASHRAE_2016).</param>
         public ProjectInfo
         (
-            double north = 0D, List<string> weatherUrls = default, Location location = default, ClimateZones ashraeClimateZone = default, List<BuildingTypes> buildingType = default, List<EfficiencyStandards> vintage = default
+            double north = 0D, List<string> weatherUrls = default, Location location = default, ClimateZones? ashraeClimateZone = default, List<BuildingTypes> buildingType = default, List<EfficiencyStandards> vintage = default
         ) : base()
         {
             this.North = north;
@@ -107,7 +107,7 @@ namespace HoneybeeSchema
         [DataMember(Name = "ashrae_climate_zone")] // For internal Serialization XML/JSON
         [JsonProperty("ashrae_climate_zone", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("ashrae_climate_zone")] // For System.Text.Json
-        public ClimateZones AshraeClimateZone { get; set; }
+        public ClimateZones? AshraeClimateZone { get; set; }
 
         /// <summary>
         /// A list of building types for the project. The first building type is considered the primary type for the project.
