@@ -49,7 +49,7 @@ namespace HoneybeeSchema
         /// <param name="bypassEfficiencySizing">A boolean to indicate whether the efficiency standard should trigger an sizing run that sets the efficiencies of all HVAC equipment in the Model (False) or the standard should only be written into the OSM and the sizing run should be bypassed (True). Bypassing the sizing run is useful when you only want to check that the overall HVAC system architecture is correct and you do not want to wait the extra time that it takes to run the sizing calculation.</param>
         public SizingParameter
         (
-            List<DesignDay> designDays = default, double heatingFactor = 1.25D, double coolingFactor = 1.15D, EfficiencyStandards efficiencyStandard = default, ClimateZones climateZone = default, string buildingType = default, bool bypassEfficiencySizing = false
+            List<DesignDay> designDays = default, double heatingFactor = 1.25D, double coolingFactor = 1.15D, EfficiencyStandards? efficiencyStandard = default, ClimateZones? climateZone = default, string buildingType = default, bool bypassEfficiencySizing = false
         ) : base()
         {
             this.DesignDays = designDays;
@@ -110,7 +110,7 @@ namespace HoneybeeSchema
         [DataMember(Name = "efficiency_standard")] // For internal Serialization XML/JSON
         [JsonProperty("efficiency_standard", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("efficiency_standard")] // For System.Text.Json
-        public EfficiencyStandards EfficiencyStandard { get; set; }
+        public EfficiencyStandards? EfficiencyStandard { get; set; }
 
         /// <summary>
         /// Text indicating the ASHRAE climate zone to be used with the efficiency_standard. When unspecified, the climate zone will be inferred from the design days on this sizing parameter object.
@@ -120,7 +120,7 @@ namespace HoneybeeSchema
         [DataMember(Name = "climate_zone")] // For internal Serialization XML/JSON
         [JsonProperty("climate_zone", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("climate_zone")] // For System.Text.Json
-        public ClimateZones ClimateZone { get; set; }
+        public ClimateZones? ClimateZone { get; set; }
 
         /// <summary>
         /// Text for the building type to be used in the efficiency_standard. If the type is not recognized or is None, it will be assumed that the building is a generic NonResidential. The following have specified systems per the standard:  Residential, NonResidential, MidriseApartment, HighriseApartment, LargeOffice, MediumOffice, SmallOffice, Retail, StripMall, PrimarySchool, SecondarySchool, SmallHotel, LargeHotel, Hospital, Outpatient, Warehouse, SuperMarket, FullServiceRestaurant, QuickServiceRestaurant, Laboratory, Courthouse.

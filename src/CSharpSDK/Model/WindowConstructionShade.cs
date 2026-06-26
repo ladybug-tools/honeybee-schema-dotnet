@@ -51,7 +51,7 @@ namespace HoneybeeSchema
         /// <param name="schedule">An optional ScheduleRuleset or ScheduleFixedInterval to be applied on top of the control_type. If None, the control_type will govern all behavior of the construction.</param>
         public WindowConstructionShade
         (
-            string identifier, WindowConstruction windowConstruction, AnyOf<EnergyWindowMaterialShade, EnergyWindowMaterialBlind, EnergyWindowMaterialGlazing> shadeMaterial, string displayName = default, object userData = default, ShadeLocation shadeLocation = ShadeLocation.Interior, ControlType controlType = ControlType.AlwaysOn, double setpoint = default, AnyOf<ScheduleRuleset, ScheduleFixedInterval> schedule = default
+            string identifier, WindowConstruction windowConstruction, AnyOf<EnergyWindowMaterialShade, EnergyWindowMaterialBlind, EnergyWindowMaterialGlazing> shadeMaterial, string displayName = default, object userData = default, ShadeLocation shadeLocation = ShadeLocation.Interior, ControlType controlType = ControlType.AlwaysOn, double? setpoint = default, AnyOf<ScheduleRuleset, ScheduleFixedInterval> schedule = default
         ) : base(identifier: identifier, displayName: displayName, userData: userData)
         {
             this.WindowConstruction = windowConstruction ?? throw new System.ArgumentNullException("windowConstruction is a required property for WindowConstructionShade and cannot be null");
@@ -121,7 +121,7 @@ namespace HoneybeeSchema
         [DataMember(Name = "setpoint")] // For internal Serialization XML/JSON
         [JsonProperty("setpoint", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("setpoint")] // For System.Text.Json
-        public double Setpoint { get; set; }
+        public double? Setpoint { get; set; }
 
         /// <summary>
         /// An optional ScheduleRuleset or ScheduleFixedInterval to be applied on top of the control_type. If None, the control_type will govern all behavior of the construction.

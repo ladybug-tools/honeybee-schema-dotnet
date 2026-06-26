@@ -57,7 +57,7 @@ namespace HoneybeeSchema
         /// <param name="groupIdentifier">An optional string to note the view group '             'to which the sensor is a part of. Views sharing the same '             'group_identifier will be written to the same subfolder in Radiance '             'folder (default: None).</param>
         public View
         (
-            string identifier, List<double> position, List<double> direction, List<double> upVector, string displayName = default, string roomIdentifier = default, List<List<string>> lightPath = default, ViewType viewType = ViewType.V, double hSize = 60D, double vSize = 60D, double shift = default, double lift = default, double foreClip = default, double aftClip = default, string groupIdentifier = default
+            string identifier, List<double> position, List<double> direction, List<double> upVector, string displayName = default, string roomIdentifier = default, List<List<string>> lightPath = default, ViewType viewType = ViewType.V, double hSize = 60D, double vSize = 60D, double? shift = default, double? lift = default, double? foreClip = default, double? aftClip = default, string groupIdentifier = default
         ) : base(identifier: identifier, displayName: displayName, roomIdentifier: roomIdentifier, lightPath: lightPath)
         {
             this.Position = position ?? throw new System.ArgumentNullException("position is a required property for View and cannot be null");
@@ -153,7 +153,7 @@ namespace HoneybeeSchema
         [DataMember(Name = "shift")] // For internal Serialization XML/JSON
         [JsonProperty("shift", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("shift")] // For System.Text.Json
-        public double Shift { get; set; }
+        public double? Shift { get; set; }
 
         /// <summary>
         /// The view lift (-vl). This is the amount the actual image will be lifted up from the specified view. This option is useful for generating skewed perspectives or rendering an image a piece at a time. A value of 1 means that the rendered image starts just to the right of the normal view. A value of -1 would be to the left. Larger or fractional values are permitted as well.
@@ -163,7 +163,7 @@ namespace HoneybeeSchema
         [DataMember(Name = "lift")] // For internal Serialization XML/JSON
         [JsonProperty("lift", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("lift")] // For System.Text.Json
-        public double Lift { get; set; }
+        public double? Lift { get; set; }
 
         /// <summary>
         /// View fore clip (-vo) at a distance from the view point.The plane will be perpendicular to the view direction for perspective and parallel view types. For fisheye view types, the clipping plane is actually a clipping sphere, centered on the view point with fore_clip radius. Objects in front of this imaginary surface will not be visible.
@@ -173,7 +173,7 @@ namespace HoneybeeSchema
         [DataMember(Name = "fore_clip")] // For internal Serialization XML/JSON
         [JsonProperty("fore_clip", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("fore_clip")] // For System.Text.Json
-        public double ForeClip { get; set; }
+        public double? ForeClip { get; set; }
 
         /// <summary>
         /// View aft clip (-va) at a distance from the view point.Like the view fore plane, it will be perpendicular to the view direction for perspective and parallel view types. For fisheye view types, the clipping plane is actually a clipping sphere, centered on the view point with radius val.
@@ -183,7 +183,7 @@ namespace HoneybeeSchema
         [DataMember(Name = "aft_clip")] // For internal Serialization XML/JSON
         [JsonProperty("aft_clip", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("aft_clip")] // For System.Text.Json
-        public double AftClip { get; set; }
+        public double? AftClip { get; set; }
 
         /// <summary>
         /// An optional string to note the view group '             'to which the sensor is a part of. Views sharing the same '             'group_identifier will be written to the same subfolder in Radiance '             'folder (default: None).
