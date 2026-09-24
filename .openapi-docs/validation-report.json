@@ -3,7 +3,7 @@
   "servers": [],
   "info": {
     "description": "Honeybee validation-report schema.",
-    "version": "2.1.2",
+    "version": "2.2.1",
     "title": "Honeybee Validation Report Schema",
     "contact": {
       "name": "Ladybug Tools",
@@ -33,6 +33,11 @@
       "name": "face3d_model",
       "x-displayName": "Face3D",
       "description": "<SchemaDefinition schemaRef=\"#/components/schemas/Face3D\" />\n"
+    },
+    {
+      "name": "fixcommand_model",
+      "x-displayName": "FixCommand",
+      "description": "<SchemaDefinition schemaRef=\"#/components/schemas/FixCommand\" />\n"
     },
     {
       "name": "linesegment3d_model",
@@ -91,6 +96,7 @@
       "tags": [
         "extensiontypes_model",
         "face3d_model",
+        "fixcommand_model",
         "linesegment3d_model",
         "objecttypes_model",
         "parenttypes_model",
@@ -185,6 +191,41 @@
           "boundary"
         ],
         "title": "Face3D",
+        "type": "object"
+      },
+      "FixCommand": {
+        "properties": {
+          "name": {
+            "description": "Text string for name of the command to be used as a suggested fix.",
+            "title": "Name",
+            "type": "string"
+          },
+          "type": {
+            "const": "FixCommand",
+            "default": "FixCommand",
+            "title": "Type",
+            "type": "string",
+            "readOnly": true
+          },
+          "inputs": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Dictionary containing inputs for the command to enable it to fix the ValidationError. The keys of this dictionary should correspond to the name of the input and the values should be the recommended input value. When None, the assumption is that all command defaults are used.",
+            "title": "Inputs"
+          }
+        },
+        "required": [
+          "name"
+        ],
+        "title": "FixCommand",
         "type": "object"
       },
       "LineSegment3D": {
@@ -383,10 +424,14 @@
             "$ref": "#/components/schemas/Platforms",
             "description": "Text string for the platform on which the command can be run to fix the error."
           },
-          "command": {
-            "description": "Text string for name of the command to be used as a suggested fix.",
-            "title": "Command",
-            "type": "string"
+          "commands": {
+            "description": "A list of FixCommand objects with recommendations for how to fix the error. The list can contain a single command or canhave multiple commands to be executed in a sequence.",
+            "items": {
+              "$ref": "#/components/schemas/FixCommand"
+            },
+            "minItems": 1,
+            "title": "Commands",
+            "type": "array"
           },
           "type": {
             "const": "SuggestedFix",
@@ -394,25 +439,11 @@
             "title": "Type",
             "type": "string",
             "readOnly": true
-          },
-          "inputs": {
-            "anyOf": [
-              {
-                "additionalProperties": true,
-                "type": "object"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "default": null,
-            "description": "Dictionary containing inputs for the command to enable it to fix the ValidationError. The keys of this dictionary should correspond to the name of the input and the values should be the recommended input value. When None, the assumption is that all command defaults are used.",
-            "title": "Inputs"
           }
         },
         "required": [
           "platform",
-          "command"
+          "commands"
         ],
         "title": "SuggestedFix",
         "type": "object"

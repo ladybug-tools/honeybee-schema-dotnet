@@ -3,7 +3,7 @@
   "servers": [],
   "info": {
     "description": "Documentation for Honeybee model schema",
-    "version": "2.1.2",
+    "version": "2.2.1",
     "title": "Honeybee Model Schema",
     "contact": {
       "name": "Ladybug Tools",
@@ -8066,7 +8066,7 @@
                 "readOnly": true
               },
               "version": {
-                "default": "2.1.2",
+                "default": "2.2.1",
                 "description": "Text string for the current version of the schema.",
                 "pattern": "^([0-9]+)\\.([0-9]+)\\.([0-9]+)$",
                 "title": "Version",
@@ -10111,6 +10111,14 @@
                 },
                 "description": "Number for the latent fraction of heat gain due to people or an Autocalculate object.",
                 "title": "Latent Fraction"
+              },
+              "carbon_dioxide_generation_rate": {
+                "default": 3.82E-08,
+                "description": "A number greater than or equal to 0 for the carbon dioxide generation rate per unit of activity level, in m3/s-W. The default is the EnergyPlus default, which is representative of the average adult. (Default: 3.82e-8).",
+                "minimum": 0,
+                "title": "Carbon Dioxide Generation Rate",
+                "type": "number",
+                "format": "double"
               }
             },
             "additionalProperties": false
@@ -10201,6 +10209,14 @@
                 },
                 "description": "Number for the latent fraction of heat gain due to people or an Autocalculate object.",
                 "title": "Latent Fraction"
+              },
+              "carbon_dioxide_generation_rate": {
+                "default": 3.82E-08,
+                "description": "A number greater than or equal to 0 for the carbon dioxide generation rate per unit of activity level, in m3/s-W. The default is the EnergyPlus default, which is representative of the average adult. (Default: 3.82e-8).",
+                "minimum": 0,
+                "title": "Carbon Dioxide Generation Rate",
+                "type": "number",
+                "format": "double"
               }
             },
             "additionalProperties": false
@@ -16544,6 +16560,41 @@
         "title": "ExtensionTypes",
         "type": "string"
       },
+      "FixCommand": {
+        "properties": {
+          "name": {
+            "description": "Text string for name of the command to be used as a suggested fix.",
+            "title": "Name",
+            "type": "string"
+          },
+          "type": {
+            "const": "FixCommand",
+            "default": "FixCommand",
+            "title": "Type",
+            "type": "string",
+            "readOnly": true
+          },
+          "inputs": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Dictionary containing inputs for the command to enable it to fix the ValidationError. The keys of this dictionary should correspond to the name of the input and the values should be the recommended input value. When None, the assumption is that all command defaults are used.",
+            "title": "Inputs"
+          }
+        },
+        "required": [
+          "name"
+        ],
+        "title": "FixCommand",
+        "type": "object"
+      },
       "LineSegment3D": {
         "additionalProperties": false,
         "description": "A single line segment face in 3D space.",
@@ -16682,10 +16733,14 @@
             "$ref": "#/components/schemas/Platforms",
             "description": "Text string for the platform on which the command can be run to fix the error."
           },
-          "command": {
-            "description": "Text string for name of the command to be used as a suggested fix.",
-            "title": "Command",
-            "type": "string"
+          "commands": {
+            "description": "A list of FixCommand objects with recommendations for how to fix the error. The list can contain a single command or canhave multiple commands to be executed in a sequence.",
+            "items": {
+              "$ref": "#/components/schemas/FixCommand"
+            },
+            "minItems": 1,
+            "title": "Commands",
+            "type": "array"
           },
           "type": {
             "const": "SuggestedFix",
@@ -16693,25 +16748,11 @@
             "title": "Type",
             "type": "string",
             "readOnly": true
-          },
-          "inputs": {
-            "anyOf": [
-              {
-                "additionalProperties": true,
-                "type": "object"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "default": null,
-            "description": "Dictionary containing inputs for the command to enable it to fix the ValidationError. The keys of this dictionary should correspond to the name of the input and the values should be the recommended input value. When None, the assumption is that all command defaults are used.",
-            "title": "Inputs"
           }
         },
         "required": [
           "platform",
-          "command"
+          "commands"
         ],
         "title": "SuggestedFix",
         "type": "object"

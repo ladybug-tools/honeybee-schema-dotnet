@@ -53,12 +53,21 @@ export class PeopleAbridged extends IDdEnergyBaseModel {
     /** Number for the latent fraction of heat gain due to people or an Autocalculate object. */
     latentFraction: (Autocalculate | number) = new Autocalculate();
 	
+    @Type(() => Number)
+    @IsNumber()
+    @IsOptional()
+    @Min(0)
+    @Expose({ name: "carbon_dioxide_generation_rate" })
+    /** A number greater than or equal to 0 for the carbon dioxide generation rate per unit of activity level, in m3/s-W. The default is the EnergyPlus default, which is representative of the average adult. (Default: 3.82e-8). */
+    carbonDioxideGenerationRate: number = 3.82E-08;
+	
 
     constructor() {
         super();
         this.type = "PeopleAbridged";
         this.radiantFraction = 0.3;
         this.latentFraction = new Autocalculate();
+        this.carbonDioxideGenerationRate = 3.82E-08;
     }
 
 
@@ -72,6 +81,7 @@ export class PeopleAbridged extends IDdEnergyBaseModel {
             this.activitySchedule = obj.activitySchedule;
             this.radiantFraction = obj.radiantFraction ?? 0.3;
             this.latentFraction = obj.latentFraction ?? new Autocalculate();
+            this.carbonDioxideGenerationRate = obj.carbonDioxideGenerationRate ?? 3.82E-08;
             this.userData = obj.userData;
             this.identifier = obj.identifier;
             this.displayName = obj.displayName;
@@ -102,6 +112,7 @@ export class PeopleAbridged extends IDdEnergyBaseModel {
         data["activity_schedule"] = this.activitySchedule;
         data["radiant_fraction"] = this.radiantFraction ?? 0.3;
         data["latent_fraction"] = this.latentFraction ?? new Autocalculate();
+        data["carbon_dioxide_generation_rate"] = this.carbonDioxideGenerationRate ?? 3.82E-08;
         data = super.toJSON(data);
         return instanceToPlain(data, { exposeUnsetFields: false });
     }

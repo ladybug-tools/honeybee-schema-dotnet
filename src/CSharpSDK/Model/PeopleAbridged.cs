@@ -45,9 +45,10 @@ namespace HoneybeeSchema
         /// <param name="activitySchedule">Identifier of a schedule for the activity of the occupants over the course of the year. The type of this schedule should be ActivityLevel and the values of the schedule equal to the number of Watts given off by an individual person in the room. If None, a default constant schedule with 120 Watts per person will be used, which is typical of awake, adult humans who are seated.</param>
         /// <param name="radiantFraction">The radiant fraction of sensible heat released by people. (Default: 0.3).</param>
         /// <param name="latentFraction">Number for the latent fraction of heat gain due to people or an Autocalculate object.</param>
+        /// <param name="carbonDioxideGenerationRate">A number greater than or equal to 0 for the carbon dioxide generation rate per unit of activity level, in m3/s-W. The default is the EnergyPlus default, which is representative of the average adult. (Default: 3.82e-8).</param>
         public PeopleAbridged
         (
-            string identifier, double peoplePerArea, string displayName = default, object userData = default, string occupancySchedule = default, string activitySchedule = default, double radiantFraction = 0.3D, AnyOf<Autocalculate, double> latentFraction = default
+            string identifier, double peoplePerArea, string displayName = default, object userData = default, string occupancySchedule = default, string activitySchedule = default, double radiantFraction = 0.3D, AnyOf<Autocalculate, double> latentFraction = default, double carbonDioxideGenerationRate = 3.82E-08D
         ) : base(identifier: identifier, displayName: displayName, userData: userData)
         {
             this.PeoplePerArea = peoplePerArea;
@@ -55,6 +56,7 @@ namespace HoneybeeSchema
             this.ActivitySchedule = activitySchedule;
             this.RadiantFraction = radiantFraction;
             this.LatentFraction = latentFraction ?? new Autocalculate();
+            this.CarbonDioxideGenerationRate = carbonDioxideGenerationRate;
 
             // Set readonly properties with defaultValue
             this.Type = "PeopleAbridged";
@@ -123,6 +125,17 @@ namespace HoneybeeSchema
         // [System.Text.Json.Serialization.JsonPropertyName("latent_fraction")] // For System.Text.Json
         public AnyOf<Autocalculate, double> LatentFraction { get; set; } = new Autocalculate();
 
+        /// <summary>
+        /// A number greater than or equal to 0 for the carbon dioxide generation rate per unit of activity level, in m3/s-W. The default is the EnergyPlus default, which is representative of the average adult. (Default: 3.82e-8).
+        /// </summary>
+        [Summary(@"A number greater than or equal to 0 for the carbon dioxide generation rate per unit of activity level, in m3/s-W. The default is the EnergyPlus default, which is representative of the average adult. (Default: 3.82e-8).")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [Range(0, double.MaxValue)]
+        [DataMember(Name = "carbon_dioxide_generation_rate")] // For internal Serialization XML/JSON
+        [JsonProperty("carbon_dioxide_generation_rate", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("carbon_dioxide_generation_rate")] // For System.Text.Json
+        public double CarbonDioxideGenerationRate { get; set; } = 3.82E-08D;
+
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -154,6 +167,7 @@ namespace HoneybeeSchema
             sb.Append("  ActivitySchedule: ").Append(this.ActivitySchedule).Append("\n");
             sb.Append("  RadiantFraction: ").Append(this.RadiantFraction).Append("\n");
             sb.Append("  LatentFraction: ").Append(this.LatentFraction).Append("\n");
+            sb.Append("  CarbonDioxideGenerationRate: ").Append(this.CarbonDioxideGenerationRate).Append("\n");
             return sb.ToString();
         }
 
@@ -219,7 +233,8 @@ namespace HoneybeeSchema
                     Extension.Equals(this.OccupancySchedule, input.OccupancySchedule) && 
                     Extension.Equals(this.ActivitySchedule, input.ActivitySchedule) && 
                     Extension.Equals(this.RadiantFraction, input.RadiantFraction) && 
-                    Extension.Equals(this.LatentFraction, input.LatentFraction);
+                    Extension.Equals(this.LatentFraction, input.LatentFraction) && 
+                    Extension.Equals(this.CarbonDioxideGenerationRate, input.CarbonDioxideGenerationRate);
         }
 
 
@@ -242,6 +257,8 @@ namespace HoneybeeSchema
                     hashCode = hashCode * 59 + this.RadiantFraction.GetHashCode();
                 if (this.LatentFraction != null)
                     hashCode = hashCode * 59 + this.LatentFraction.GetHashCode();
+                if (this.CarbonDioxideGenerationRate != null)
+                    hashCode = hashCode * 59 + this.CarbonDioxideGenerationRate.GetHashCode();
                 return hashCode;
             }
         }

@@ -1,6 +1,7 @@
-﻿import { IsEnum, IsDefined, IsString, IsOptional, Equals, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsEnum, IsDefined, IsArray, IsInstance, ValidateNested, IsString, IsOptional, Equals, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { deepTransform } from '../deepTransform';
+import { FixCommand } from "./FixCommand";
 import { Platforms } from "./Platforms";
 
 export class SuggestedFix {
@@ -11,12 +12,14 @@ export class SuggestedFix {
     /** Text string for the platform on which the command can be run to fix the error. */
     platform!: Platforms;
 	
-    @Type(() => String)
-    @IsString()
+    @IsArray()
+    @Type(() => FixCommand)
+    @IsInstance(FixCommand, { each: true })
+    @ValidateNested({ each: true })
     @IsDefined()
-    @Expose({ name: "command" })
-    /** Text string for name of the command to be used as a suggested fix. */
-    command!: string;
+    @Expose({ name: "commands" })
+    /** A list of FixCommand objects with recommendations for how to fix the error. The list can contain a single command or canhave multiple commands to be executed in a sequence. */
+    commands!: FixCommand[];
 	
     @Type(() => String)
     @IsString()
@@ -25,11 +28,6 @@ export class SuggestedFix {
     @Expose({ name: "type" })
     /** type */
     type: string = "SuggestedFix";
-	
-    @IsOptional()
-    @Expose({ name: "inputs" })
-    /** Dictionary containing inputs for the command to enable it to fix the ValidationError. The keys of this dictionary should correspond to the name of the input and the values should be the recommended input value. When None, the assumption is that all command defaults are used. */
-    inputs?: Object;
 	
 
     constructor() {
@@ -42,9 +40,8 @@ export class SuggestedFix {
         if (_data) {
             const obj = deepTransform(SuggestedFix, _data);
             this.platform = obj.platform;
-            this.command = obj.command;
+            this.commands = obj.commands;
             this.type = obj.type ?? "SuggestedFix";
-            this.inputs = obj.inputs;
         }
     }
 
@@ -67,9 +64,8 @@ export class SuggestedFix {
 	toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["platform"] = this.platform;
-        data["command"] = this.command;
+        data["commands"] = this.commands;
         data["type"] = this.type ?? "SuggestedFix";
-        data["inputs"] = this.inputs;
         return instanceToPlain(data, { exposeUnsetFields: false });
     }
 
