@@ -1,6 +1,9 @@
-.PHONY: sync-google-form
+.PHONY: sync-google-form init
 
 NEW_RELEASE_VERSION ?= 0.0.1
+init:
+	git submodule update --init --recursive
+
 download:
 	cd ./.generator/SchemaGenerator && dotnet run --download --updateVersion
 
