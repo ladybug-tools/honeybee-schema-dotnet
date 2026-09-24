@@ -21,63 +21,52 @@ namespace HoneybeeSchema
 {
     [Summary(@"")]
     [System.Serializable]
-    [DataContract(Name = "SuggestedFix")] // Enables DataMember rules. For internal Serialization XML/JSON
-    public partial class SuggestedFix : System.IEquatable<SuggestedFix>
+    [DataContract(Name = "FixCommand")] // Enables DataMember rules. For internal Serialization XML/JSON
+    public partial class FixCommand : System.IEquatable<FixCommand>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="SuggestedFix" /> class.
+        /// Initializes a new instance of the <see cref="FixCommand" /> class.
         /// </summary>
         [LBT.Newtonsoft.Json.JsonConstructorAttribute]
         // [System.Text.Json.Serialization.JsonConstructor] // for future switching to System.Text.Json
-        protected SuggestedFix() 
+        protected FixCommand() 
         { 
             // Set readonly properties with defaultValue
-            this.Type = "SuggestedFix";
+            this.Type = "FixCommand";
         }
         /// <summary>
-        /// Initializes a new instance of the <see cref="SuggestedFix" /> class.
+        /// Initializes a new instance of the <see cref="FixCommand" /> class.
         /// </summary>
-        /// <param name="platform">Text string for the platform on which the command can be run to fix the error.</param>
-        /// <param name="commands">A list of FixCommand objects with recommendations for how to fix the error. The list can contain a single command or canhave multiple commands to be executed in a sequence.</param>
-        public SuggestedFix
+        /// <param name="name">Text string for name of the command to be used as a suggested fix.</param>
+        /// <param name="inputs">Dictionary containing inputs for the command to enable it to fix the ValidationError. The keys of this dictionary should correspond to the name of the input and the values should be the recommended input value. When None, the assumption is that all command defaults are used.</param>
+        public FixCommand
         (
-            Platforms platform, List<FixCommand> commands
+            string name, object inputs = default
         )
         {
-            this.Platform = platform;
-            this.Commands = commands ?? throw new System.ArgumentNullException("commands is a required property for SuggestedFix and cannot be null");
+            this.Name = name ?? throw new System.ArgumentNullException("name is a required property for FixCommand and cannot be null");
+            this.Inputs = inputs;
 
             // Set readonly properties with defaultValue
-            this.Type = "SuggestedFix";
+            this.Type = "FixCommand";
 
             // check if object is valid, only check for inherited class
-            if (this.GetType() == typeof(SuggestedFix))
+            if (this.GetType() == typeof(FixCommand))
                 this.IsValid(throwException: true);
         }
 
 	
 	
         /// <summary>
-        /// Text string for the platform on which the command can be run to fix the error.
+        /// Text string for name of the command to be used as a suggested fix.
         /// </summary>
-        [Summary(@"Text string for the platform on which the command can be run to fix the error.")]
+        [Summary(@"Text string for name of the command to be used as a suggested fix.")]
         [Required] // For validation after deserialization
         // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
-        [DataMember(Name = "platform", IsRequired = true)] // For internal Serialization XML/JSON
-        [JsonProperty("platform", Required = Required.Always)] // For Newtonsoft.Json
-        // [System.Text.Json.Serialization.JsonPropertyName("platform")] // For System.Text.Json
-        public Platforms Platform { get; set; }
-
-        /// <summary>
-        /// A list of FixCommand objects with recommendations for how to fix the error. The list can contain a single command or canhave multiple commands to be executed in a sequence.
-        /// </summary>
-        [Summary(@"A list of FixCommand objects with recommendations for how to fix the error. The list can contain a single command or canhave multiple commands to be executed in a sequence.")]
-        [Required] // For validation after deserialization
-        // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
-        [DataMember(Name = "commands", IsRequired = true)] // For internal Serialization XML/JSON
-        [JsonProperty("commands", Required = Required.Always)] // For Newtonsoft.Json
-        // [System.Text.Json.Serialization.JsonPropertyName("commands")] // For System.Text.Json
-        public List<FixCommand> Commands { get; set; }
+        [DataMember(Name = "name", IsRequired = true)] // For internal Serialization XML/JSON
+        [JsonProperty("name", Required = Required.Always)] // For Newtonsoft.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("name")] // For System.Text.Json
+        public string Name { get; set; }
 
         /// <summary>
         /// Type
@@ -87,7 +76,17 @@ namespace HoneybeeSchema
         [DataMember(Name = "type")] // For internal Serialization XML/JSON
         [JsonProperty("type", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("type")] // For System.Text.Json
-        public string Type { get; protected set; } = "SuggestedFix";
+        public string Type { get; protected set; } = "FixCommand";
+
+        /// <summary>
+        /// Dictionary containing inputs for the command to enable it to fix the ValidationError. The keys of this dictionary should correspond to the name of the input and the values should be the recommended input value. When None, the assumption is that all command defaults are used.
+        /// </summary>
+        [Summary(@"Dictionary containing inputs for the command to enable it to fix the ValidationError. The keys of this dictionary should correspond to the name of the input and the values should be the recommended input value. When None, the assumption is that all command defaults are used.")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "inputs")] // For internal Serialization XML/JSON
+        [JsonProperty("inputs", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("inputs")] // For System.Text.Json
+        public object Inputs { get; set; }
 
 
         /// <summary>
@@ -96,7 +95,7 @@ namespace HoneybeeSchema
         /// <returns>String presentation of the object</returns>
         public override string ToString()
         {
-            return "SuggestedFix";
+            return "FixCommand";
         }
 
 
@@ -110,10 +109,10 @@ namespace HoneybeeSchema
                 return this.ToString();
             
             var sb = new StringBuilder();
-            sb.Append("SuggestedFix:\n");
-            sb.Append("  Platform: ").Append(this.Platform).Append("\n");
-            sb.Append("  Commands: ").Append(this.Commands).Append("\n");
+            sb.Append("FixCommand:\n");
+            sb.Append("  Name: ").Append(this.Name).Append("\n");
             sb.Append("  Type: ").Append(this.Type).Append("\n");
+            sb.Append("  Inputs: ").Append(this.Inputs).Append("\n");
             return sb.ToString();
         }
 
@@ -121,10 +120,10 @@ namespace HoneybeeSchema
         /// <summary>
         /// Returns the object from JSON string
         /// </summary>
-        /// <returns>SuggestedFix object</returns>
-        public static SuggestedFix FromJson(string json)
+        /// <returns>FixCommand object</returns>
+        public static FixCommand FromJson(string json)
         {
-            var obj = JsonConvert.DeserializeObject<SuggestedFix>(json, JsonSetting.AnyOfConvertSetting);
+            var obj = JsonConvert.DeserializeObject<FixCommand>(json, JsonSetting.AnyOfConvertSetting);
             if (obj == null)
                 return null;
             return obj.Type.ToLower() == obj.GetType().Name.ToLower() && obj.IsValid(throwException: true) ? obj : null;
@@ -141,8 +140,8 @@ namespace HoneybeeSchema
         /// <summary>
         /// Creates a new instance with the same properties.
         /// </summary>
-        /// <returns>SuggestedFix object</returns>
-        public virtual SuggestedFix DuplicateSuggestedFix()
+        /// <returns>FixCommand object</returns>
+        public virtual FixCommand DuplicateFixCommand()
         {
             return FromJson(this.ToJson());
         }
@@ -151,10 +150,10 @@ namespace HoneybeeSchema
         /// <summary>
         /// Creates a new instance with the same properties.
         /// </summary>
-        /// <returns>SuggestedFix</returns>
-        public SuggestedFix Duplicate()
+        /// <returns>FixCommand</returns>
+        public FixCommand Duplicate()
         {
-            return DuplicateSuggestedFix();
+            return DuplicateFixCommand();
         }
 
 
@@ -166,23 +165,23 @@ namespace HoneybeeSchema
         public override bool Equals(object input)
         {
             input = input is AnyOf anyOf ? anyOf.Obj : input;
-            return this.Equals(input as SuggestedFix);
+            return this.Equals(input as FixCommand);
         }
 
 
         /// <summary>
-        /// Returns true if SuggestedFix instances are equal
+        /// Returns true if FixCommand instances are equal
         /// </summary>
-        /// <param name="input">Instance of SuggestedFix to be compared</param>
+        /// <param name="input">Instance of FixCommand to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(SuggestedFix input)
+        public bool Equals(FixCommand input)
         {
             if (input == null)
                 return false;
             return true && 
-                    Extension.Equals(this.Platform, input.Platform) && 
-                    Extension.AllEquals(this.Commands, input.Commands) && 
-                    Extension.Equals(this.Type, input.Type);
+                    Extension.Equals(this.Name, input.Name) && 
+                    Extension.Equals(this.Type, input.Type) && 
+                    Extension.Equals(this.Inputs, input.Inputs);
         }
 
 
@@ -195,17 +194,17 @@ namespace HoneybeeSchema
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
-                if (this.Platform != null)
-                    hashCode = hashCode * 59 + this.Platform.GetHashCode();
-                if (this.Commands != null)
-                    hashCode = hashCode * 59 + this.Commands.GetHashCode();
+                if (this.Name != null)
+                    hashCode = hashCode * 59 + this.Name.GetHashCode();
                 if (this.Type != null)
                     hashCode = hashCode * 59 + this.Type.GetHashCode();
+                if (this.Inputs != null)
+                    hashCode = hashCode * 59 + this.Inputs.GetHashCode();
                 return hashCode;
             }
         }
 
-        public static bool operator ==(SuggestedFix left, SuggestedFix right)
+        public static bool operator ==(FixCommand left, FixCommand right)
         {
             if (left is null)
             {
@@ -221,7 +220,7 @@ namespace HoneybeeSchema
             return object.Equals(left, right);
         }
 
-        public static bool operator !=(SuggestedFix left, SuggestedFix right)
+        public static bool operator !=(FixCommand left, FixCommand right)
         {
             return !(left == right);
         }

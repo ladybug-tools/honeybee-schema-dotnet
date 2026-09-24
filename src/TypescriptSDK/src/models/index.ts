@@ -96,6 +96,7 @@ export * from "./FCU";
 export * from "./FCUEquipmentType";
 export * from "./FCUwithDOASAbridged";
 export * from "./FCUwithDOASEquipmentType";
+export * from "./FixCommand";
 export * from "./FloorConstructionSet";
 export * from "./FloorConstructionSetAbridged";
 export * from "./FloorModifierSet";
