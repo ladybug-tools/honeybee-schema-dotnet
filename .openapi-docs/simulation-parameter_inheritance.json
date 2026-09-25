@@ -3,7 +3,7 @@
   "servers": [],
   "info": {
     "description": "Documentation for Honeybee simulation-parameter schema",
-    "version": "2.2.1",
+    "version": "2.2.2",
     "title": "Honeybee Simulation Parameter Schema",
     "contact": {
       "name": "Ladybug Tools",

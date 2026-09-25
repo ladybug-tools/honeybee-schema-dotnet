@@ -1,10 +1,24 @@
-﻿import { IsEnum, IsDefined, IsArray, IsInstance, ValidateNested, IsString, IsOptional, Equals, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsDefined, IsEnum, IsArray, IsInstance, ValidateNested, IsOptional, Equals, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { deepTransform } from '../deepTransform';
 import { FixCommand } from "./FixCommand";
 import { Platforms } from "./Platforms";
 
 export class SuggestedFix {
+    @Type(() => String)
+    @IsString()
+    @IsDefined()
+    @Expose({ name: "name" })
+    /** Text string for name of the suggested fix. */
+    name!: string;
+	
+    @Type(() => String)
+    @IsString()
+    @IsDefined()
+    @Expose({ name: "message" })
+    /** Text for the suggested fix with a detailed description of what exactly the suggested fix does. */
+    message!: string;
+	
     @Type(() => String)
     @IsEnum(Platforms)
     @IsDefined()
@@ -39,6 +53,8 @@ export class SuggestedFix {
 
         if (_data) {
             const obj = deepTransform(SuggestedFix, _data);
+            this.name = obj.name;
+            this.message = obj.message;
             this.platform = obj.platform;
             this.commands = obj.commands;
             this.type = obj.type ?? "SuggestedFix";
@@ -63,6 +79,8 @@ export class SuggestedFix {
 
 	toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
+        data["name"] = this.name;
+        data["message"] = this.message;
         data["platform"] = this.platform;
         data["commands"] = this.commands;
         data["type"] = this.type ?? "SuggestedFix";
