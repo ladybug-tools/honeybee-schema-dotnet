@@ -3,7 +3,7 @@
   "servers": [],
   "info": {
     "description": "Honeybee validation-report schema.",
-    "version": "2.2.1",
+    "version": "2.2.2",
     "title": "Honeybee Validation Report Schema",
     "contact": {
       "name": "Ladybug Tools",
@@ -420,6 +420,16 @@
       },
       "SuggestedFix": {
         "properties": {
+          "name": {
+            "description": "Text string for name of the suggested fix.",
+            "title": "Name",
+            "type": "string"
+          },
+          "message": {
+            "description": "Text for the suggested fix with a detailed description of what exactly the suggested fix does.",
+            "title": "Message",
+            "type": "string"
+          },
           "platform": {
             "$ref": "#/components/schemas/Platforms",
             "description": "Text string for the platform on which the command can be run to fix the error."
@@ -442,6 +452,8 @@
           }
         },
         "required": [
+          "name",
+          "message",
           "platform",
           "commands"
         ],

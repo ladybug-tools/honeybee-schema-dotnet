@@ -3,7 +3,7 @@
   "servers": [],
   "info": {
     "description": "Documentation for Honeybee model schema",
-    "version": "2.2.1",
+    "version": "2.2.2",
     "title": "Honeybee Model Schema",
     "contact": {
       "name": "Ladybug Tools",
@@ -8066,7 +8066,7 @@
                 "readOnly": true
               },
               "version": {
-                "default": "2.2.1",
+                "default": "2.2.2",
                 "description": "Text string for the current version of the schema.",
                 "pattern": "^([0-9]+)\\.([0-9]+)\\.([0-9]+)$",
                 "title": "Version",
@@ -16729,6 +16729,16 @@
       },
       "SuggestedFix": {
         "properties": {
+          "name": {
+            "description": "Text string for name of the suggested fix.",
+            "title": "Name",
+            "type": "string"
+          },
+          "message": {
+            "description": "Text for the suggested fix with a detailed description of what exactly the suggested fix does.",
+            "title": "Message",
+            "type": "string"
+          },
           "platform": {
             "$ref": "#/components/schemas/Platforms",
             "description": "Text string for the platform on which the command can be run to fix the error."
@@ -16751,6 +16761,8 @@
           }
         },
         "required": [
+          "name",
+          "message",
           "platform",
           "commands"
         ],

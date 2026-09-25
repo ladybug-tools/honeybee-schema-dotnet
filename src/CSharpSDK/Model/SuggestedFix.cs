@@ -37,13 +37,17 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="SuggestedFix" /> class.
         /// </summary>
+        /// <param name="name">Text string for name of the suggested fix.</param>
+        /// <param name="message">Text for the suggested fix with a detailed description of what exactly the suggested fix does.</param>
         /// <param name="platform">Text string for the platform on which the command can be run to fix the error.</param>
         /// <param name="commands">A list of FixCommand objects with recommendations for how to fix the error. The list can contain a single command or canhave multiple commands to be executed in a sequence.</param>
         public SuggestedFix
         (
-            Platforms platform, List<FixCommand> commands
+            string name, string message, Platforms platform, List<FixCommand> commands
         )
         {
+            this.Name = name ?? throw new System.ArgumentNullException("name is a required property for SuggestedFix and cannot be null");
+            this.Message = message ?? throw new System.ArgumentNullException("message is a required property for SuggestedFix and cannot be null");
             this.Platform = platform;
             this.Commands = commands ?? throw new System.ArgumentNullException("commands is a required property for SuggestedFix and cannot be null");
 
@@ -57,6 +61,28 @@ namespace HoneybeeSchema
 
 	
 	
+        /// <summary>
+        /// Text string for name of the suggested fix.
+        /// </summary>
+        [Summary(@"Text string for name of the suggested fix.")]
+        [Required] // For validation after deserialization
+        // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
+        [DataMember(Name = "name", IsRequired = true)] // For internal Serialization XML/JSON
+        [JsonProperty("name", Required = Required.Always)] // For Newtonsoft.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("name")] // For System.Text.Json
+        public string Name { get; set; }
+
+        /// <summary>
+        /// Text for the suggested fix with a detailed description of what exactly the suggested fix does.
+        /// </summary>
+        [Summary(@"Text for the suggested fix with a detailed description of what exactly the suggested fix does.")]
+        [Required] // For validation after deserialization
+        // [System.Text.Json.Serialization.JsonRequired] // For System.Text.Json 
+        [DataMember(Name = "message", IsRequired = true)] // For internal Serialization XML/JSON
+        [JsonProperty("message", Required = Required.Always)] // For Newtonsoft.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("message")] // For System.Text.Json
+        public string Message { get; set; }
+
         /// <summary>
         /// Text string for the platform on which the command can be run to fix the error.
         /// </summary>
@@ -111,6 +137,8 @@ namespace HoneybeeSchema
             
             var sb = new StringBuilder();
             sb.Append("SuggestedFix:\n");
+            sb.Append("  Name: ").Append(this.Name).Append("\n");
+            sb.Append("  Message: ").Append(this.Message).Append("\n");
             sb.Append("  Platform: ").Append(this.Platform).Append("\n");
             sb.Append("  Commands: ").Append(this.Commands).Append("\n");
             sb.Append("  Type: ").Append(this.Type).Append("\n");
@@ -180,6 +208,8 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
             return true && 
+                    Extension.Equals(this.Name, input.Name) && 
+                    Extension.Equals(this.Message, input.Message) && 
                     Extension.Equals(this.Platform, input.Platform) && 
                     Extension.AllEquals(this.Commands, input.Commands) && 
                     Extension.Equals(this.Type, input.Type);
@@ -195,6 +225,10 @@ namespace HoneybeeSchema
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
+                if (this.Name != null)
+                    hashCode = hashCode * 59 + this.Name.GetHashCode();
+                if (this.Message != null)
+                    hashCode = hashCode * 59 + this.Message.GetHashCode();
                 if (this.Platform != null)
                     hashCode = hashCode * 59 + this.Platform.GetHashCode();
                 if (this.Commands != null)
