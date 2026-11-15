@@ -4,6 +4,10 @@
   "version": "2.201.1",
   "description": "Honeybee Schema's typescript version",
   "author": "Ladybug Tools",
+  "repository":{
+    "type": "git",
+    "url": "https://github.com/ladybug-tools/honeybee-schema-dotnet.git"
+  },
   "type": "module",
   "files": [
     "dist"
