@@ -44,11 +44,15 @@ namespace HoneybeeSchema
         /// <param name="displayName">Display name of the object with no character restrictions.</param>
         /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list).</param>
         /// <param name="vintage">Text for the vintage of the template system. This will be used to set efficiencies for various pieces of equipment within the system. Further information about these defaults can be found in the version of ASHRAE 90.1 corresponding to the selected vintage. Read-only versions of the standard can be found at: https://www.ashrae.org/technical-resources/standards-and-guidelines/read-only-versions-of-ashrae-standards</param>
+        /// <param name="unitVentilators">Boolean to note whether individual zone ventilators are included with the basic heating and cooling system (True) or the system only performs heating and cooling without any ventilation (False). Unlike a DOAS, unit ventilators do not pass the outdoor air through heating or cooling coils to condition it for the space. However, heat recovery effectiveness can be specified, which can temper the air supplied to the zone by the ventilator with exhaust air. All air flow through this ventilator is always balanced for each zone between supply and exhaust and the total flow rate is determined by checking the ventilation and exhaust requirements of the rooms to which the system is assigned.</param>
+        /// <param name="sensibleHeatRecovery">A number between 0 and 1 for the effectiveness of sensible heat recovery within unit ventilators if specified.</param>
+        /// <param name="latentHeatRecovery">A number between 0 and 1 for the effectiveness of latent heat recovery within unit ventilators if specified.</param>
+        /// <param name="ventAvailabilitySchedule">An optional On/Off discrete schedule to specify when unit ventilators shut off (assuming that the unit_ventilators is True). This will not only reduce heating and cooling load by preventing outdoor air from flowing but will also shut off the fans, which can result in more energy savings when spaces served by the ventilators are completely unoccupied. If None, the unit ventilators will be always on.</param>
         /// <param name="equipmentType">Text for the specific type of system equipment from the BaseboardEquipmentType enumeration.</param>
         public Baseboard
         (
-            string identifier, string displayName = default, object userData = default, Vintages vintage = Vintages.ASHRAE_2019, BaseboardEquipmentType equipmentType = BaseboardEquipmentType.ElectricBaseboard
-        ) : base(identifier: identifier, displayName: displayName, userData: userData, vintage: vintage)
+            string identifier, string displayName = default, object userData = default, Vintages vintage = Vintages.ASHRAE_2019, bool unitVentilators = false, double sensibleHeatRecovery = 0D, double latentHeatRecovery = 0D, string ventAvailabilitySchedule = default, BaseboardEquipmentType equipmentType = BaseboardEquipmentType.ElectricBaseboard
+        ) : base(identifier: identifier, displayName: displayName, userData: userData, vintage: vintage, unitVentilators: unitVentilators, sensibleHeatRecovery: sensibleHeatRecovery, latentHeatRecovery: latentHeatRecovery, ventAvailabilitySchedule: ventAvailabilitySchedule)
         {
             this.EquipmentType = equipmentType;
 
@@ -99,6 +103,10 @@ namespace HoneybeeSchema
             sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
             sb.Append("  UserData: ").Append(this.UserData).Append("\n");
             sb.Append("  Vintage: ").Append(this.Vintage).Append("\n");
+            sb.Append("  UnitVentilators: ").Append(this.UnitVentilators).Append("\n");
+            sb.Append("  SensibleHeatRecovery: ").Append(this.SensibleHeatRecovery).Append("\n");
+            sb.Append("  LatentHeatRecovery: ").Append(this.LatentHeatRecovery).Append("\n");
+            sb.Append("  VentAvailabilitySchedule: ").Append(this.VentAvailabilitySchedule).Append("\n");
             sb.Append("  EquipmentType: ").Append(this.EquipmentType).Append("\n");
             return sb.ToString();
         }

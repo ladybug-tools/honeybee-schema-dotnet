@@ -48,6 +48,7 @@ namespace HoneybeeSchema
         /// <param name="serviceHotWater">ServiceHotWater object to describe the hot water usage.</param>
         /// <param name="infiltration">Infiltration object to to describe the outdoor air leakage.</param>
         /// <param name="ventilation">Ventilation object for the minimum outdoor air requirement.</param>
+        /// <param name="exhaust">ExhaustAir object object to describe the exhaust air requirement of the room. If None, no exhaust air requirement will be assumed for the room.</param>
         /// <param name="setpoint">Setpoint object for the temperature setpoints of the Room.</param>
         /// <param name="daylightingControl">An optional DaylightingControl object to dictate the dimming of lights. If None, the lighting will respond only to the schedule and not the daylight conditions within the room.</param>
         /// <param name="windowVentControl">An optional VentilationControl object to dictate the opening of windows. If None, the windows will never open.</param>
@@ -56,7 +57,7 @@ namespace HoneybeeSchema
         /// <param name="processLoads">An optional list of of Process objects for process loads within the room. These can represent kilns, manufacturing equipment, and various industrial processes. They can also be used to represent wood burning fireplaces or certain pieces of equipment to be separated from the other end uses.</param>
         public RoomEnergyPropertiesAbridged
         (
-            string constructionSet = default, string programType = default, string hvac = default, string shw = default, PeopleAbridged people = default, LightingAbridged lighting = default, ElectricEquipmentAbridged electricEquipment = default, GasEquipmentAbridged gasEquipment = default, ServiceHotWaterAbridged serviceHotWater = default, InfiltrationAbridged infiltration = default, VentilationAbridged ventilation = default, SetpointAbridged setpoint = default, DaylightingControl daylightingControl = default, VentilationControlAbridged windowVentControl = default, List<VentilationFan> fans = default, List<InternalMassAbridged> internalMasses = default, List<ProcessAbridged> processLoads = default
+            string constructionSet = default, string programType = default, string hvac = default, string shw = default, PeopleAbridged people = default, LightingAbridged lighting = default, ElectricEquipmentAbridged electricEquipment = default, GasEquipmentAbridged gasEquipment = default, ServiceHotWaterAbridged serviceHotWater = default, InfiltrationAbridged infiltration = default, VentilationAbridged ventilation = default, ExhaustAirAbridged exhaust = default, SetpointAbridged setpoint = default, DaylightingControl daylightingControl = default, VentilationControlAbridged windowVentControl = default, List<VentilationFan> fans = default, List<InternalMassAbridged> internalMasses = default, List<ProcessAbridged> processLoads = default
         ) : base()
         {
             this.ConstructionSet = constructionSet;
@@ -70,6 +71,7 @@ namespace HoneybeeSchema
             this.ServiceHotWater = serviceHotWater;
             this.Infiltration = infiltration;
             this.Ventilation = ventilation;
+            this.Exhaust = exhaust;
             this.Setpoint = setpoint;
             this.DaylightingControl = daylightingControl;
             this.WindowVentControl = windowVentControl;
@@ -206,6 +208,16 @@ namespace HoneybeeSchema
         public VentilationAbridged Ventilation { get; set; }
 
         /// <summary>
+        /// ExhaustAir object object to describe the exhaust air requirement of the room. If None, no exhaust air requirement will be assumed for the room.
+        /// </summary>
+        [Summary(@"ExhaustAir object object to describe the exhaust air requirement of the room. If None, no exhaust air requirement will be assumed for the room.")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "exhaust")] // For internal Serialization XML/JSON
+        [JsonProperty("exhaust", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("exhaust")] // For System.Text.Json
+        public ExhaustAirAbridged Exhaust { get; set; }
+
+        /// <summary>
         /// Setpoint object for the temperature setpoints of the Room.
         /// </summary>
         [Summary(@"Setpoint object for the temperature setpoints of the Room.")]
@@ -299,6 +311,7 @@ namespace HoneybeeSchema
             sb.Append("  ServiceHotWater: ").Append(this.ServiceHotWater).Append("\n");
             sb.Append("  Infiltration: ").Append(this.Infiltration).Append("\n");
             sb.Append("  Ventilation: ").Append(this.Ventilation).Append("\n");
+            sb.Append("  Exhaust: ").Append(this.Exhaust).Append("\n");
             sb.Append("  Setpoint: ").Append(this.Setpoint).Append("\n");
             sb.Append("  DaylightingControl: ").Append(this.DaylightingControl).Append("\n");
             sb.Append("  WindowVentControl: ").Append(this.WindowVentControl).Append("\n");
@@ -377,6 +390,7 @@ namespace HoneybeeSchema
                     Extension.Equals(this.ServiceHotWater, input.ServiceHotWater) && 
                     Extension.Equals(this.Infiltration, input.Infiltration) && 
                     Extension.Equals(this.Ventilation, input.Ventilation) && 
+                    Extension.Equals(this.Exhaust, input.Exhaust) && 
                     Extension.Equals(this.Setpoint, input.Setpoint) && 
                     Extension.Equals(this.DaylightingControl, input.DaylightingControl) && 
                     Extension.Equals(this.WindowVentControl, input.WindowVentControl) && 
@@ -417,6 +431,8 @@ namespace HoneybeeSchema
                     hashCode = hashCode * 59 + this.Infiltration.GetHashCode();
                 if (this.Ventilation != null)
                     hashCode = hashCode * 59 + this.Ventilation.GetHashCode();
+                if (this.Exhaust != null)
+                    hashCode = hashCode * 59 + this.Exhaust.GetHashCode();
                 if (this.Setpoint != null)
                     hashCode = hashCode * 59 + this.Setpoint.GetHashCode();
                 if (this.DaylightingControl != null)

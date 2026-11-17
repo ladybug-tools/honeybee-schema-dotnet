@@ -1,10 +1,44 @@
-﻿import { IsString, IsOptional, Matches, IsEnum, IsDefined, MinLength, MaxLength, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsBoolean, IsOptional, IsNumber, Min, Max, IsString, MinLength, MaxLength, Matches, IsEnum, IsDefined, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { deepTransform } from '../deepTransform';
 import { Vintages } from "./Vintages";
 
-/** Base class for all heating/cooling systems without any ventilation.\n\nThese systems are only designed to satisfy heating + cooling demand and they\ncannot meet any minimum ventilation requirements.\n\nAs such, these systems tend to be used in residential or storage settings where\nmeeting minimum ventilation requirements may not be required or the density\nof occupancy is so low that infiltration is enough to meet fresh air demand. */
+/** Base class for all heating/cooling systems without ventilation.\n\nThese systems are only designed to satisfy heating + cooling demand and,\nby default, they cannot meet minimum ventilation requirements. However,\noptional unit ventilators can be included, which provide ventilation through\na balanced intake and exhaust ventilation on a zone-by-zone basis. Unlike a\nDOAS, unit ventilators do not pass the outdoor air through heating or cooling\ncoils to condition it for the space. However, heat recovery effectiveness\ncan be specified, which can temper the air supplied to the zone with exhaust air.\n\nThese systems tend to be used in residential or hospitality settings where\nmeeting minimum ventilation requirements may not be required as the density\nof occupancy is so low that infiltration is enough to meet fresh air needs.\nOr occupancy is so variable that supplying ventilation to each room with\nseparate unit ventilators is a worthwhile approach.\n\nThese systems are also common in warehouse or storage settings where ventilation\nmay not be necessary. */
 export class _HeatCoolBase {
+    @Type(() => Boolean)
+    @IsBoolean()
+    @IsOptional()
+    @Expose({ name: "unit_ventilators" })
+    /** Boolean to note whether individual zone ventilators are included with the basic heating and cooling system (True) or the system only performs heating and cooling without any ventilation (False). Unlike a DOAS, unit ventilators do not pass the outdoor air through heating or cooling coils to condition it for the space. However, heat recovery effectiveness can be specified, which can temper the air supplied to the zone by the ventilator with exhaust air. All air flow through this ventilator is always balanced for each zone between supply and exhaust and the total flow rate is determined by checking the ventilation and exhaust requirements of the rooms to which the system is assigned. */
+    unitVentilators: boolean = false;
+	
+    @Type(() => Number)
+    @IsNumber()
+    @IsOptional()
+    @Min(0)
+    @Max(1)
+    @Expose({ name: "sensible_heat_recovery" })
+    /** A number between 0 and 1 for the effectiveness of sensible heat recovery within unit ventilators if specified. */
+    sensibleHeatRecovery: number = 0;
+	
+    @Type(() => Number)
+    @IsNumber()
+    @IsOptional()
+    @Min(0)
+    @Max(1)
+    @Expose({ name: "latent_heat_recovery" })
+    /** A number between 0 and 1 for the effectiveness of latent heat recovery within unit ventilators if specified. */
+    latentHeatRecovery: number = 0;
+	
+    @Type(() => String)
+    @IsString()
+    @IsOptional()
+    @MinLength(1)
+    @MaxLength(100)
+    @Expose({ name: "vent_availability_schedule" })
+    /** An optional On/Off discrete schedule to specify when unit ventilators shut off (assuming that the unit_ventilators is True). This will not only reduce heating and cooling load by preventing outdoor air from flowing but will also shut off the fans, which can result in more energy savings when spaces served by the ventilators are completely unoccupied. If None, the unit ventilators will be always on. */
+    ventAvailabilitySchedule?: string;
+	
     @Type(() => String)
     @IsString()
     @IsOptional()
@@ -44,6 +78,9 @@ export class _HeatCoolBase {
 	
 
     constructor() {
+        this.unitVentilators = false;
+        this.sensibleHeatRecovery = 0;
+        this.latentHeatRecovery = 0;
         this.type = "_HeatCoolBase";
         this.vintage = Vintages.ASHRAE_2019;
     }
@@ -53,6 +90,10 @@ export class _HeatCoolBase {
 
         if (_data) {
             const obj = deepTransform(_HeatCoolBase, _data);
+            this.unitVentilators = obj.unitVentilators ?? false;
+            this.sensibleHeatRecovery = obj.sensibleHeatRecovery ?? 0;
+            this.latentHeatRecovery = obj.latentHeatRecovery ?? 0;
+            this.ventAvailabilitySchedule = obj.ventAvailabilitySchedule;
             this.type = obj.type ?? "_HeatCoolBase";
             this.vintage = obj.vintage ?? Vintages.ASHRAE_2019;
             this.userData = obj.userData;
@@ -79,6 +120,10 @@ export class _HeatCoolBase {
 
 	toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
+        data["unit_ventilators"] = this.unitVentilators ?? false;
+        data["sensible_heat_recovery"] = this.sensibleHeatRecovery ?? 0;
+        data["latent_heat_recovery"] = this.latentHeatRecovery ?? 0;
+        data["vent_availability_schedule"] = this.ventAvailabilitySchedule;
         data["type"] = this.type ?? "_HeatCoolBase";
         data["vintage"] = this.vintage ?? Vintages.ASHRAE_2019;
         data["user_data"] = this.userData;

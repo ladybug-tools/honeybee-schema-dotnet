@@ -2,6 +2,7 @@
 import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { deepTransform } from '../deepTransform';
 import { ElectricEquipmentAbridged } from "./ElectricEquipmentAbridged";
+import { ExhaustAirAbridged } from "./ExhaustAirAbridged";
 import { GasEquipmentAbridged } from "./GasEquipmentAbridged";
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { InfiltrationAbridged } from "./InfiltrationAbridged";
@@ -73,8 +74,16 @@ export class ProgramTypeAbridged extends IDdEnergyBaseModel {
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "ventilation" })
-    /** Ventilation to describe the minimum outdoor air requirement of the program. If None, no ventilation requirement will be assumed. */
+    /** Ventilation object to describe the minimum outdoor air requirement of the program. If None, no ventilation requirement will be assumed. */
     ventilation?: VentilationAbridged;
+	
+    @Type(() => ExhaustAirAbridged)
+    @IsInstance(ExhaustAirAbridged)
+    @ValidateNested()
+    @IsOptional()
+    @Expose({ name: "exhaust" })
+    /** ExhaustAir object to describe the exhaust air requirement of the program. If None, no exhaust air requirement will be assumed for the program. */
+    exhaust?: ExhaustAirAbridged;
 	
     @Type(() => SetpointAbridged)
     @IsInstance(SetpointAbridged)
@@ -103,6 +112,7 @@ export class ProgramTypeAbridged extends IDdEnergyBaseModel {
             this.serviceHotWater = obj.serviceHotWater;
             this.infiltration = obj.infiltration;
             this.ventilation = obj.ventilation;
+            this.exhaust = obj.exhaust;
             this.setpoint = obj.setpoint;
             this.userData = obj.userData;
             this.identifier = obj.identifier;
@@ -136,6 +146,7 @@ export class ProgramTypeAbridged extends IDdEnergyBaseModel {
         data["service_hot_water"] = this.serviceHotWater;
         data["infiltration"] = this.infiltration;
         data["ventilation"] = this.ventilation;
+        data["exhaust"] = this.exhaust;
         data["setpoint"] = this.setpoint;
         data = super.toJSON(data);
         return instanceToPlain(data, { exposeUnsetFields: false });

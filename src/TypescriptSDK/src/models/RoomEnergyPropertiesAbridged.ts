@@ -4,6 +4,7 @@ import { deepTransform } from '../deepTransform';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
 import { DaylightingControl } from "./DaylightingControl";
 import { ElectricEquipmentAbridged } from "./ElectricEquipmentAbridged";
+import { ExhaustAirAbridged } from "./ExhaustAirAbridged";
 import { GasEquipmentAbridged } from "./GasEquipmentAbridged";
 import { InfiltrationAbridged } from "./InfiltrationAbridged";
 import { InternalMassAbridged } from "./InternalMassAbridged";
@@ -117,6 +118,14 @@ export class RoomEnergyPropertiesAbridged extends _OpenAPIGenBaseModel {
     /** Ventilation object for the minimum outdoor air requirement. */
     ventilation?: VentilationAbridged;
 	
+    @Type(() => ExhaustAirAbridged)
+    @IsInstance(ExhaustAirAbridged)
+    @ValidateNested()
+    @IsOptional()
+    @Expose({ name: "exhaust" })
+    /** ExhaustAir object object to describe the exhaust air requirement of the room. If None, no exhaust air requirement will be assumed for the room. */
+    exhaust?: ExhaustAirAbridged;
+	
     @Type(() => SetpointAbridged)
     @IsInstance(SetpointAbridged)
     @ValidateNested()
@@ -191,6 +200,7 @@ export class RoomEnergyPropertiesAbridged extends _OpenAPIGenBaseModel {
             this.serviceHotWater = obj.serviceHotWater;
             this.infiltration = obj.infiltration;
             this.ventilation = obj.ventilation;
+            this.exhaust = obj.exhaust;
             this.setpoint = obj.setpoint;
             this.daylightingControl = obj.daylightingControl;
             this.windowVentControl = obj.windowVentControl;
@@ -230,6 +240,7 @@ export class RoomEnergyPropertiesAbridged extends _OpenAPIGenBaseModel {
         data["service_hot_water"] = this.serviceHotWater;
         data["infiltration"] = this.infiltration;
         data["ventilation"] = this.ventilation;
+        data["exhaust"] = this.exhaust;
         data["setpoint"] = this.setpoint;
         data["daylighting_control"] = this.daylightingControl;
         data["window_vent_control"] = this.windowVentControl;

@@ -33,13 +33,6 @@ export class RadiantwithDOASAbridged extends _DOASBase {
     @Type(() => Number)
     @IsNumber()
     @IsOptional()
-    @Expose({ name: "minimum_operation_time" })
-    /** A number for the minimum number of hours of operation for the radiant system before it shuts off. */
-    minimumOperationTime: number = 1;
-	
-    @Type(() => Number)
-    @IsNumber()
-    @IsOptional()
     @Expose({ name: "switch_over_time" })
     /** A number for the minimum number of hours for when the system can switch between heating and cooling. */
     switchOverTime: number = 24;
@@ -50,7 +43,6 @@ export class RadiantwithDOASAbridged extends _DOASBase {
         this.type = "RadiantwithDOASAbridged";
         this.equipmentType = RadiantwithDOASEquipmentType.DOAS_Radiant_Chiller_Boiler;
         this.radiantFaceType = RadiantFaceTypes.Floor;
-        this.minimumOperationTime = 1;
         this.switchOverTime = 24;
     }
 
@@ -62,7 +54,6 @@ export class RadiantwithDOASAbridged extends _DOASBase {
             this.type = obj.type ?? "RadiantwithDOASAbridged";
             this.equipmentType = obj.equipmentType ?? RadiantwithDOASEquipmentType.DOAS_Radiant_Chiller_Boiler;
             this.radiantFaceType = obj.radiantFaceType ?? RadiantFaceTypes.Floor;
-            this.minimumOperationTime = obj.minimumOperationTime ?? 1;
             this.switchOverTime = obj.switchOverTime ?? 24;
             this.sensibleHeatRecovery = obj.sensibleHeatRecovery ?? 0;
             this.latentHeatRecovery = obj.latentHeatRecovery ?? 0;
@@ -96,7 +87,6 @@ export class RadiantwithDOASAbridged extends _DOASBase {
         data["type"] = this.type ?? "RadiantwithDOASAbridged";
         data["equipment_type"] = this.equipmentType ?? RadiantwithDOASEquipmentType.DOAS_Radiant_Chiller_Boiler;
         data["radiant_face_type"] = this.radiantFaceType ?? RadiantFaceTypes.Floor;
-        data["minimum_operation_time"] = this.minimumOperationTime ?? 1;
         data["switch_over_time"] = this.switchOverTime ?? 24;
         data = super.toJSON(data);
         return instanceToPlain(data, { exposeUnsetFields: false });

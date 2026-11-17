@@ -36,6 +36,10 @@ export class Baseboard extends _HeatCoolBase {
             const obj = deepTransform(Baseboard, _data);
             this.type = obj.type ?? "Baseboard";
             this.equipmentType = obj.equipmentType ?? BaseboardEquipmentType.ElectricBaseboard;
+            this.unitVentilators = obj.unitVentilators ?? false;
+            this.sensibleHeatRecovery = obj.sensibleHeatRecovery ?? 0;
+            this.latentHeatRecovery = obj.latentHeatRecovery ?? 0;
+            this.ventAvailabilitySchedule = obj.ventAvailabilitySchedule;
             this.vintage = obj.vintage ?? Vintages.ASHRAE_2019;
             this.userData = obj.userData;
             this.identifier = obj.identifier;

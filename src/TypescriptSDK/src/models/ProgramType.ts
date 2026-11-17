@@ -2,6 +2,7 @@
 import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { deepTransform } from '../deepTransform';
 import { ElectricEquipment } from "./ElectricEquipment";
+import { ExhaustAir } from "./ExhaustAir";
 import { GasEquipment } from "./GasEquipment";
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { Infiltration } from "./Infiltration";
@@ -76,6 +77,14 @@ export class ProgramType extends IDdEnergyBaseModel {
     /** Ventilation to describe the minimum outdoor air requirement of the program. If None, no ventilation requirement will be assumed. */
     ventilation?: Ventilation;
 	
+    @Type(() => ExhaustAir)
+    @IsInstance(ExhaustAir)
+    @ValidateNested()
+    @IsOptional()
+    @Expose({ name: "exhaust" })
+    /** ExhaustAir to describe the exhaust air requirement of the program. If None, no exhaust air requirement will be assumed for the program. */
+    exhaust?: ExhaustAir;
+	
     @Type(() => Setpoint)
     @IsInstance(Setpoint)
     @ValidateNested()
@@ -103,6 +112,7 @@ export class ProgramType extends IDdEnergyBaseModel {
             this.serviceHotWater = obj.serviceHotWater;
             this.infiltration = obj.infiltration;
             this.ventilation = obj.ventilation;
+            this.exhaust = obj.exhaust;
             this.setpoint = obj.setpoint;
             this.userData = obj.userData;
             this.identifier = obj.identifier;
@@ -136,6 +146,7 @@ export class ProgramType extends IDdEnergyBaseModel {
         data["service_hot_water"] = this.serviceHotWater;
         data["infiltration"] = this.infiltration;
         data["ventilation"] = this.ventilation;
+        data["exhaust"] = this.exhaust;
         data["setpoint"] = this.setpoint;
         data = super.toJSON(data);
         return instanceToPlain(data, { exposeUnsetFields: false });

@@ -16,6 +16,10 @@ namespace HoneybeeSchema
 	
 	public partial class EquipmentBase: HoneybeeSchema.Energy.ILoad {}
 	
+	public partial class ExhaustAir: HoneybeeSchema.Energy.ILoad {}
+	
+	public partial class ExhaustAirAbridged: HoneybeeSchema.Energy.ILoad {}
+	
 	public partial class GasEquipment: HoneybeeSchema.Energy.ILoad {}
 	
 	public partial class GasEquipmentAbridged: HoneybeeSchema.Energy.ILoad {}

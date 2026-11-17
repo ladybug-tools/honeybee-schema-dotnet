@@ -1,4 +1,4 @@
-﻿import { IsString, IsOptional, Equals, IsEnum, IsDefined, Matches, MinLength, MaxLength, validate, ValidationError as TsValidationError } from 'class-validator';
+﻿import { IsString, IsOptional, Equals, IsEnum, IsNumber, Min, Max, IsDefined, Matches, MinLength, MaxLength, validate, ValidationError as TsValidationError } from 'class-validator';
 import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { deepTransform } from '../deepTransform';
 import { PTACEquipmentType } from "./PTACEquipmentType";
@@ -20,6 +20,24 @@ export class PTAC {
     @Expose({ name: "equipment_type" })
     /** Text for the specific type of system equipment from the PTACEquipmentType enumeration. */
     equipmentType: PTACEquipmentType = PTACEquipmentType.PTAC_ElectricBaseboard;
+	
+    @Type(() => Number)
+    @IsNumber()
+    @IsOptional()
+    @Min(0)
+    @Max(1)
+    @Expose({ name: "sensible_heat_recovery" })
+    /** A number between 0 and 1 for the effectiveness of sensible heat recovery within the system. When this is not zero, heat recovery is modeled using an ERV connected to the PTAC. */
+    sensibleHeatRecovery: number = 0;
+	
+    @Type(() => Number)
+    @IsNumber()
+    @IsOptional()
+    @Min(0)
+    @Max(1)
+    @Expose({ name: "latent_heat_recovery" })
+    /** A number between 0 and 1 for the effectiveness of latent heat recovery within the system. When this is not zero, heat recovery is modeled using an ERV connected to the PTAC. */
+    latentHeatRecovery: number = 0;
 	
     @Type(() => String)
     @IsEnum(Vintages)
@@ -54,6 +72,8 @@ export class PTAC {
     constructor() {
         this.type = "PTAC";
         this.equipmentType = PTACEquipmentType.PTAC_ElectricBaseboard;
+        this.sensibleHeatRecovery = 0;
+        this.latentHeatRecovery = 0;
         this.vintage = Vintages.ASHRAE_2019;
     }
 
@@ -64,6 +84,8 @@ export class PTAC {
             const obj = deepTransform(PTAC, _data);
             this.type = obj.type ?? "PTAC";
             this.equipmentType = obj.equipmentType ?? PTACEquipmentType.PTAC_ElectricBaseboard;
+            this.sensibleHeatRecovery = obj.sensibleHeatRecovery ?? 0;
+            this.latentHeatRecovery = obj.latentHeatRecovery ?? 0;
             this.vintage = obj.vintage ?? Vintages.ASHRAE_2019;
             this.userData = obj.userData;
             this.identifier = obj.identifier;
@@ -91,6 +113,8 @@ export class PTAC {
         data = typeof data === 'object' ? data : {};
         data["type"] = this.type ?? "PTAC";
         data["equipment_type"] = this.equipmentType ?? PTACEquipmentType.PTAC_ElectricBaseboard;
+        data["sensible_heat_recovery"] = this.sensibleHeatRecovery ?? 0;
+        data["latent_heat_recovery"] = this.latentHeatRecovery ?? 0;
         data["vintage"] = this.vintage ?? Vintages.ASHRAE_2019;
         data["user_data"] = this.userData;
         data["identifier"] = this.identifier;

@@ -3,7 +3,7 @@
   "servers": [],
   "info": {
     "description": "Documentation for Honeybee simulation-parameter schema",
-    "version": "2.2.2",
+    "version": "2.4.1",
     "title": "Honeybee Simulation Parameter Schema",
     "contact": {
       "name": "Ladybug Tools",
@@ -33,6 +33,11 @@
       "name": "ashraetau_model",
       "x-displayName": "ASHRAETau",
       "description": "<SchemaDefinition schemaRef=\"#/components/schemas/ASHRAETau\" />\n"
+    },
+    {
+      "name": "autocalculate_model",
+      "x-displayName": "Autocalculate",
+      "description": "<SchemaDefinition schemaRef=\"#/components/schemas/Autocalculate\" />\n"
     },
     {
       "name": "calculationmethod_model",
@@ -93,6 +98,11 @@
       "name": "humiditytypes_model",
       "x-displayName": "HumidityTypes",
       "description": "<SchemaDefinition schemaRef=\"#/components/schemas/HumidityTypes\" />\n"
+    },
+    {
+      "name": "location_model",
+      "x-displayName": "Location",
+      "description": "<SchemaDefinition schemaRef=\"#/components/schemas/Location\" />\n"
     },
     {
       "name": "reportingfrequency_model",
@@ -163,6 +173,7 @@
         "_skycondition_model",
         "ashraeclearsky_model",
         "ashraetau_model",
+        "autocalculate_model",
         "calculationmethod_model",
         "calculationupdatemethod_model",
         "climatezones_model",
@@ -175,6 +186,7 @@
         "efficiencystandards_model",
         "humiditycondition_model",
         "humiditytypes_model",
+        "location_model",
         "reportingfrequency_model",
         "runperiod_model",
         "shadowcalculation_model",
@@ -268,6 +280,30 @@
         ],
         "description": "Used to specify sky conditions on a design day.",
         "title": "ASHRAETau",
+        "discriminator": {
+          "propertyName": "type"
+        }
+      },
+      "Autocalculate": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "const": "Autocalculate",
+                "default": "Autocalculate",
+                "title": "Type",
+                "type": "string",
+                "readOnly": true
+              }
+            },
+            "additionalProperties": false
+          }
+        ],
+        "title": "Autocalculate",
         "discriminator": {
           "propertyName": "type"
         }
@@ -616,6 +652,86 @@
         ],
         "title": "HumidityTypes",
         "type": "string"
+      },
+      "Location": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/_OpenAPIGenBaseModel"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "const": "Location",
+                "default": "Location",
+                "title": "Type",
+                "type": "string",
+                "readOnly": true
+              },
+              "city": {
+                "default": "-",
+                "description": "Name of the city as a string.",
+                "title": "City",
+                "type": "string"
+              },
+              "latitude": {
+                "default": 0,
+                "description": "Location latitude between -90 and 90 (Default: 0).",
+                "title": "Latitude",
+                "type": "number",
+                "format": "double"
+              },
+              "longitude": {
+                "default": 0,
+                "description": "Location longitude between -180 (west) and 180 (east) (Default: 0).",
+                "title": "Longitude",
+                "type": "number",
+                "format": "double"
+              },
+              "time_zone": {
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schemas/Autocalculate"
+                  },
+                  {
+                    "maximum": 14,
+                    "minimum": -12,
+                    "type": "integer"
+                  }
+                ],
+                "default": {
+                  "type": "Autocalculate"
+                },
+                "description": "Time zone between -12 hours (west) and +14 hours (east). If None, the time zone will be an estimated integer value derived from the longitude in accordance with solar time.",
+                "title": "Time Zone"
+              },
+              "elevation": {
+                "default": 0,
+                "description": "A number for elevation of the location in meters. (Default: 0).",
+                "title": "Elevation",
+                "type": "number",
+                "format": "double"
+              },
+              "station_id": {
+                "default": null,
+                "description": "ID of the location if the location is representing a weather station.",
+                "title": "Station Id",
+                "type": "string"
+              },
+              "source": {
+                "default": null,
+                "description": "Source of data (e.g. TMY, TMY3).",
+                "title": "Source",
+                "type": "string"
+              }
+            }
+          }
+        ],
+        "description": "A Ladybug Location.",
+        "title": "Location",
+        "discriminator": {
+          "propertyName": "type"
+        }
       },
       "ReportingFrequency": {
         "enum": [
@@ -1005,6 +1121,18 @@
                 "$ref": "#/components/schemas/TerrianTypes",
                 "default": "City",
                 "description": "Text for the terrain in which the model sits. This is used to determine the wind profile over the height of the rooms."
+              },
+              "location": {
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schemas/Location"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "description": "An optional location object to describe the exact latitude, longitude, time zone and elevation of the project site. If None the location specified within the EPW file will be used for the simulation."
               }
             },
             "additionalProperties": false
