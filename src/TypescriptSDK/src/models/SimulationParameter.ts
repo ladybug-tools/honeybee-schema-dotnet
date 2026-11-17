@@ -2,6 +2,7 @@
 import { Type, instanceToPlain, Expose, Transform } from 'class-transformer';
 import { deepTransform } from '../deepTransform';
 import { _OpenAPIGenBaseModel } from "./_OpenAPIGenBaseModel";
+import { Location } from "./Location";
 import { RunPeriod } from "./RunPeriod";
 import { ShadowCalculation } from "./ShadowCalculation";
 import { SimulationControl } from "./SimulationControl";
@@ -84,6 +85,14 @@ export class SimulationParameter extends _OpenAPIGenBaseModel {
     /** Text for the terrain in which the model sits. This is used to determine the wind profile over the height of the rooms. */
     terrainType: TerrianTypes = TerrianTypes.City;
 	
+    @Type(() => Location)
+    @IsInstance(Location)
+    @ValidateNested()
+    @IsOptional()
+    @Expose({ name: "location" })
+    /** An optional location object to describe the exact latitude, longitude, time zone and elevation of the project site. If None the location specified within the EPW file will be used for the simulation. */
+    location?: Location;
+	
 
     constructor() {
         super();
@@ -107,6 +116,7 @@ export class SimulationParameter extends _OpenAPIGenBaseModel {
             this.sizingParameter = obj.sizingParameter;
             this.northAngle = obj.northAngle ?? 0;
             this.terrainType = obj.terrainType ?? TerrianTypes.City;
+            this.location = obj.location;
         }
     }
 
@@ -137,6 +147,7 @@ export class SimulationParameter extends _OpenAPIGenBaseModel {
         data["sizing_parameter"] = this.sizingParameter;
         data["north_angle"] = this.northAngle ?? 0;
         data["terrain_type"] = this.terrainType ?? TerrianTypes.City;
+        data["location"] = this.location;
         data = super.toJSON(data);
         return instanceToPlain(data, { exposeUnsetFields: false });
     }

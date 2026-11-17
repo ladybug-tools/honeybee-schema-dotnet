@@ -47,10 +47,11 @@ namespace HoneybeeSchema
         /// <param name="serviceHotWater">ServiceHotWater object to describe the usage of hot water within the program. If None, no hot water will be assumed.</param>
         /// <param name="infiltration">Infiltration to describe the outdoor air leakage of the program. If None, no infiltration will be assumed for the program.</param>
         /// <param name="ventilation">Ventilation to describe the minimum outdoor air requirement of the program. If None, no ventilation requirement will be assumed.</param>
+        /// <param name="exhaust">ExhaustAir to describe the exhaust air requirement of the program. If None, no exhaust air requirement will be assumed for the program.</param>
         /// <param name="setpoint">Setpoint object to describe the temperature and humidity setpoints of the program.  If None, the ProgramType cannot be assigned to a Room that is conditioned.</param>
         public ProgramType
         (
-            string identifier, string displayName = default, object userData = default, People people = default, Lighting lighting = default, ElectricEquipment electricEquipment = default, GasEquipment gasEquipment = default, ServiceHotWater serviceHotWater = default, Infiltration infiltration = default, Ventilation ventilation = default, Setpoint setpoint = default
+            string identifier, string displayName = default, object userData = default, People people = default, Lighting lighting = default, ElectricEquipment electricEquipment = default, GasEquipment gasEquipment = default, ServiceHotWater serviceHotWater = default, Infiltration infiltration = default, Ventilation ventilation = default, ExhaustAir exhaust = default, Setpoint setpoint = default
         ) : base(identifier: identifier, displayName: displayName, userData: userData)
         {
             this.People = people;
@@ -60,6 +61,7 @@ namespace HoneybeeSchema
             this.ServiceHotWater = serviceHotWater;
             this.Infiltration = infiltration;
             this.Ventilation = ventilation;
+            this.Exhaust = exhaust;
             this.Setpoint = setpoint;
 
             // Set readonly properties with defaultValue
@@ -143,6 +145,16 @@ namespace HoneybeeSchema
         public Ventilation Ventilation { get; set; }
 
         /// <summary>
+        /// ExhaustAir to describe the exhaust air requirement of the program. If None, no exhaust air requirement will be assumed for the program.
+        /// </summary>
+        [Summary(@"ExhaustAir to describe the exhaust air requirement of the program. If None, no exhaust air requirement will be assumed for the program.")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "exhaust")] // For internal Serialization XML/JSON
+        [JsonProperty("exhaust", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("exhaust")] // For System.Text.Json
+        public ExhaustAir Exhaust { get; set; }
+
+        /// <summary>
         /// Setpoint object to describe the temperature and humidity setpoints of the program.  If None, the ProgramType cannot be assigned to a Room that is conditioned.
         /// </summary>
         [Summary(@"Setpoint object to describe the temperature and humidity setpoints of the program.  If None, the ProgramType cannot be assigned to a Room that is conditioned.")]
@@ -185,6 +197,7 @@ namespace HoneybeeSchema
             sb.Append("  ServiceHotWater: ").Append(this.ServiceHotWater).Append("\n");
             sb.Append("  Infiltration: ").Append(this.Infiltration).Append("\n");
             sb.Append("  Ventilation: ").Append(this.Ventilation).Append("\n");
+            sb.Append("  Exhaust: ").Append(this.Exhaust).Append("\n");
             sb.Append("  Setpoint: ").Append(this.Setpoint).Append("\n");
             return sb.ToString();
         }
@@ -254,6 +267,7 @@ namespace HoneybeeSchema
                     Extension.Equals(this.ServiceHotWater, input.ServiceHotWater) && 
                     Extension.Equals(this.Infiltration, input.Infiltration) && 
                     Extension.Equals(this.Ventilation, input.Ventilation) && 
+                    Extension.Equals(this.Exhaust, input.Exhaust) && 
                     Extension.Equals(this.Setpoint, input.Setpoint);
         }
 
@@ -281,6 +295,8 @@ namespace HoneybeeSchema
                     hashCode = hashCode * 59 + this.Infiltration.GetHashCode();
                 if (this.Ventilation != null)
                     hashCode = hashCode * 59 + this.Ventilation.GetHashCode();
+                if (this.Exhaust != null)
+                    hashCode = hashCode * 59 + this.Exhaust.GetHashCode();
                 if (this.Setpoint != null)
                     hashCode = hashCode * 59 + this.Setpoint.GetHashCode();
                 return hashCode;

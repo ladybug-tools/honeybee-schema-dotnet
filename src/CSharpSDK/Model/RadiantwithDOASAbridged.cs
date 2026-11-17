@@ -50,16 +50,14 @@ namespace HoneybeeSchema
         /// <param name="doasAvailabilitySchedule">An optional On/Off discrete schedule to set when the dedicated outdoor air system (DOAS) shuts off. This will not only prevent any outdoor air from flowing thorough the system but will also shut off the fans, which can result in more energy savings when spaces served by the DOAS are completely unoccupied. If None, the DOAS will be always on.</param>
         /// <param name="equipmentType">Text for the specific type of system equipment from the RadiantwithDOASEquipmentType enumeration.</param>
         /// <param name="radiantFaceType">Text to indicate which faces are thermally active by default. Note that this property has no effect when the rooms to which the HVAC system is assigned have constructions with internal source materials. In this case, those constructions will dictate the thermally active surfaces.</param>
-        /// <param name="minimumOperationTime">A number for the minimum number of hours of operation for the radiant system before it shuts off.</param>
         /// <param name="switchOverTime">A number for the minimum number of hours for when the system can switch between heating and cooling.</param>
         public RadiantwithDOASAbridged
         (
-            string identifier, string displayName = default, object userData = default, Vintages vintage = Vintages.ASHRAE_2019, double sensibleHeatRecovery = 0D, double latentHeatRecovery = 0D, bool demandControlledVentilation = false, string doasAvailabilitySchedule = default, RadiantwithDOASEquipmentType equipmentType = RadiantwithDOASEquipmentType.DOAS_Radiant_Chiller_Boiler, RadiantFaceTypes radiantFaceType = RadiantFaceTypes.Floor, double minimumOperationTime = 1D, double switchOverTime = 24D
+            string identifier, string displayName = default, object userData = default, Vintages vintage = Vintages.ASHRAE_2019, double sensibleHeatRecovery = 0D, double latentHeatRecovery = 0D, bool demandControlledVentilation = false, string doasAvailabilitySchedule = default, RadiantwithDOASEquipmentType equipmentType = RadiantwithDOASEquipmentType.DOAS_Radiant_Chiller_Boiler, RadiantFaceTypes radiantFaceType = RadiantFaceTypes.Floor, double switchOverTime = 24D
         ) : base(identifier: identifier, displayName: displayName, userData: userData, vintage: vintage, sensibleHeatRecovery: sensibleHeatRecovery, latentHeatRecovery: latentHeatRecovery, demandControlledVentilation: demandControlledVentilation, doasAvailabilitySchedule: doasAvailabilitySchedule)
         {
             this.EquipmentType = equipmentType;
             this.RadiantFaceType = radiantFaceType;
-            this.MinimumOperationTime = minimumOperationTime;
             this.SwitchOverTime = switchOverTime;
 
             // Set readonly properties with defaultValue
@@ -91,17 +89,6 @@ namespace HoneybeeSchema
         [JsonProperty("radiant_face_type", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("radiant_face_type")] // For System.Text.Json
         public RadiantFaceTypes RadiantFaceType { get; set; } = RadiantFaceTypes.Floor;
-
-        /// <summary>
-        /// A number for the minimum number of hours of operation for the radiant system before it shuts off.
-        /// </summary>
-        [Summary(@"A number for the minimum number of hours of operation for the radiant system before it shuts off.")]
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
-        [Range(0, double.MaxValue)]
-        [DataMember(Name = "minimum_operation_time")] // For internal Serialization XML/JSON
-        [JsonProperty("minimum_operation_time", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [System.Text.Json.Serialization.JsonPropertyName("minimum_operation_time")] // For System.Text.Json
-        public double MinimumOperationTime { get; set; } = 1D;
 
         /// <summary>
         /// A number for the minimum number of hours for when the system can switch between heating and cooling.
@@ -147,7 +134,6 @@ namespace HoneybeeSchema
             sb.Append("  DoasAvailabilitySchedule: ").Append(this.DoasAvailabilitySchedule).Append("\n");
             sb.Append("  EquipmentType: ").Append(this.EquipmentType).Append("\n");
             sb.Append("  RadiantFaceType: ").Append(this.RadiantFaceType).Append("\n");
-            sb.Append("  MinimumOperationTime: ").Append(this.MinimumOperationTime).Append("\n");
             sb.Append("  SwitchOverTime: ").Append(this.SwitchOverTime).Append("\n");
             return sb.ToString();
         }
@@ -212,7 +198,6 @@ namespace HoneybeeSchema
             return base.Equals(input) && 
                     Extension.Equals(this.EquipmentType, input.EquipmentType) && 
                     Extension.Equals(this.RadiantFaceType, input.RadiantFaceType) && 
-                    Extension.Equals(this.MinimumOperationTime, input.MinimumOperationTime) && 
                     Extension.Equals(this.SwitchOverTime, input.SwitchOverTime);
         }
 
@@ -230,8 +215,6 @@ namespace HoneybeeSchema
                     hashCode = hashCode * 59 + this.EquipmentType.GetHashCode();
                 if (this.RadiantFaceType != null)
                     hashCode = hashCode * 59 + this.RadiantFaceType.GetHashCode();
-                if (this.MinimumOperationTime != null)
-                    hashCode = hashCode * 59 + this.MinimumOperationTime.GetHashCode();
                 if (this.SwitchOverTime != null)
                     hashCode = hashCode * 59 + this.SwitchOverTime.GetHashCode();
                 return hashCode;

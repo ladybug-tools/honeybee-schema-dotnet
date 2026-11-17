@@ -85,6 +85,8 @@ export * from "./EnergyWindowMaterialShade";
 export * from "./EnergyWindowMaterialSimpleGlazSys";
 export * from "./EvaporativeCooler";
 export * from "./EvaporativeCoolerEquipmentType";
+export * from "./ExhaustAir";
+export * from "./ExhaustAirAbridged";
 export * from "./ExtensionTypes";
 export * from "./Face";
 export * from "./Face3D";

@@ -48,9 +48,10 @@ namespace HoneybeeSchema
         /// <param name="sizingParameter">A SizingParameter object with criteria for sizing the heating and cooling system.</param>
         /// <param name="northAngle">A number between -360 and 360 for the north direction in degrees.This is the counterclockwise difference between the North and the positive Y-axis. 90 is West and 270 is East. Note that this is different than the convention used in EnergyPlus, which uses clockwise difference instead of counterclockwise difference.</param>
         /// <param name="terrainType">Text for the terrain in which the model sits. This is used to determine the wind profile over the height of the rooms.</param>
+        /// <param name="location">An optional location object to describe the exact latitude, longitude, time zone and elevation of the project site. If None the location specified within the EPW file will be used for the simulation.</param>
         public SimulationParameter
         (
-            SimulationOutput output = default, RunPeriod runPeriod = default, int timestep = 6, SimulationControl simulationControl = default, ShadowCalculation shadowCalculation = default, SizingParameter sizingParameter = default, double northAngle = 0D, TerrianTypes terrainType = TerrianTypes.City
+            SimulationOutput output = default, RunPeriod runPeriod = default, int timestep = 6, SimulationControl simulationControl = default, ShadowCalculation shadowCalculation = default, SizingParameter sizingParameter = default, double northAngle = 0D, TerrianTypes terrainType = TerrianTypes.City, Location location = default
         ) : base()
         {
             this.Output = output;
@@ -61,6 +62,7 @@ namespace HoneybeeSchema
             this.SizingParameter = sizingParameter;
             this.NorthAngle = northAngle;
             this.TerrainType = terrainType;
+            this.Location = location;
 
             // Set readonly properties with defaultValue
             this.Type = "SimulationParameter";
@@ -154,6 +156,16 @@ namespace HoneybeeSchema
         // [System.Text.Json.Serialization.JsonPropertyName("terrain_type")] // For System.Text.Json
         public TerrianTypes TerrainType { get; set; } = TerrianTypes.City;
 
+        /// <summary>
+        /// An optional location object to describe the exact latitude, longitude, time zone and elevation of the project site. If None the location specified within the EPW file will be used for the simulation.
+        /// </summary>
+        [Summary(@"An optional location object to describe the exact latitude, longitude, time zone and elevation of the project site. If None the location specified within the EPW file will be used for the simulation.")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [DataMember(Name = "location")] // For internal Serialization XML/JSON
+        [JsonProperty("location", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("location")] // For System.Text.Json
+        public Location Location { get; set; }
+
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -185,6 +197,7 @@ namespace HoneybeeSchema
             sb.Append("  SizingParameter: ").Append(this.SizingParameter).Append("\n");
             sb.Append("  NorthAngle: ").Append(this.NorthAngle).Append("\n");
             sb.Append("  TerrainType: ").Append(this.TerrainType).Append("\n");
+            sb.Append("  Location: ").Append(this.Location).Append("\n");
             return sb.ToString();
         }
 
@@ -253,7 +266,8 @@ namespace HoneybeeSchema
                     Extension.Equals(this.ShadowCalculation, input.ShadowCalculation) && 
                     Extension.Equals(this.SizingParameter, input.SizingParameter) && 
                     Extension.Equals(this.NorthAngle, input.NorthAngle) && 
-                    Extension.Equals(this.TerrainType, input.TerrainType);
+                    Extension.Equals(this.TerrainType, input.TerrainType) && 
+                    Extension.Equals(this.Location, input.Location);
         }
 
 
@@ -282,6 +296,8 @@ namespace HoneybeeSchema
                     hashCode = hashCode * 59 + this.NorthAngle.GetHashCode();
                 if (this.TerrainType != null)
                     hashCode = hashCode * 59 + this.TerrainType.GetHashCode();
+                if (this.Location != null)
+                    hashCode = hashCode * 59 + this.Location.GetHashCode();
                 return hashCode;
             }
         }

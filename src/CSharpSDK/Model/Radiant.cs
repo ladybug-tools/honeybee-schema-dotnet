@@ -44,18 +44,20 @@ namespace HoneybeeSchema
         /// <param name="displayName">Display name of the object with no character restrictions.</param>
         /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list).</param>
         /// <param name="vintage">Text for the vintage of the template system. This will be used to set efficiencies for various pieces of equipment within the system. Further information about these defaults can be found in the version of ASHRAE 90.1 corresponding to the selected vintage. Read-only versions of the standard can be found at: https://www.ashrae.org/technical-resources/standards-and-guidelines/read-only-versions-of-ashrae-standards</param>
+        /// <param name="unitVentilators">Boolean to note whether individual zone ventilators are included with the basic heating and cooling system (True) or the system only performs heating and cooling without any ventilation (False). Unlike a DOAS, unit ventilators do not pass the outdoor air through heating or cooling coils to condition it for the space. However, heat recovery effectiveness can be specified, which can temper the air supplied to the zone by the ventilator with exhaust air. All air flow through this ventilator is always balanced for each zone between supply and exhaust and the total flow rate is determined by checking the ventilation and exhaust requirements of the rooms to which the system is assigned.</param>
+        /// <param name="sensibleHeatRecovery">A number between 0 and 1 for the effectiveness of sensible heat recovery within unit ventilators if specified.</param>
+        /// <param name="latentHeatRecovery">A number between 0 and 1 for the effectiveness of latent heat recovery within unit ventilators if specified.</param>
+        /// <param name="ventAvailabilitySchedule">An optional On/Off discrete schedule to specify when unit ventilators shut off (assuming that the unit_ventilators is True). This will not only reduce heating and cooling load by preventing outdoor air from flowing but will also shut off the fans, which can result in more energy savings when spaces served by the ventilators are completely unoccupied. If None, the unit ventilators will be always on.</param>
         /// <param name="equipmentType">Text for the specific type of system equipment from the RadiantEquipmentType enumeration.</param>
         /// <param name="radiantFaceType">Text to indicate which faces are thermally active by default. Note that this property has no effect when the rooms to which the HVAC system is assigned have constructions with internal source materials. In this case, those constructions will dictate the thermally active surfaces.</param>
-        /// <param name="minimumOperationTime">A number for the minimum number of hours of operation for the radiant system before it shuts off.</param>
         /// <param name="switchOverTime">A number for the minimum number of hours for when the system can switch between heating and cooling.</param>
         public Radiant
         (
-            string identifier, string displayName = default, object userData = default, Vintages vintage = Vintages.ASHRAE_2019, RadiantEquipmentType equipmentType = RadiantEquipmentType.Radiant_Chiller_Boiler, RadiantFaceTypes radiantFaceType = RadiantFaceTypes.Floor, double minimumOperationTime = 1D, double switchOverTime = 24D
-        ) : base(identifier: identifier, displayName: displayName, userData: userData, vintage: vintage)
+            string identifier, string displayName = default, object userData = default, Vintages vintage = Vintages.ASHRAE_2019, bool unitVentilators = false, double sensibleHeatRecovery = 0D, double latentHeatRecovery = 0D, string ventAvailabilitySchedule = default, RadiantEquipmentType equipmentType = RadiantEquipmentType.Radiant_Chiller_Boiler, RadiantFaceTypes radiantFaceType = RadiantFaceTypes.Floor, double switchOverTime = 24D
+        ) : base(identifier: identifier, displayName: displayName, userData: userData, vintage: vintage, unitVentilators: unitVentilators, sensibleHeatRecovery: sensibleHeatRecovery, latentHeatRecovery: latentHeatRecovery, ventAvailabilitySchedule: ventAvailabilitySchedule)
         {
             this.EquipmentType = equipmentType;
             this.RadiantFaceType = radiantFaceType;
-            this.MinimumOperationTime = minimumOperationTime;
             this.SwitchOverTime = switchOverTime;
 
             // Set readonly properties with defaultValue
@@ -87,17 +89,6 @@ namespace HoneybeeSchema
         [JsonProperty("radiant_face_type", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("radiant_face_type")] // For System.Text.Json
         public RadiantFaceTypes RadiantFaceType { get; set; } = RadiantFaceTypes.Floor;
-
-        /// <summary>
-        /// A number for the minimum number of hours of operation for the radiant system before it shuts off.
-        /// </summary>
-        [Summary(@"A number for the minimum number of hours of operation for the radiant system before it shuts off.")]
-        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
-        [Range(0, double.MaxValue)]
-        [DataMember(Name = "minimum_operation_time")] // For internal Serialization XML/JSON
-        [JsonProperty("minimum_operation_time", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
-        // [System.Text.Json.Serialization.JsonPropertyName("minimum_operation_time")] // For System.Text.Json
-        public double MinimumOperationTime { get; set; } = 1D;
 
         /// <summary>
         /// A number for the minimum number of hours for when the system can switch between heating and cooling.
@@ -137,9 +128,12 @@ namespace HoneybeeSchema
             sb.Append("  DisplayName: ").Append(this.DisplayName).Append("\n");
             sb.Append("  UserData: ").Append(this.UserData).Append("\n");
             sb.Append("  Vintage: ").Append(this.Vintage).Append("\n");
+            sb.Append("  UnitVentilators: ").Append(this.UnitVentilators).Append("\n");
+            sb.Append("  SensibleHeatRecovery: ").Append(this.SensibleHeatRecovery).Append("\n");
+            sb.Append("  LatentHeatRecovery: ").Append(this.LatentHeatRecovery).Append("\n");
+            sb.Append("  VentAvailabilitySchedule: ").Append(this.VentAvailabilitySchedule).Append("\n");
             sb.Append("  EquipmentType: ").Append(this.EquipmentType).Append("\n");
             sb.Append("  RadiantFaceType: ").Append(this.RadiantFaceType).Append("\n");
-            sb.Append("  MinimumOperationTime: ").Append(this.MinimumOperationTime).Append("\n");
             sb.Append("  SwitchOverTime: ").Append(this.SwitchOverTime).Append("\n");
             return sb.ToString();
         }
@@ -204,7 +198,6 @@ namespace HoneybeeSchema
             return base.Equals(input) && 
                     Extension.Equals(this.EquipmentType, input.EquipmentType) && 
                     Extension.Equals(this.RadiantFaceType, input.RadiantFaceType) && 
-                    Extension.Equals(this.MinimumOperationTime, input.MinimumOperationTime) && 
                     Extension.Equals(this.SwitchOverTime, input.SwitchOverTime);
         }
 
@@ -222,8 +215,6 @@ namespace HoneybeeSchema
                     hashCode = hashCode * 59 + this.EquipmentType.GetHashCode();
                 if (this.RadiantFaceType != null)
                     hashCode = hashCode * 59 + this.RadiantFaceType.GetHashCode();
-                if (this.MinimumOperationTime != null)
-                    hashCode = hashCode * 59 + this.MinimumOperationTime.GetHashCode();
                 if (this.SwitchOverTime != null)
                     hashCode = hashCode * 59 + this.SwitchOverTime.GetHashCode();
                 return hashCode;

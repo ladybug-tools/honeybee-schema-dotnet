@@ -48,6 +48,8 @@
     "EnergyWindowMaterialShade": "honeybee_schema.energy.material",
     "EnergyWindowMaterialSimpleGlazSys": "honeybee_schema.energy.material",
     "EvaporativeCooler": "honeybee_schema.energy.hvac.heatcool",
+    "ExhaustAir": "honeybee_schema.energy.load",
+    "ExhaustAirAbridged": "honeybee_schema.energy.load",
     "FCU": "honeybee_schema.energy.hvac.heatcool",
     "FCUwithDOASAbridged": "honeybee_schema.energy.hvac.doas",
     "Face": "honeybee_schema.model",

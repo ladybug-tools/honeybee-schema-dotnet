@@ -45,12 +45,16 @@ namespace HoneybeeSchema
         /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list).</param>
         /// <param name="vintage">Text for the vintage of the template system. This will be used to set efficiencies for various pieces of equipment within the system. Further information about these defaults can be found in the version of ASHRAE 90.1 corresponding to the selected vintage. Read-only versions of the standard can be found at: https://www.ashrae.org/technical-resources/standards-and-guidelines/read-only-versions-of-ashrae-standards</param>
         /// <param name="equipmentType">Text for the specific type of system equipment from the PTACEquipmentType enumeration.</param>
+        /// <param name="sensibleHeatRecovery">A number between 0 and 1 for the effectiveness of sensible heat recovery within the system. When this is not zero, heat recovery is modeled using an ERV connected to the PTAC.</param>
+        /// <param name="latentHeatRecovery">A number between 0 and 1 for the effectiveness of latent heat recovery within the system. When this is not zero, heat recovery is modeled using an ERV connected to the PTAC.</param>
         public PTAC
         (
-            string identifier, string displayName = default, object userData = default, Vintages vintage = Vintages.ASHRAE_2019, PTACEquipmentType equipmentType = PTACEquipmentType.PTAC_ElectricBaseboard
+            string identifier, string displayName = default, object userData = default, Vintages vintage = Vintages.ASHRAE_2019, PTACEquipmentType equipmentType = PTACEquipmentType.PTAC_ElectricBaseboard, double sensibleHeatRecovery = 0D, double latentHeatRecovery = 0D
         ) : base(identifier: identifier, displayName: displayName, userData: userData, vintage: vintage)
         {
             this.EquipmentType = equipmentType;
+            this.SensibleHeatRecovery = sensibleHeatRecovery;
+            this.LatentHeatRecovery = latentHeatRecovery;
 
             // Set readonly properties with defaultValue
             this.Type = "PTAC";
@@ -71,6 +75,28 @@ namespace HoneybeeSchema
         [JsonProperty("equipment_type", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
         // [System.Text.Json.Serialization.JsonPropertyName("equipment_type")] // For System.Text.Json
         public PTACEquipmentType EquipmentType { get; set; } = PTACEquipmentType.PTAC_ElectricBaseboard;
+
+        /// <summary>
+        /// A number between 0 and 1 for the effectiveness of sensible heat recovery within the system. When this is not zero, heat recovery is modeled using an ERV connected to the PTAC.
+        /// </summary>
+        [Summary(@"A number between 0 and 1 for the effectiveness of sensible heat recovery within the system. When this is not zero, heat recovery is modeled using an ERV connected to the PTAC.")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [Range(0, 1)]
+        [DataMember(Name = "sensible_heat_recovery")] // For internal Serialization XML/JSON
+        [JsonProperty("sensible_heat_recovery", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("sensible_heat_recovery")] // For System.Text.Json
+        public double SensibleHeatRecovery { get; set; } = 0D;
+
+        /// <summary>
+        /// A number between 0 and 1 for the effectiveness of latent heat recovery within the system. When this is not zero, heat recovery is modeled using an ERV connected to the PTAC.
+        /// </summary>
+        [Summary(@"A number between 0 and 1 for the effectiveness of latent heat recovery within the system. When this is not zero, heat recovery is modeled using an ERV connected to the PTAC.")]
+        // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
+        [Range(0, 1)]
+        [DataMember(Name = "latent_heat_recovery")] // For internal Serialization XML/JSON
+        [JsonProperty("latent_heat_recovery", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
+        // [System.Text.Json.Serialization.JsonPropertyName("latent_heat_recovery")] // For System.Text.Json
+        public double LatentHeatRecovery { get; set; } = 0D;
 
 
         /// <summary>
@@ -100,6 +126,8 @@ namespace HoneybeeSchema
             sb.Append("  UserData: ").Append(this.UserData).Append("\n");
             sb.Append("  Vintage: ").Append(this.Vintage).Append("\n");
             sb.Append("  EquipmentType: ").Append(this.EquipmentType).Append("\n");
+            sb.Append("  SensibleHeatRecovery: ").Append(this.SensibleHeatRecovery).Append("\n");
+            sb.Append("  LatentHeatRecovery: ").Append(this.LatentHeatRecovery).Append("\n");
             return sb.ToString();
         }
 
@@ -161,7 +189,9 @@ namespace HoneybeeSchema
             if (input == null)
                 return false;
             return base.Equals(input) && 
-                    Extension.Equals(this.EquipmentType, input.EquipmentType);
+                    Extension.Equals(this.EquipmentType, input.EquipmentType) && 
+                    Extension.Equals(this.SensibleHeatRecovery, input.SensibleHeatRecovery) && 
+                    Extension.Equals(this.LatentHeatRecovery, input.LatentHeatRecovery);
         }
 
 
@@ -176,6 +206,10 @@ namespace HoneybeeSchema
                 int hashCode = base.GetHashCode();
                 if (this.EquipmentType != null)
                     hashCode = hashCode * 59 + this.EquipmentType.GetHashCode();
+                if (this.SensibleHeatRecovery != null)
+                    hashCode = hashCode * 59 + this.SensibleHeatRecovery.GetHashCode();
+                if (this.LatentHeatRecovery != null)
+                    hashCode = hashCode * 59 + this.LatentHeatRecovery.GetHashCode();
                 return hashCode;
             }
         }

@@ -3,7 +3,7 @@
   "servers": [],
   "info": {
     "description": "Documentation for Honeybee model schema",
-    "version": "2.2.2",
+    "version": "2.4.1",
     "title": "Honeybee Model Schema",
     "contact": {
       "name": "Ladybug Tools",
@@ -293,6 +293,16 @@
       "name": "evaporativecoolerequipmenttype_model",
       "x-displayName": "EvaporativeCoolerEquipmentType",
       "description": "<SchemaDefinition schemaRef=\"#/components/schemas/EvaporativeCoolerEquipmentType\" />\n"
+    },
+    {
+      "name": "exhaustair_model",
+      "x-displayName": "ExhaustAir",
+      "description": "<SchemaDefinition schemaRef=\"#/components/schemas/ExhaustAir\" />\n"
+    },
+    {
+      "name": "exhaustairabridged_model",
+      "x-displayName": "ExhaustAirAbridged",
+      "description": "<SchemaDefinition schemaRef=\"#/components/schemas/ExhaustAirAbridged\" />\n"
     },
     {
       "name": "fcu_model",
@@ -1203,6 +1213,8 @@
         "energywindowmaterialsimpleglazsys_model",
         "evaporativecooler_model",
         "evaporativecoolerequipmenttype_model",
+        "exhaustair_model",
+        "exhaustairabridged_model",
         "face3d_model",
         "face_model",
         "faceenergypropertiesabridged_model",
@@ -5238,6 +5250,200 @@
         "title": "EvaporativeCoolerEquipmentType",
         "type": "string"
       },
+      "ExhaustAir": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/IDdEnergyBaseModel"
+          },
+          {
+            "type": "object",
+            "required": [],
+            "properties": {
+              "type": {
+                "const": "ExhaustAir",
+                "default": "ExhaustAir",
+                "title": "Type",
+                "type": "string",
+                "readOnly": true
+              },
+              "flow_per_area": {
+                "default": 0,
+                "description": "Intensity of exhaust air in [m3/s per m2 of floor area].",
+                "minimum": 0,
+                "title": "Flow Per Area",
+                "type": "number",
+                "format": "double"
+              },
+              "flow_per_fixture": {
+                "default": 0,
+                "description": "The level of exhaust air ventilation in m3/s for each fixture in the room. The term \"fixture\" is used broadly as a way to reference a wide variety of contaminant sources such as toilets/urinals, shower heads, kitchen hoods, fume hoods, etc.",
+                "minimum": 0,
+                "title": "Flow Per Fixture",
+                "type": "number",
+                "format": "double"
+              },
+              "fixture_count": {
+                "default": 1,
+                "description": "An integer for the number of fixtures in the room. This is multiplied by the flow_per_fixture, which is then added to the flow_per_area to yield the final exhaust air flow rate.",
+                "minimum": 0,
+                "title": "Fixture Count",
+                "type": "integer",
+                "format": "int32"
+              },
+              "schedule": {
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schemas/ScheduleRuleset"
+                  },
+                  {
+                    "$ref": "#/components/schemas/ScheduleFixedInterval"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "description": "Schedule for the exhaust air ventilation over the course of the year. The type of this schedule should be Fractional and the fractional values get multiplied by the total design flow rate to yield a complete exhaust air profile. Values of 0 in the schedule will shut the exhaust fan off completely. If None, the design level of exhaust air will be used throughout all timesteps of the simulation, meaning that this schedule is Always On.",
+                "title": "Schedule"
+              },
+              "pressure_rise": {
+                "default": 125,
+                "description": "A positive number for the the pressure rise across the fan in Pascals (N/m2). This is often a function of the fan speed and the conditions in which the fan is operating. It plays an important role in determining the amount of energy consumed by the fan. Typical kitchen and bathroom exhaust fans have pressure rises around 125 Pa but, in healthcare settings where filters create more resistance, higher pressures around 250 Pa are more common.",
+                "exclusiveMinimum": 0,
+                "title": "Pressure Rise",
+                "type": "number",
+                "format": "double"
+              },
+              "efficiency": {
+                "default": 0.35,
+                "description": "A number between 0 and 1 for the overall efficiency of the fan. Specifically, this is the ratio of the power delivered to the fluid to the electrical input power. It is the product of the fan motor efficiency and the fan impeller efficiency. Fans that have a higher blade diameter, no obstructions or filters, and operate at lower speeds with smaller pressure rises for their size tend to have higher efficiencies. Because motor efficiencies are typically between 0.8 and 0.9, the best overall fan efficiencies tend to be around 0.7 with most typical fan efficiencies between 0.5 and 0.7. When filters are added, which is common for most exhaust fans, the total efficiency typically ends up between 0.3 and 0.4.",
+                "exclusiveMinimum": 0,
+                "maximum": 1,
+                "title": "Efficiency",
+                "type": "number",
+                "format": "double"
+              },
+              "balancing_schedule": {
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schemas/ScheduleRuleset"
+                  },
+                  {
+                    "$ref": "#/components/schemas/ScheduleFixedInterval"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "description": "Schedule for the fraction of exhaust air that is unbalanced by simple airflows, such as infiltration, natural ventilation, or zone mixing. Unbalanced exhaust is modeled as being provided by the outdoor air system in the central air system such that values of 1 in this schedule indicate all exhaust air balancing done by the mechanical system and values of 0 indicate all air balanced by simple air flows. If None, then all the exhaust air flow is assumed to be unbalanced by simple airflows. The the flow rates at the zone return air node are reduced by the flow rate that is being exhausted and the zone outdoor air controller will ensure that the outdoor air flow rate is sufficient to serve the exhaust.",
+                "title": "Balancing Schedule"
+              }
+            },
+            "additionalProperties": false
+          }
+        ],
+        "title": "ExhaustAir",
+        "discriminator": {
+          "propertyName": "type"
+        }
+      },
+      "ExhaustAirAbridged": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/IDdEnergyBaseModel"
+          },
+          {
+            "type": "object",
+            "required": [],
+            "properties": {
+              "type": {
+                "const": "ExhaustAirAbridged",
+                "default": "ExhaustAirAbridged",
+                "title": "Type",
+                "type": "string",
+                "readOnly": true
+              },
+              "flow_per_area": {
+                "default": 0,
+                "description": "Intensity of exhaust air in [m3/s per m2 of floor area].",
+                "minimum": 0,
+                "title": "Flow Per Area",
+                "type": "number",
+                "format": "double"
+              },
+              "flow_per_fixture": {
+                "default": 0,
+                "description": "The level of exhaust air ventilation in m3/s for each fixture in the room. The term \"fixture\" is used broadly as a way to reference a wide variety of contaminant sources such as toilets/urinals, shower heads, kitchen hoods, fume hoods, etc.",
+                "minimum": 0,
+                "title": "Flow Per Fixture",
+                "type": "number",
+                "format": "double"
+              },
+              "fixture_count": {
+                "default": 1,
+                "description": "An integer for the number of fixtures in the room. This is multiplied by the flow_per_fixture, which is then added to the flow_per_area to yield the final exhaust air flow rate.",
+                "minimum": 0,
+                "title": "Fixture Count",
+                "type": "integer",
+                "format": "int32"
+              },
+              "schedule": {
+                "anyOf": [
+                  {
+                    "maxLength": 100,
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "description": "Identifier of the schedule for the exhaust air ventilation over the course of the year. The type of this schedule should be Fractional and the fractional values get multiplied by the total design flow rate to yield a complete exhaust air profile. Values of 0 in the schedule will shut the exhaust fan off completely. If None, the design level of exhaust air will be used throughout all timesteps of the simulation, meaning that this schedule is Always On.",
+                "title": "Schedule"
+              },
+              "pressure_rise": {
+                "default": 125,
+                "description": "A positive number for the the pressure rise across the fan in Pascals (N/m2). This is often a function of the fan speed and the conditions in which the fan is operating. It plays an important role in determining the amount of energy consumed by the fan. Typical kitchen and bathroom exhaust fans have pressure rises around 125 Pa but, in healthcare settings where filters create more resistance, higher pressures around 250 Pa are more common.",
+                "exclusiveMinimum": 0,
+                "title": "Pressure Rise",
+                "type": "number",
+                "format": "double"
+              },
+              "efficiency": {
+                "default": 0.35,
+                "description": "A number between 0 and 1 for the overall efficiency of the fan. Specifically, this is the ratio of the power delivered to the fluid to the electrical input power. It is the product of the fan motor efficiency and the fan impeller efficiency. Fans that have a higher blade diameter, no obstructions or filters, and operate at lower speeds with smaller pressure rises for their size tend to have higher efficiencies. Because motor efficiencies are typically between 0.8 and 0.9, the best overall fan efficiencies tend to be around 0.7 with most typical fan efficiencies between 0.5 and 0.7. When filters are added, which is common for most exhaust fans, the total efficiency typically ends up between 0.3 and 0.4.",
+                "exclusiveMinimum": 0,
+                "maximum": 1,
+                "title": "Efficiency",
+                "type": "number",
+                "format": "double"
+              },
+              "balancing_schedule": {
+                "anyOf": [
+                  {
+                    "maxLength": 100,
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "description": "Identifier of the schedule for the fraction of exhaust air that is unbalanced by simple airflows, such as infiltration, natural ventilation, or zone mixing. Unbalanced exhaust is modeled as being provided by the outdoor air system in the central air system such that values of 1 in this schedule indicate all exhaust air balancing done by the mechanical system and values of 0 indicate all air balanced by simple air flows. If None, then all the exhaust air flow is assumed to be unbalanced by simple airflows. The the flow rates at the zone return air node are reduced by the flow rate that is being exhausted and the zone outdoor air controller will ensure that the outdoor air flow rate is sufficient to serve the exhaust.",
+                "title": "Balancing Schedule"
+              }
+            },
+            "additionalProperties": false
+          }
+        ],
+        "title": "ExhaustAirAbridged",
+        "discriminator": {
+          "propertyName": "type"
+        }
+      },
       "FCU": {
         "allOf": [
           {
@@ -8066,7 +8272,7 @@
                 "readOnly": true
               },
               "version": {
-                "default": "2.2.2",
+                "default": "2.4.1",
                 "description": "Text string for the current version of the schema.",
                 "pattern": "^([0-9]+)\\.([0-9]+)\\.([0-9]+)$",
                 "title": "Version",
@@ -9897,6 +10103,24 @@
                 "$ref": "#/components/schemas/PTACEquipmentType",
                 "default": "PTAC_ElectricBaseboard",
                 "description": "Text for the specific type of system equipment from the PTACEquipmentType enumeration."
+              },
+              "sensible_heat_recovery": {
+                "default": 0,
+                "description": "A number between 0 and 1 for the effectiveness of sensible heat recovery within the system. When this is not zero, heat recovery is modeled using an ERV connected to the PTAC.",
+                "maximum": 1,
+                "minimum": 0,
+                "title": "Sensible Heat Recovery",
+                "type": "number",
+                "format": "double"
+              },
+              "latent_heat_recovery": {
+                "default": 0,
+                "description": "A number between 0 and 1 for the effectiveness of latent heat recovery within the system. When this is not zero, heat recovery is modeled using an ERV connected to the PTAC.",
+                "maximum": 1,
+                "minimum": 0,
+                "title": "Latent Heat Recovery",
+                "type": "number",
+                "format": "double"
               }
             },
             "additionalProperties": false
@@ -10638,6 +10862,18 @@
                 "default": null,
                 "description": "Ventilation to describe the minimum outdoor air requirement of the program. If None, no ventilation requirement will be assumed."
               },
+              "exhaust": {
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schemas/ExhaustAir"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "description": "ExhaustAir to describe the exhaust air requirement of the program. If None, no exhaust air requirement will be assumed for the program."
+              },
               "setpoint": {
                 "anyOf": [
                   {
@@ -10757,7 +10993,19 @@
                   }
                 ],
                 "default": null,
-                "description": "Ventilation to describe the minimum outdoor air requirement of the program. If None, no ventilation requirement will be assumed."
+                "description": "Ventilation object to describe the minimum outdoor air requirement of the program. If None, no ventilation requirement will be assumed."
+              },
+              "exhaust": {
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schemas/ExhaustAirAbridged"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "description": "ExhaustAir object to describe the exhaust air requirement of the program. If None, no exhaust air requirement will be assumed for the program."
               },
               "setpoint": {
                 "anyOf": [
@@ -10888,14 +11136,6 @@
                 "default": "Floor",
                 "description": "Text to indicate which faces are thermally active by default. Note that this property has no effect when the rooms to which the HVAC system is assigned have constructions with internal source materials. In this case, those constructions will dictate the thermally active surfaces."
               },
-              "minimum_operation_time": {
-                "default": 1.0,
-                "description": "A number for the minimum number of hours of operation for the radiant system before it shuts off.",
-                "exclusiveMinimum": 0,
-                "title": "Minimum Operation Time",
-                "type": "number",
-                "format": "double"
-              },
               "switch_over_time": {
                 "default": 24.0,
                 "description": "A number for the minimum number of hours for when the system can switch between heating and cooling.",
@@ -10965,14 +11205,6 @@
                 "$ref": "#/components/schemas/RadiantFaceTypes",
                 "default": "Floor",
                 "description": "Text to indicate which faces are thermally active by default. Note that this property has no effect when the rooms to which the HVAC system is assigned have constructions with internal source materials. In this case, those constructions will dictate the thermally active surfaces."
-              },
-              "minimum_operation_time": {
-                "default": 1.0,
-                "description": "A number for the minimum number of hours of operation for the radiant system before it shuts off.",
-                "exclusiveMinimum": 0,
-                "title": "Minimum Operation Time",
-                "type": "number",
-                "format": "double"
               },
               "switch_over_time": {
                 "default": 24.0,
@@ -11546,6 +11778,18 @@
                 ],
                 "default": null,
                 "description": "Ventilation object for the minimum outdoor air requirement."
+              },
+              "exhaust": {
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schemas/ExhaustAirAbridged"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "description": "ExhaustAir object object to describe the exhaust air requirement of the room. If None, no exhaust air requirement will be assumed for the room."
               },
               "setpoint": {
                 "anyOf": [
@@ -15376,6 +15620,45 @@
             "type": "object",
             "required": [],
             "properties": {
+              "unit_ventilators": {
+                "default": false,
+                "description": "Boolean to note whether individual zone ventilators are included with the basic heating and cooling system (True) or the system only performs heating and cooling without any ventilation (False). Unlike a DOAS, unit ventilators do not pass the outdoor air through heating or cooling coils to condition it for the space. However, heat recovery effectiveness can be specified, which can temper the air supplied to the zone by the ventilator with exhaust air. All air flow through this ventilator is always balanced for each zone between supply and exhaust and the total flow rate is determined by checking the ventilation and exhaust requirements of the rooms to which the system is assigned.",
+                "title": "Unit Ventilators",
+                "type": "boolean"
+              },
+              "sensible_heat_recovery": {
+                "default": 0,
+                "description": "A number between 0 and 1 for the effectiveness of sensible heat recovery within unit ventilators if specified.",
+                "maximum": 1,
+                "minimum": 0,
+                "title": "Sensible Heat Recovery",
+                "type": "number",
+                "format": "double"
+              },
+              "latent_heat_recovery": {
+                "default": 0,
+                "description": "A number between 0 and 1 for the effectiveness of latent heat recovery within unit ventilators if specified.",
+                "maximum": 1,
+                "minimum": 0,
+                "title": "Latent Heat Recovery",
+                "type": "number",
+                "format": "double"
+              },
+              "vent_availability_schedule": {
+                "anyOf": [
+                  {
+                    "maxLength": 100,
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "description": "An optional On/Off discrete schedule to specify when unit ventilators shut off (assuming that the unit_ventilators is True). This will not only reduce heating and cooling load by preventing outdoor air from flowing but will also shut off the fans, which can result in more energy savings when spaces served by the ventilators are completely unoccupied. If None, the unit ventilators will be always on.",
+                "title": "Vent Availability Schedule"
+              },
               "type": {
                 "title": "Type",
                 "default": "_HeatCoolBase",
@@ -15387,7 +15670,7 @@
             "additionalProperties": false
           }
         ],
-        "description": "Base class for all heating/cooling systems without any ventilation.\n\nThese systems are only designed to satisfy heating + cooling demand and they\ncannot meet any minimum ventilation requirements.\n\nAs such, these systems tend to be used in residential or storage settings where\nmeeting minimum ventilation requirements may not be required or the density\nof occupancy is so low that infiltration is enough to meet fresh air demand.",
+        "description": "Base class for all heating/cooling systems without ventilation.\n\nThese systems are only designed to satisfy heating + cooling demand and,\nby default, they cannot meet minimum ventilation requirements. However,\noptional unit ventilators can be included, which provide ventilation through\na balanced intake and exhaust ventilation on a zone-by-zone basis. Unlike a\nDOAS, unit ventilators do not pass the outdoor air through heating or cooling\ncoils to condition it for the space. However, heat recovery effectiveness\ncan be specified, which can temper the air supplied to the zone with exhaust air.\n\nThese systems tend to be used in residential or hospitality settings where\nmeeting minimum ventilation requirements may not be required as the density\nof occupancy is so low that infiltration is enough to meet fresh air needs.\nOr occupancy is so variable that supplying ventilation to each room with\nseparate unit ventilators is a worthwhile approach.\n\nThese systems are also common in warehouse or storage settings where ventilation\nmay not be necessary.",
         "title": "_HeatCoolBase",
         "discriminator": {
           "propertyName": "type"
