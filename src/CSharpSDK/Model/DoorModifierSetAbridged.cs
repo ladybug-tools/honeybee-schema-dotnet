@@ -40,7 +40,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="DoorModifierSetAbridged" /> class.
         /// </summary>
-        /// <param name="exteriorModifier">Identifier for a radiance modifier object for faces with an  Outdoors boundary condition.</param>
+        /// <param name="exteriorModifier">Identifier for a radiance modifier object for faces with an Outdoors boundary condition.</param>
         /// <param name="interiorModifier">Identifier for a radiance modifier object for faces with a boundary condition other than Outdoors.</param>
         /// <param name="interiorGlassModifier">Identifier of modifier object for glass with a Surface boundary condition.</param>
         /// <param name="exteriorGlassModifier">Identifier of modifier object for glass with an Outdoors boundary condition.</param>

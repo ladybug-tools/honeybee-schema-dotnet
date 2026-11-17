@@ -40,7 +40,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="BaseModifierSetAbridged" /> class.
         /// </summary>
-        /// <param name="exteriorModifier">Identifier for a radiance modifier object for faces with an  Outdoors boundary condition.</param>
+        /// <param name="exteriorModifier">Identifier for a radiance modifier object for faces with an Outdoors boundary condition.</param>
         /// <param name="interiorModifier">Identifier for a radiance modifier object for faces with a boundary condition other than Outdoors.</param>
         public BaseModifierSetAbridged
         (
@@ -61,9 +61,9 @@ namespace HoneybeeSchema
 	
 	
         /// <summary>
-        /// Identifier for a radiance modifier object for faces with an  Outdoors boundary condition.
+        /// Identifier for a radiance modifier object for faces with an Outdoors boundary condition.
         /// </summary>
-        [Summary(@"Identifier for a radiance modifier object for faces with an  Outdoors boundary condition.")]
+        [Summary(@"Identifier for a radiance modifier object for faces with an Outdoors boundary condition.")]
         // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [DataMember(Name = "exterior_modifier")] // For internal Serialization XML/JSON
         [JsonProperty("exterior_modifier", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json

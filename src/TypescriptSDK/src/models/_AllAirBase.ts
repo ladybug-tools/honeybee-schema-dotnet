@@ -4,7 +4,7 @@ import { deepTransform } from '../deepTransform';
 import { AllAirEconomizerType } from "./AllAirEconomizerType";
 import { Vintages } from "./Vintages";
 
-/** Base class for all-air systems.\n\nAll-air systems provide both ventilation and heating + cooling demand with\nthe same stream of warm/cool air. As such, they often grant tight control\nover zone humidity. However, because such systems often involve the\ncooling of air only to reheat it again, they are often more energy intensive\nthan systems that separate ventilation from the meeting of thermal loads. */
+/** Base class for all-air systems. All-air systems provide both ventilation and heating + cooling demand with the same stream of warm/cool air. As such, they often grant tight control over zone humidity. However, because such systems often involve the cooling of air only to reheat it again, they are often more energy intensive than systems that separate ventilation from the meeting of thermal loads. */
 export class _AllAirBase {
     @Type(() => String)
     @IsEnum(AllAirEconomizerType)

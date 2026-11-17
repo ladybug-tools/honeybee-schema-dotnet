@@ -45,9 +45,9 @@ namespace HoneybeeSchema
         /// <param name="displayName">Display name of the object with no character restrictions.</param>
         /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list).</param>
         /// <param name="scheduleTypeLimit">ScheduleTypeLimit object that will be used to validate schedule values against upper/lower limits and assign units to the schedule values. If None, no validation will occur.</param>
-        /// <param name="timestep">An integer for the number of steps per hour that the input values correspond to.  For example, if each value represents 30 minutes, the timestep is 2. For 15 minutes, it is 4.</param>
+        /// <param name="timestep">An integer for the number of steps per hour that the input values correspond to. For example, if each value represents 30 minutes, the timestep is 2. For 15 minutes, it is 4.</param>
         /// <param name="startDate">A list of two integers for [month, day], representing the start date when the schedule values begin to take effect.A third integer may be added to denote whether the date should be re-serialized for a leap year (it should be a 1 in this case).</param>
-        /// <param name="placeholderValue"> A value that will be used for all times not covered by the input values. Typically, your simulation should not need to use this value if the input values completely cover the simulation period.</param>
+        /// <param name="placeholderValue">A value that will be used for all times not covered by the input values. Typically, your simulation should not need to use this value if the input values completely cover the simulation period.</param>
         /// <param name="interpolate">Boolean to note whether values in between intervals should be linearly interpolated or whether successive values should take effect immediately upon the beginning time corresponding to them.</param>
         public ScheduleFixedInterval
         (
@@ -93,9 +93,9 @@ namespace HoneybeeSchema
         public ScheduleTypeLimit ScheduleTypeLimit { get; set; }
 
         /// <summary>
-        /// An integer for the number of steps per hour that the input values correspond to.  For example, if each value represents 30 minutes, the timestep is 2. For 15 minutes, it is 4.
+        /// An integer for the number of steps per hour that the input values correspond to. For example, if each value represents 30 minutes, the timestep is 2. For 15 minutes, it is 4.
         /// </summary>
-        [Summary(@"An integer for the number of steps per hour that the input values correspond to.  For example, if each value represents 30 minutes, the timestep is 2. For 15 minutes, it is 4.")]
+        [Summary(@"An integer for the number of steps per hour that the input values correspond to. For example, if each value represents 30 minutes, the timestep is 2. For 15 minutes, it is 4.")]
         // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [DataMember(Name = "timestep")] // For internal Serialization XML/JSON
         [JsonProperty("timestep", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
@@ -113,9 +113,9 @@ namespace HoneybeeSchema
         public List<int> StartDate { get; set; } = new List<int>{ 1, 1 };
 
         /// <summary>
-        ///  A value that will be used for all times not covered by the input values. Typically, your simulation should not need to use this value if the input values completely cover the simulation period.
+        /// A value that will be used for all times not covered by the input values. Typically, your simulation should not need to use this value if the input values completely cover the simulation period.
         /// </summary>
-        [Summary(@" A value that will be used for all times not covered by the input values. Typically, your simulation should not need to use this value if the input values completely cover the simulation period.")]
+        [Summary(@"A value that will be used for all times not covered by the input values. Typically, your simulation should not need to use this value if the input values completely cover the simulation period.")]
         // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [DataMember(Name = "placeholder_value")] // For internal Serialization XML/JSON
         [JsonProperty("placeholder_value", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json

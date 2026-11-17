@@ -20,9 +20,9 @@ using System.ComponentModel.DataAnnotations;
 namespace HoneybeeSchema
 {
     /// <summary>
-    /// Window Air Conditioning cooling system (with optional heating).\n\nEach room/zone will receive its own Packaged Terminal Air Conditioner (PTAC)\nwith properties set to reflect a typical window air conditioning (AC) unit.\nNo ventilation air is supplied by the unit and the cooling coil within the\nunit is a single-speed direct expansion (DX) cooling coil. Heating loads\ncan be met with various options, including several types of baseboards,\na furnace, or gas unit heaters.
+    /// Window Air Conditioning cooling system (with optional heating). Each room/zone will receive its own Packaged Terminal Air Conditioner (PTAC) with properties set to reflect a typical window air conditioning (AC) unit. No ventilation air is supplied by the unit and the cooling coil within the unit is a single-speed direct expansion (DX) cooling coil. Heating loads can be met with various options, including several types of baseboards, a furnace, or gas unit heaters.
     /// </summary>
-    [Summary(@"Window Air Conditioning cooling system (with optional heating).\n\nEach room/zone will receive its own Packaged Terminal Air Conditioner (PTAC)\nwith properties set to reflect a typical window air conditioning (AC) unit.\nNo ventilation air is supplied by the unit and the cooling coil within the\nunit is a single-speed direct expansion (DX) cooling coil. Heating loads\ncan be met with various options, including several types of baseboards,\na furnace, or gas unit heaters.")]
+    [Summary(@"Window Air Conditioning cooling system (with optional heating). Each room/zone will receive its own Packaged Terminal Air Conditioner (PTAC) with properties set to reflect a typical window air conditioning (AC) unit. No ventilation air is supplied by the unit and the cooling coil within the unit is a single-speed direct expansion (DX) cooling coil. Heating loads can be met with various options, including several types of baseboards, a furnace, or gas unit heaters.")]
     [System.Serializable]
     [DataContract(Name = "WindowAC")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class WindowAC : HeatCoolBase, System.IEquatable<WindowAC>

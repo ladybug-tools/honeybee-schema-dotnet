@@ -18,7 +18,7 @@ export class ApertureRadiancePropertiesAbridged extends _PropertiesBaseAbridged 
     @IsString()
     @IsOptional()
     @Expose({ name: "dynamic_group_identifier" })
-    /** An optional string to note the dynamic group '             'to which the Aperture is a part of. Apertures sharing the same '             'dynamic_group_identifier will have their states change in unison. '             'If None, the Aperture is assumed to be static. (default: None). */
+    /** An optional string to note the dynamic group ' 'to which the Aperture is a part of. Apertures sharing the same ' 'dynamic_group_identifier will have their states change in unison. ' 'If None, the Aperture is assumed to be static. (default: None). */
     dynamicGroupIdentifier?: string;
 	
     @IsArray()

@@ -54,7 +54,7 @@ export class VentilationControlAbridged extends _OpenAPIGenBaseModel {
     @Min(-100)
     @Max(100)
     @Expose({ name: "delta_temperature" })
-    /** A number for the temperature differential in Celsius between indoor and outdoor below which ventilation is shut off.  This should usually be a positive number so that ventilation only occurs when the outdoors is cooler than the indoors. Negative numbers indicate how much hotter the outdoors can be than the indoors before ventilation is stopped. */
+    /** A number for the temperature differential in Celsius between indoor and outdoor below which ventilation is shut off. This should usually be a positive number so that ventilation only occurs when the outdoors is cooler than the indoors. Negative numbers indicate how much hotter the outdoors can be than the indoors before ventilation is stopped. */
     deltaTemperature: number = -100;
 	
     @Type(() => String)

@@ -4,7 +4,7 @@ import { deepTransform } from '../deepTransform';
 import { Face3D } from "./Face3D";
 import { StateGeometryAbridged } from "./StateGeometryAbridged";
 
-/** RadianceSubFaceStateAbridged is an abridged state for a dynamic Aperture or Door.\n     */
+/** RadianceSubFaceStateAbridged is an abridged state for a dynamic Aperture or Door. */
 export class RadianceSubFaceStateAbridged {
     @Type(() => Face3D)
     @IsInstance(Face3D)

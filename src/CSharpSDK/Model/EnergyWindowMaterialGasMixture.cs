@@ -20,9 +20,9 @@ using System.ComponentModel.DataAnnotations;
 namespace HoneybeeSchema
 {
     /// <summary>
-    /// Create a mixture of two to four different gases to fill the panes of multiple\npane windows.
+    /// Create a mixture of two to four different gases to fill the panes of multiple pane windows.
     /// </summary>
-    [Summary(@"Create a mixture of two to four different gases to fill the panes of multiple\npane windows.")]
+    [Summary(@"Create a mixture of two to four different gases to fill the panes of multiple pane windows.")]
     [System.Serializable]
     [DataContract(Name = "EnergyWindowMaterialGasMixture")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class EnergyWindowMaterialGasMixture : IDdEnergyBaseModel, System.IEquatable<EnergyWindowMaterialGasMixture>

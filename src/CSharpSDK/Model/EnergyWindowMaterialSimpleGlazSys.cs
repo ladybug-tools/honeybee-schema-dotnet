@@ -20,9 +20,9 @@ using System.ComponentModel.DataAnnotations;
 namespace HoneybeeSchema
 {
     /// <summary>
-    /// Describe an entire glazing system rather than individual layers.\n\nUsed when only very limited information is available on the glazing layers or when\nspecific performance levels are being targeted.
+    /// Describe an entire glazing system rather than individual layers. Used when only very limited information is available on the glazing layers or when specific performance levels are being targeted.
     /// </summary>
-    [Summary(@"Describe an entire glazing system rather than individual layers.\n\nUsed when only very limited information is available on the glazing layers or when\nspecific performance levels are being targeted.")]
+    [Summary(@"Describe an entire glazing system rather than individual layers. Used when only very limited information is available on the glazing layers or when specific performance levels are being targeted.")]
     [System.Serializable]
     [DataContract(Name = "EnergyWindowMaterialSimpleGlazSys")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class EnergyWindowMaterialSimpleGlazSys : IDdEnergyBaseModel, System.IEquatable<EnergyWindowMaterialSimpleGlazSys>

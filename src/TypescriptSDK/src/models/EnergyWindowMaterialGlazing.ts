@@ -18,7 +18,7 @@ export class EnergyWindowMaterialGlazing extends IDdEnergyBaseModel {
     @IsNumber()
     @IsOptional()
     @Expose({ name: "thickness" })
-    /** The surface-to-surface thickness of the glass in meters. Default:  0.003. */
+    /** The surface-to-surface thickness of the glass in meters. Default: 0.003. */
     thickness: number = 0.003;
 	
     @Type(() => Number)
@@ -82,7 +82,7 @@ export class EnergyWindowMaterialGlazing extends IDdEnergyBaseModel {
     @Min(0)
     @Max(1)
     @Expose({ name: "emissivity" })
-    /** Infrared hemispherical emissivity of the front (outward facing) side of the glass.  Default: 0.84, which is typical for clear glass without a low-e coating. */
+    /** Infrared hemispherical emissivity of the front (outward facing) side of the glass. Default: 0.84, which is typical for clear glass without a low-e coating. */
     emissivity: number = 0.84;
 	
     @Type(() => Number)
@@ -91,14 +91,14 @@ export class EnergyWindowMaterialGlazing extends IDdEnergyBaseModel {
     @Min(0)
     @Max(1)
     @Expose({ name: "emissivity_back" })
-    /** Infrared hemispherical emissivity of the back (inward facing) side of the glass.  Default: 0.84, which is typical for clear glass without a low-e coating. */
+    /** Infrared hemispherical emissivity of the back (inward facing) side of the glass. Default: 0.84, which is typical for clear glass without a low-e coating. */
     emissivityBack: number = 0.84;
 	
     @Type(() => Number)
     @IsNumber()
     @IsOptional()
     @Expose({ name: "conductivity" })
-    /** Thermal conductivity of the glass in W/(m-K). Default: 0.9, which is  typical for clear glass without a low-e coating. */
+    /** Thermal conductivity of the glass in W/(m-K). Default: 0.9, which is typical for clear glass without a low-e coating. */
     conductivity: number = 0.9;
 	
     @Type(() => Number)
@@ -112,7 +112,7 @@ export class EnergyWindowMaterialGlazing extends IDdEnergyBaseModel {
     @IsBoolean()
     @IsOptional()
     @Expose({ name: "solar_diffusing" })
-    /** If False (default), the beam solar radiation incident on the glass is transmitted as beam radiation with no diffuse component.If True, the beam  solar radiation incident on the glass is transmitted as hemispherical diffuse radiation with no beam component. */
+    /** If False (default), the beam solar radiation incident on the glass is transmitted as beam radiation with no diffuse component.If True, the beam solar radiation incident on the glass is transmitted as hemispherical diffuse radiation with no beam component. */
     solarDiffusing: boolean = false;
 	
 

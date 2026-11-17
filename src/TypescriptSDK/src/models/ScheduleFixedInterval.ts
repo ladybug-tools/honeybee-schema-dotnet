@@ -34,7 +34,7 @@ export class ScheduleFixedInterval extends IDdEnergyBaseModel {
     @IsInt()
     @IsOptional()
     @Expose({ name: "timestep" })
-    /** An integer for the number of steps per hour that the input values correspond to.  For example, if each value represents 30 minutes, the timestep is 2. For 15 minutes, it is 4. */
+    /** An integer for the number of steps per hour that the input values correspond to. For example, if each value represents 30 minutes, the timestep is 2. For 15 minutes, it is 4. */
     timestep: number = 1;
 	
     @IsArray()
@@ -49,7 +49,7 @@ export class ScheduleFixedInterval extends IDdEnergyBaseModel {
     @IsNumber()
     @IsOptional()
     @Expose({ name: "placeholder_value" })
-    /**  A value that will be used for all times not covered by the input values. Typically, your simulation should not need to use this value if the input values completely cover the simulation period. */
+    /** A value that will be used for all times not covered by the input values. Typically, your simulation should not need to use this value if the input values completely cover the simulation period. */
     placeholderValue: number = 0;
 	
     @Type(() => Boolean)

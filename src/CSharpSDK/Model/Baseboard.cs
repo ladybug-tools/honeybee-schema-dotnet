@@ -20,9 +20,9 @@ using System.ComponentModel.DataAnnotations;
 namespace HoneybeeSchema
 {
     /// <summary>
-    /// Baseboard heating system.\n\nBaseboard systems are intended for spaces only requiring heating and\nno ventilation or cooling. Each room/zone will get its own baseboard\nheating unit that satisfies the heating load.
+    /// Baseboard heating system. Baseboard systems are intended for spaces only requiring heating and no ventilation or cooling. Each room/zone will get its own baseboard heating unit that satisfies the heating load.
     /// </summary>
-    [Summary(@"Baseboard heating system.\n\nBaseboard systems are intended for spaces only requiring heating and\nno ventilation or cooling. Each room/zone will get its own baseboard\nheating unit that satisfies the heating load.")]
+    [Summary(@"Baseboard heating system. Baseboard systems are intended for spaces only requiring heating and no ventilation or cooling. Each room/zone will get its own baseboard heating unit that satisfies the heating load.")]
     [System.Serializable]
     [DataContract(Name = "Baseboard")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class Baseboard : HeatCoolBase, System.IEquatable<Baseboard>

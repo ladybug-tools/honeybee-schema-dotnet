@@ -5,7 +5,7 @@ import { _HeatCoolBase } from "./_HeatCoolBase";
 import { EvaporativeCoolerEquipmentType } from "./EvaporativeCoolerEquipmentType";
 import { Vintages } from "./Vintages";
 
-/** Direct evaporative cooling systems (with optional heating).\n\nEach room/zone will receive its own air loop sized to meet the sensible load,\nwhich contains an evaporative cooler that directly adds humidity to the room\nair to cool it. The loop contains an outdoor air mixer, which is used whenever\nthe outdoor air has a lower wet bulb temperature than the return air from\nthe room. In the event that the combination of outdoor and room return air\nair is too humid, a backup single-speed direct expansion (DX) cooling coil\nwill be used. Heating loads can be met with various options, including\nseveral types of baseboards, a furnace, or gas unit heaters. */
+/** Direct evaporative cooling systems (with optional heating). Each room/zone will receive its own air loop sized to meet the sensible load, which contains an evaporative cooler that directly adds humidity to the room air to cool it. The loop contains an outdoor air mixer, which is used whenever the outdoor air has a lower wet bulb temperature than the return air from the room. In the event that the combination of outdoor and room return air air is too humid, a backup single-speed direct expansion (DX) cooling coil will be used. Heating loads can be met with various options, including several types of baseboards, a furnace, or gas unit heaters. */
 export class EvaporativeCooler extends _HeatCoolBase {
     @Type(() => String)
     @IsString()

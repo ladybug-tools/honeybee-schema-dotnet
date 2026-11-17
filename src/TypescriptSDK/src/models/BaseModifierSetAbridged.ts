@@ -9,7 +9,7 @@ export class BaseModifierSetAbridged extends _OpenAPIGenBaseModel {
     @IsString()
     @IsOptional()
     @Expose({ name: "exterior_modifier" })
-    /** Identifier for a radiance modifier object for faces with an  Outdoors boundary condition. */
+    /** Identifier for a radiance modifier object for faces with an Outdoors boundary condition. */
     exteriorModifier?: string;
 	
     @Type(() => String)

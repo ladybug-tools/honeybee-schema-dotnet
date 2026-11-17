@@ -43,7 +43,7 @@ namespace HoneybeeSchema
         /// <param name="identifier">Text string for a unique object ID. This identifier remains constant as the object is mutated, copied, and serialized to different formats (eg. dict, idf, osm). This identifier is also used to reference the object across a Model. It must be < 100 characters, use only ASCII characters and exclude (, ; ! \n \t).</param>
         /// <param name="displayName">Display name of the object with no character restrictions.</param>
         /// <param name="userData">Optional dictionary of user data associated with the object.All keys and values of this dictionary should be of a standard data type to ensure correct serialization of the object (eg. str, float, int, list).</param>
-        /// <param name="thickness">The surface-to-surface thickness of the glass in meters. Default:  0.003.</param>
+        /// <param name="thickness">The surface-to-surface thickness of the glass in meters. Default: 0.003.</param>
         /// <param name="solarTransmittance">Transmittance of solar radiation through the glass at normal incidence. Default: 0.85 for clear glass.</param>
         /// <param name="solarReflectance">Reflectance of solar radiation off of the front side of the glass at normal incidence, averaged over the solar spectrum. Default: 0.075 for clear glass.</param>
         /// <param name="solarReflectanceBack">Reflectance of solar radiation off of the back side of the glass at normal incidence, averaged over the solar spectrum.</param>
@@ -51,11 +51,11 @@ namespace HoneybeeSchema
         /// <param name="visibleReflectance">Reflectance of visible light off of the front side of the glass at normal incidence. Default: 0.075 for clear glass.</param>
         /// <param name="visibleReflectanceBack">Reflectance of visible light off of the back side of the glass at normal incidence averaged over the solar spectrum and weighted by the response of the human eye.</param>
         /// <param name="infraredTransmittance">Long-wave transmittance at normal incidence.</param>
-        /// <param name="emissivity">Infrared hemispherical emissivity of the front (outward facing) side of the glass.  Default: 0.84, which is typical for clear glass without a low-e coating.</param>
-        /// <param name="emissivityBack">Infrared hemispherical emissivity of the back (inward facing) side of the glass.  Default: 0.84, which is typical for clear glass without a low-e coating.</param>
-        /// <param name="conductivity">Thermal conductivity of the glass in W/(m-K). Default: 0.9, which is  typical for clear glass without a low-e coating.</param>
+        /// <param name="emissivity">Infrared hemispherical emissivity of the front (outward facing) side of the glass. Default: 0.84, which is typical for clear glass without a low-e coating.</param>
+        /// <param name="emissivityBack">Infrared hemispherical emissivity of the back (inward facing) side of the glass. Default: 0.84, which is typical for clear glass without a low-e coating.</param>
+        /// <param name="conductivity">Thermal conductivity of the glass in W/(m-K). Default: 0.9, which is typical for clear glass without a low-e coating.</param>
         /// <param name="dirtCorrection">Factor that corrects for the presence of dirt on the glass. A default value of 1 indicates the glass is clean.</param>
-        /// <param name="solarDiffusing">If False (default), the beam solar radiation incident on the glass is transmitted as beam radiation with no diffuse component.If True, the beam  solar radiation incident on the glass is transmitted as hemispherical diffuse radiation with no beam component.</param>
+        /// <param name="solarDiffusing">If False (default), the beam solar radiation incident on the glass is transmitted as beam radiation with no diffuse component.If True, the beam solar radiation incident on the glass is transmitted as hemispherical diffuse radiation with no beam component.</param>
         public EnergyWindowMaterialGlazing
         (
             string identifier, string displayName = default, object userData = default, double thickness = 0.003D, double solarTransmittance = 0.85D, double solarReflectance = 0.075D, AnyOf<Autocalculate, double> solarReflectanceBack = default, double visibleTransmittance = 0.9D, double visibleReflectance = 0.075D, AnyOf<Autocalculate, double> visibleReflectanceBack = default, double infraredTransmittance = 0D, double emissivity = 0.84D, double emissivityBack = 0.84D, double conductivity = 0.9D, double dirtCorrection = 1D, bool solarDiffusing = false
@@ -86,9 +86,9 @@ namespace HoneybeeSchema
 	
 	
         /// <summary>
-        /// The surface-to-surface thickness of the glass in meters. Default:  0.003.
+        /// The surface-to-surface thickness of the glass in meters. Default: 0.003.
         /// </summary>
-        [Summary(@"The surface-to-surface thickness of the glass in meters. Default:  0.003.")]
+        [Summary(@"The surface-to-surface thickness of the glass in meters. Default: 0.003.")]
         // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [Range(0, double.MaxValue)]
         [DataMember(Name = "thickness")] // For internal Serialization XML/JSON
@@ -172,9 +172,9 @@ namespace HoneybeeSchema
         public double InfraredTransmittance { get; set; } = 0D;
 
         /// <summary>
-        /// Infrared hemispherical emissivity of the front (outward facing) side of the glass.  Default: 0.84, which is typical for clear glass without a low-e coating.
+        /// Infrared hemispherical emissivity of the front (outward facing) side of the glass. Default: 0.84, which is typical for clear glass without a low-e coating.
         /// </summary>
-        [Summary(@"Infrared hemispherical emissivity of the front (outward facing) side of the glass.  Default: 0.84, which is typical for clear glass without a low-e coating.")]
+        [Summary(@"Infrared hemispherical emissivity of the front (outward facing) side of the glass. Default: 0.84, which is typical for clear glass without a low-e coating.")]
         // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [Range(0, 1)]
         [DataMember(Name = "emissivity")] // For internal Serialization XML/JSON
@@ -183,9 +183,9 @@ namespace HoneybeeSchema
         public double Emissivity { get; set; } = 0.84D;
 
         /// <summary>
-        /// Infrared hemispherical emissivity of the back (inward facing) side of the glass.  Default: 0.84, which is typical for clear glass without a low-e coating.
+        /// Infrared hemispherical emissivity of the back (inward facing) side of the glass. Default: 0.84, which is typical for clear glass without a low-e coating.
         /// </summary>
-        [Summary(@"Infrared hemispherical emissivity of the back (inward facing) side of the glass.  Default: 0.84, which is typical for clear glass without a low-e coating.")]
+        [Summary(@"Infrared hemispherical emissivity of the back (inward facing) side of the glass. Default: 0.84, which is typical for clear glass without a low-e coating.")]
         // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [Range(0, 1)]
         [DataMember(Name = "emissivity_back")] // For internal Serialization XML/JSON
@@ -194,9 +194,9 @@ namespace HoneybeeSchema
         public double EmissivityBack { get; set; } = 0.84D;
 
         /// <summary>
-        /// Thermal conductivity of the glass in W/(m-K). Default: 0.9, which is  typical for clear glass without a low-e coating.
+        /// Thermal conductivity of the glass in W/(m-K). Default: 0.9, which is typical for clear glass without a low-e coating.
         /// </summary>
-        [Summary(@"Thermal conductivity of the glass in W/(m-K). Default: 0.9, which is  typical for clear glass without a low-e coating.")]
+        [Summary(@"Thermal conductivity of the glass in W/(m-K). Default: 0.9, which is typical for clear glass without a low-e coating.")]
         // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [Range(0, double.MaxValue)]
         [DataMember(Name = "conductivity")] // For internal Serialization XML/JSON
@@ -215,9 +215,9 @@ namespace HoneybeeSchema
         public double DirtCorrection { get; set; } = 1D;
 
         /// <summary>
-        /// If False (default), the beam solar radiation incident on the glass is transmitted as beam radiation with no diffuse component.If True, the beam  solar radiation incident on the glass is transmitted as hemispherical diffuse radiation with no beam component.
+        /// If False (default), the beam solar radiation incident on the glass is transmitted as beam radiation with no diffuse component.If True, the beam solar radiation incident on the glass is transmitted as hemispherical diffuse radiation with no beam component.
         /// </summary>
-        [Summary(@"If False (default), the beam solar radiation incident on the glass is transmitted as beam radiation with no diffuse component.If True, the beam  solar radiation incident on the glass is transmitted as hemispherical diffuse radiation with no beam component.")]
+        [Summary(@"If False (default), the beam solar radiation incident on the glass is transmitted as beam radiation with no diffuse component.If True, the beam solar radiation incident on the glass is transmitted as hemispherical diffuse radiation with no beam component.")]
         // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [DataMember(Name = "solar_diffusing")] // For internal Serialization XML/JSON
         [JsonProperty("solar_diffusing", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json

@@ -20,9 +20,9 @@ using System.ComponentModel.DataAnnotations;
 namespace HoneybeeSchema
 {
     /// <summary>
-    /// RadianceSubFaceStateAbridged is an abridged state for a dynamic Aperture or Door.\n    
+    /// RadianceSubFaceStateAbridged is an abridged state for a dynamic Aperture or Door.
     /// </summary>
-    [Summary(@"RadianceSubFaceStateAbridged is an abridged state for a dynamic Aperture or Door.\n    ")]
+    [Summary(@"RadianceSubFaceStateAbridged is an abridged state for a dynamic Aperture or Door.")]
     [System.Serializable]
     [DataContract(Name = "RadianceSubFaceStateAbridged")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class RadianceSubFaceStateAbridged : RadianceShadeStateAbridged, System.IEquatable<RadianceSubFaceStateAbridged>

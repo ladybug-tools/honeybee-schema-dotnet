@@ -20,9 +20,9 @@ using System.ComponentModel.DataAnnotations;
 namespace HoneybeeSchema
 {
     /// <summary>
-    /// Water Source Heat Pump (WSHP) heating/cooling system (with no ventilation).\n\nEach room/zone receives its own Water Source Heat Pump (WSHP), which meets\nthe heating and cooling loads of the space. All WSHPs are connected to the\nsame water condenser loop, which has its temperature maintained by the\nequipment_type (eg. Boiler with Cooling Tower).
+    /// Water Source Heat Pump (WSHP) heating/cooling system (with no ventilation). Each room/zone receives its own Water Source Heat Pump (WSHP), which meets the heating and cooling loads of the space. All WSHPs are connected to the same water condenser loop, which has its temperature maintained by the equipment_type (eg. Boiler with Cooling Tower).
     /// </summary>
-    [Summary(@"Water Source Heat Pump (WSHP) heating/cooling system (with no ventilation).\n\nEach room/zone receives its own Water Source Heat Pump (WSHP), which meets\nthe heating and cooling loads of the space. All WSHPs are connected to the\nsame water condenser loop, which has its temperature maintained by the\nequipment_type (eg. Boiler with Cooling Tower).")]
+    [Summary(@"Water Source Heat Pump (WSHP) heating/cooling system (with no ventilation). Each room/zone receives its own Water Source Heat Pump (WSHP), which meets the heating and cooling loads of the space. All WSHPs are connected to the same water condenser loop, which has its temperature maintained by the equipment_type (eg. Boiler with Cooling Tower).")]
     [System.Serializable]
     [DataContract(Name = "WSHP")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class WSHP : HeatCoolBase, System.IEquatable<WSHP>

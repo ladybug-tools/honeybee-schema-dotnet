@@ -20,9 +20,9 @@ using System.ComponentModel.DataAnnotations;
 namespace HoneybeeSchema
 {
     /// <summary>
-    /// Create single layer of gas in a window construction.\n\nCan be combined with EnergyWindowMaterialGlazing to make multi-pane windows.
+    /// Create single layer of gas in a window construction. Can be combined with EnergyWindowMaterialGlazing to make multi-pane windows.
     /// </summary>
-    [Summary(@"Create single layer of gas in a window construction.\n\nCan be combined with EnergyWindowMaterialGlazing to make multi-pane windows.")]
+    [Summary(@"Create single layer of gas in a window construction. Can be combined with EnergyWindowMaterialGlazing to make multi-pane windows.")]
     [System.Serializable]
     [DataContract(Name = "EnergyWindowMaterialGas")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class EnergyWindowMaterialGas : IDdEnergyBaseModel, System.IEquatable<EnergyWindowMaterialGas>

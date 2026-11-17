@@ -47,7 +47,7 @@ namespace HoneybeeSchema
         /// <param name="lightPath">Get or set a list of lists for the light path from the object to the sky. Each sub-list contains identifiers of aperture groups through which light passes. (eg. [[""SouthWindow1""], [""static_apertures"", ""NorthWindow2""]]).Setting this property will override any auto-calculation of the light path from the model and room_identifier upon export to the simulation.</param>
         /// <param name="mesh">An optional Mesh3D that aligns with the sensors and can be used for visualization of the grid. Note that the number of sensors in the grid must match the number of faces or the number vertices within the Mesh3D.</param>
         /// <param name="baseGeometry">An optional array of Face3D used to represent the grid. There are no restrictions on how this property relates to the sensors and it is provided only to assist with the display of the grid when the number of sensors or the mesh is too large to be practically visualized.</param>
-        /// <param name="groupIdentifier">An optional string to note the sensor grid group '             'to which the sensor is a part of. Grids sharing the same '             'group_identifier will be written to the same subfolder in Radiance '             'folder (default: None).</param>
+        /// <param name="groupIdentifier">An optional string to note the sensor grid group ' 'to which the sensor is a part of. Grids sharing the same ' 'group_identifier will be written to the same subfolder in Radiance ' 'folder (default: None).</param>
         public SensorGrid
         (
             string identifier, List<Sensor> sensors, string displayName = default, string roomIdentifier = default, List<List<string>> lightPath = default, Mesh3D mesh = default, List<Face3D> baseGeometry = default, string groupIdentifier = default
@@ -100,9 +100,9 @@ namespace HoneybeeSchema
         public List<Face3D> BaseGeometry { get; set; }
 
         /// <summary>
-        /// An optional string to note the sensor grid group '             'to which the sensor is a part of. Grids sharing the same '             'group_identifier will be written to the same subfolder in Radiance '             'folder (default: None).
+        /// An optional string to note the sensor grid group ' 'to which the sensor is a part of. Grids sharing the same ' 'group_identifier will be written to the same subfolder in Radiance ' 'folder (default: None).
         /// </summary>
-        [Summary(@"An optional string to note the sensor grid group '             'to which the sensor is a part of. Grids sharing the same '             'group_identifier will be written to the same subfolder in Radiance '             'folder (default: None).")]
+        [Summary(@"An optional string to note the sensor grid group ' 'to which the sensor is a part of. Grids sharing the same ' 'group_identifier will be written to the same subfolder in Radiance ' 'folder (default: None).")]
         // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [DataMember(Name = "group_identifier")] // For internal Serialization XML/JSON
         [JsonProperty("group_identifier", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json
