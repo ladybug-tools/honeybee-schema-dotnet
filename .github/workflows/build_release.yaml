@@ -53,11 +53,10 @@ jobs:
       - name: Build
         run: |
           dotnet restore
-          dotnet build --configuration Release
+          make cs-build
 
       - name: Run Unit Tests
-        working-directory: src/CSharpSDK.Tests
-        run: dotnet test --configuration Release
+        run: make cs-test
 
       - name: Release CSharp
         working-directory: src/CSharpSDK

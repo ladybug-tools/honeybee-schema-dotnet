@@ -22,10 +22,10 @@ cs-sdk:
 	cd ./.generator/SchemaGenerator && dotnet run --genCsModel --genCsInterface --updateVersion
 
 cs-build:
-	cd ./src/CSharpSDK && dotnet build
+	cd ./src/CSharpSDK && dotnet build --configuration Release
 
 cs-test:
-	cd ./src/CSharpSDK.Tests && dotnet test
+	cd ./src/CSharpSDK.Tests && dotnet test --configuration Release
 
 ts-sdk:
 	cd ./.generator/SchemaGenerator && dotnet run --genTsModel --updateVersion
