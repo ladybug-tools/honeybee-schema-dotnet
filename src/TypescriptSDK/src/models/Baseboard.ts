@@ -5,7 +5,7 @@ import { _HeatCoolBase } from "./_HeatCoolBase";
 import { BaseboardEquipmentType } from "./BaseboardEquipmentType";
 import { Vintages } from "./Vintages";
 
-/** Baseboard heating system.\n\nBaseboard systems are intended for spaces only requiring heating and\nno ventilation or cooling. Each room/zone will get its own baseboard\nheating unit that satisfies the heating load. */
+/** Baseboard heating system. Baseboard systems are intended for spaces only requiring heating and no ventilation or cooling. Each room/zone will get its own baseboard heating unit that satisfies the heating load. */
 export class Baseboard extends _HeatCoolBase {
     @Type(() => String)
     @IsString()

@@ -48,7 +48,7 @@ namespace HoneybeeSchema
         /// <param name="infiltration">Infiltration to describe the outdoor air leakage of the program. If None, no infiltration will be assumed for the program.</param>
         /// <param name="ventilation">Ventilation object to describe the minimum outdoor air requirement of the program. If None, no ventilation requirement will be assumed.</param>
         /// <param name="exhaust">ExhaustAir object to describe the exhaust air requirement of the program. If None, no exhaust air requirement will be assumed for the program.</param>
-        /// <param name="setpoint">Setpoint object to describe the temperature and humidity setpoints of the program.  If None, the ProgramType cannot be assigned to a Room that is conditioned.</param>
+        /// <param name="setpoint">Setpoint object to describe the temperature and humidity setpoints of the program. If None, the ProgramType cannot be assigned to a Room that is conditioned.</param>
         public ProgramTypeAbridged
         (
             string identifier, string displayName = default, object userData = default, PeopleAbridged people = default, LightingAbridged lighting = default, ElectricEquipmentAbridged electricEquipment = default, GasEquipmentAbridged gasEquipment = default, ServiceHotWaterAbridged serviceHotWater = default, InfiltrationAbridged infiltration = default, VentilationAbridged ventilation = default, ExhaustAirAbridged exhaust = default, SetpointAbridged setpoint = default
@@ -155,9 +155,9 @@ namespace HoneybeeSchema
         public ExhaustAirAbridged Exhaust { get; set; }
 
         /// <summary>
-        /// Setpoint object to describe the temperature and humidity setpoints of the program.  If None, the ProgramType cannot be assigned to a Room that is conditioned.
+        /// Setpoint object to describe the temperature and humidity setpoints of the program. If None, the ProgramType cannot be assigned to a Room that is conditioned.
         /// </summary>
-        [Summary(@"Setpoint object to describe the temperature and humidity setpoints of the program.  If None, the ProgramType cannot be assigned to a Room that is conditioned.")]
+        [Summary(@"Setpoint object to describe the temperature and humidity setpoints of the program. If None, the ProgramType cannot be assigned to a Room that is conditioned.")]
         // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [DataMember(Name = "setpoint")] // For internal Serialization XML/JSON
         [JsonProperty("setpoint", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json

@@ -20,9 +20,9 @@ using System.ComponentModel.DataAnnotations;
 namespace HoneybeeSchema
 {
     /// <summary>
-    /// Base class for all-air systems.\n\nAll-air systems provide both ventilation and heating + cooling demand with\nthe same stream of warm/cool air. As such, they often grant tight control\nover zone humidity. However, because such systems often involve the\ncooling of air only to reheat it again, they are often more energy intensive\nthan systems that separate ventilation from the meeting of thermal loads.
+    /// Base class for all-air systems. All-air systems provide both ventilation and heating + cooling demand with the same stream of warm/cool air. As such, they often grant tight control over zone humidity. However, because such systems often involve the cooling of air only to reheat it again, they are often more energy intensive than systems that separate ventilation from the meeting of thermal loads.
     /// </summary>
-    [Summary(@"Base class for all-air systems.\n\nAll-air systems provide both ventilation and heating + cooling demand with\nthe same stream of warm/cool air. As such, they often grant tight control\nover zone humidity. However, because such systems often involve the\ncooling of air only to reheat it again, they are often more energy intensive\nthan systems that separate ventilation from the meeting of thermal loads.")]
+    [Summary(@"Base class for all-air systems. All-air systems provide both ventilation and heating + cooling demand with the same stream of warm/cool air. As such, they often grant tight control over zone humidity. However, because such systems often involve the cooling of air only to reheat it again, they are often more energy intensive than systems that separate ventilation from the meeting of thermal loads.")]
     [System.Serializable]
     [DataContract(Name = "AllAirBase")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class AllAirBase : TemplateSystem, System.IEquatable<AllAirBase>

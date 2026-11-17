@@ -20,9 +20,9 @@ using System.ComponentModel.DataAnnotations;
 namespace HoneybeeSchema
 {
     /// <summary>
-    /// No mass opaque material representing a layer within an opaque construction.\n\nUsed when only the thermal resistance (R value) of the material is known.
+    /// No mass opaque material representing a layer within an opaque construction. Used when only the thermal resistance (R value) of the material is known.
     /// </summary>
-    [Summary(@"No mass opaque material representing a layer within an opaque construction.\n\nUsed when only the thermal resistance (R value) of the material is known.")]
+    [Summary(@"No mass opaque material representing a layer within an opaque construction. Used when only the thermal resistance (R value) of the material is known.")]
     [System.Serializable]
     [DataContract(Name = "EnergyMaterialNoMass")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class EnergyMaterialNoMass : IDdEnergyBaseModel, System.IEquatable<EnergyMaterialNoMass>

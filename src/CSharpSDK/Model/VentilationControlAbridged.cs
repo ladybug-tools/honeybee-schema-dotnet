@@ -41,7 +41,7 @@ namespace HoneybeeSchema
         /// <param name="maxIndoorTemperature">A number for the maximum indoor temperature at which to ventilate in Celsius. This can be used to set a maximum temperature at which point ventilation is stopped and a cooling system is turned on.</param>
         /// <param name="minOutdoorTemperature">A number for the minimum outdoor temperature at which to ventilate in Celsius. This can be used to ensure ventilative cooling does not happen during the winter even if the Room is above the min_indoor_temperature.</param>
         /// <param name="maxOutdoorTemperature">A number for the maximum indoor temperature at which to ventilate in Celsius. This can be used to set a limit for when it is considered too hot outside for ventilative cooling.</param>
-        /// <param name="deltaTemperature">A number for the temperature differential in Celsius between indoor and outdoor below which ventilation is shut off.  This should usually be a positive number so that ventilation only occurs when the outdoors is cooler than the indoors. Negative numbers indicate how much hotter the outdoors can be than the indoors before ventilation is stopped.</param>
+        /// <param name="deltaTemperature">A number for the temperature differential in Celsius between indoor and outdoor below which ventilation is shut off. This should usually be a positive number so that ventilation only occurs when the outdoors is cooler than the indoors. Negative numbers indicate how much hotter the outdoors can be than the indoors before ventilation is stopped.</param>
         /// <param name="schedule">Identifier of the schedule for the ventilation over the course of the year. Note that this is applied on top of any setpoints. The type of this schedule should be On/Off and values should be either 0 (no possibility of ventilation) or 1 (ventilation possible).</param>
         public VentilationControlAbridged
         (
@@ -110,9 +110,9 @@ namespace HoneybeeSchema
         public double MaxOutdoorTemperature { get; set; } = 100D;
 
         /// <summary>
-        /// A number for the temperature differential in Celsius between indoor and outdoor below which ventilation is shut off.  This should usually be a positive number so that ventilation only occurs when the outdoors is cooler than the indoors. Negative numbers indicate how much hotter the outdoors can be than the indoors before ventilation is stopped.
+        /// A number for the temperature differential in Celsius between indoor and outdoor below which ventilation is shut off. This should usually be a positive number so that ventilation only occurs when the outdoors is cooler than the indoors. Negative numbers indicate how much hotter the outdoors can be than the indoors before ventilation is stopped.
         /// </summary>
-        [Summary(@"A number for the temperature differential in Celsius between indoor and outdoor below which ventilation is shut off.  This should usually be a positive number so that ventilation only occurs when the outdoors is cooler than the indoors. Negative numbers indicate how much hotter the outdoors can be than the indoors before ventilation is stopped.")]
+        [Summary(@"A number for the temperature differential in Celsius between indoor and outdoor below which ventilation is shut off. This should usually be a positive number so that ventilation only occurs when the outdoors is cooler than the indoors. Negative numbers indicate how much hotter the outdoors can be than the indoors before ventilation is stopped.")]
         // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [Range(-100, 100)]
         [DataMember(Name = "delta_temperature")] // For internal Serialization XML/JSON

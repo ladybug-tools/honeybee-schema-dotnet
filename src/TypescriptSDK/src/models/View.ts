@@ -91,7 +91,7 @@ export class View {
     @IsString()
     @IsOptional()
     @Expose({ name: "group_identifier" })
-    /** An optional string to note the view group '             'to which the sensor is a part of. Views sharing the same '             'group_identifier will be written to the same subfolder in Radiance '             'folder (default: None). */
+    /** An optional string to note the view group ' 'to which the sensor is a part of. Views sharing the same ' 'group_identifier will be written to the same subfolder in Radiance ' 'folder (default: None). */
     groupIdentifier?: string;
 	
     @Type(() => String)

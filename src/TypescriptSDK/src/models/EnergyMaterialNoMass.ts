@@ -4,7 +4,7 @@ import { deepTransform } from '../deepTransform';
 import { IDdEnergyBaseModel } from "./IDdEnergyBaseModel";
 import { Roughness } from "./Roughness";
 
-/** No mass opaque material representing a layer within an opaque construction.\n\nUsed when only the thermal resistance (R value) of the material is known. */
+/** No mass opaque material representing a layer within an opaque construction. Used when only the thermal resistance (R value) of the material is known. */
 export class EnergyMaterialNoMass extends IDdEnergyBaseModel {
     @Type(() => Number)
     @IsNumber()

@@ -40,7 +40,7 @@ namespace HoneybeeSchema
         /// <summary>
         /// Initializes a new instance of the <see cref="RoofCeilingModifierSetAbridged" /> class.
         /// </summary>
-        /// <param name="exteriorModifier">Identifier for a radiance modifier object for faces with an  Outdoors boundary condition.</param>
+        /// <param name="exteriorModifier">Identifier for a radiance modifier object for faces with an Outdoors boundary condition.</param>
         /// <param name="interiorModifier">Identifier for a radiance modifier object for faces with a boundary condition other than Outdoors.</param>
         public RoofCeilingModifierSetAbridged
         (

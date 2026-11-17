@@ -20,9 +20,9 @@ using System.ComponentModel.DataAnnotations;
 namespace HoneybeeSchema
 {
     /// <summary>
-    /// Gas unit heating system.\n\nGas unit systems are intended for spaces only requiring heating and no\nventilation or cooling. Each room/zone will get its own gaa heating unit\nthat satisfies the heating load.
+    /// Gas unit heating system. Gas unit systems are intended for spaces only requiring heating and no ventilation or cooling. Each room/zone will get its own gaa heating unit that satisfies the heating load.
     /// </summary>
-    [Summary(@"Gas unit heating system.\n\nGas unit systems are intended for spaces only requiring heating and no\nventilation or cooling. Each room/zone will get its own gaa heating unit\nthat satisfies the heating load.")]
+    [Summary(@"Gas unit heating system. Gas unit systems are intended for spaces only requiring heating and no ventilation or cooling. Each room/zone will get its own gaa heating unit that satisfies the heating load.")]
     [System.Serializable]
     [DataContract(Name = "GasUnitHeater")] // Enables DataMember rules. For internal Serialization XML/JSON
     public partial class GasUnitHeater : HeatCoolBase, System.IEquatable<GasUnitHeater>

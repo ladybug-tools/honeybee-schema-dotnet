@@ -37,7 +37,7 @@ export class WindowConstructionShadeAbridged extends IDdEnergyBaseModel {
     @IsEnum(ShadeLocation)
     @IsOptional()
     @Expose({ name: "shade_location" })
-    /** Text to indicate where in the window assembly the shade_material is located.  Note that the WindowConstruction must have at least one gas gap to use the ""Between"" option. Also note that, for a WindowConstruction with more than one gas gap, the ""Between"" option defaults to using the inner gap as this is the only option that EnergyPlus supports. */
+    /** Text to indicate where in the window assembly the shade_material is located. Note that the WindowConstruction must have at least one gas gap to use the ""Between"" option. Also note that, for a WindowConstruction with more than one gas gap, the ""Between"" option defaults to using the inner gap as this is the only option that EnergyPlus supports. */
     shadeLocation: ShadeLocation = ShadeLocation.Interior;
 	
     @Type(() => String)

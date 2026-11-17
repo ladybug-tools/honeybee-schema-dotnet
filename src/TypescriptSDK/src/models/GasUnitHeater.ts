@@ -5,7 +5,7 @@ import { _HeatCoolBase } from "./_HeatCoolBase";
 import { GasUnitHeaterEquipmentType } from "./GasUnitHeaterEquipmentType";
 import { Vintages } from "./Vintages";
 
-/** Gas unit heating system.\n\nGas unit systems are intended for spaces only requiring heating and no\nventilation or cooling. Each room/zone will get its own gaa heating unit\nthat satisfies the heating load. */
+/** Gas unit heating system. Gas unit systems are intended for spaces only requiring heating and no ventilation or cooling. Each room/zone will get its own gaa heating unit that satisfies the heating load. */
 export class GasUnitHeater extends _HeatCoolBase {
     @Type(() => String)
     @IsString()

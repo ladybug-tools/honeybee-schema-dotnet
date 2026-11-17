@@ -54,7 +54,7 @@ namespace HoneybeeSchema
         /// <param name="lift">The view lift (-vl). This is the amount the actual image will be lifted up from the specified view. This option is useful for generating skewed perspectives or rendering an image a piece at a time. A value of 1 means that the rendered image starts just to the right of the normal view. A value of -1 would be to the left. Larger or fractional values are permitted as well.</param>
         /// <param name="foreClip">View fore clip (-vo) at a distance from the view point.The plane will be perpendicular to the view direction for perspective and parallel view types. For fisheye view types, the clipping plane is actually a clipping sphere, centered on the view point with fore_clip radius. Objects in front of this imaginary surface will not be visible.</param>
         /// <param name="aftClip">View aft clip (-va) at a distance from the view point.Like the view fore plane, it will be perpendicular to the view direction for perspective and parallel view types. For fisheye view types, the clipping plane is actually a clipping sphere, centered on the view point with radius val.</param>
-        /// <param name="groupIdentifier">An optional string to note the view group '             'to which the sensor is a part of. Views sharing the same '             'group_identifier will be written to the same subfolder in Radiance '             'folder (default: None).</param>
+        /// <param name="groupIdentifier">An optional string to note the view group ' 'to which the sensor is a part of. Views sharing the same ' 'group_identifier will be written to the same subfolder in Radiance ' 'folder (default: None).</param>
         public View
         (
             string identifier, List<double> position, List<double> direction, List<double> upVector, string displayName = default, string roomIdentifier = default, List<List<string>> lightPath = default, ViewType viewType = ViewType.V, double hSize = 60D, double vSize = 60D, double? shift = default, double? lift = default, double? foreClip = default, double? aftClip = default, string groupIdentifier = default
@@ -186,9 +186,9 @@ namespace HoneybeeSchema
         public double? AftClip { get; set; }
 
         /// <summary>
-        /// An optional string to note the view group '             'to which the sensor is a part of. Views sharing the same '             'group_identifier will be written to the same subfolder in Radiance '             'folder (default: None).
+        /// An optional string to note the view group ' 'to which the sensor is a part of. Views sharing the same ' 'group_identifier will be written to the same subfolder in Radiance ' 'folder (default: None).
         /// </summary>
-        [Summary(@"An optional string to note the view group '             'to which the sensor is a part of. Views sharing the same '             'group_identifier will be written to the same subfolder in Radiance '             'folder (default: None).")]
+        [Summary(@"An optional string to note the view group ' 'to which the sensor is a part of. Views sharing the same ' 'group_identifier will be written to the same subfolder in Radiance ' 'folder (default: None).")]
         // [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]  // For System.Text.Json  
         [DataMember(Name = "group_identifier")] // For internal Serialization XML/JSON
         [JsonProperty("group_identifier", NullValueHandling = NullValueHandling.Ignore)] // For Newtonsoft.Json

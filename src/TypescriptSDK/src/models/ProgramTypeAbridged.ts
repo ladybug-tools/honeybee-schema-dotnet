@@ -90,7 +90,7 @@ export class ProgramTypeAbridged extends IDdEnergyBaseModel {
     @ValidateNested()
     @IsOptional()
     @Expose({ name: "setpoint" })
-    /** Setpoint object to describe the temperature and humidity setpoints of the program.  If None, the ProgramType cannot be assigned to a Room that is conditioned. */
+    /** Setpoint object to describe the temperature and humidity setpoints of the program. If None, the ProgramType cannot be assigned to a Room that is conditioned. */
     setpoint?: SetpointAbridged;
 	
 
