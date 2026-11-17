@@ -9,7 +9,7 @@ jobs:
     if: github.event.action == 'honeybee_schema_release'
     steps:
       - name: "Checkout Master Branch"
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           ref: refs/heads/master
           token: ${{ secrets.DEPS_UPDATING }}
